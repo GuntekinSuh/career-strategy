@@ -24,6 +24,8 @@ background:#f5f5f7;
 color:#111;
 }
 
+/* HEADER */
+
 header{
 display:flex;
 justify-content:space-between;
@@ -47,6 +49,8 @@ text-decoration:none;
 color:#333;
 font-weight:500;
 }
+
+/* HERO */
 
 .hero{
 display:flex;
@@ -92,6 +96,8 @@ transition:0.3s;
 transform:translateY(-3px);
 }
 
+/* SECTIONS */
+
 .section{
 padding:110px 8%;
 }
@@ -100,6 +106,8 @@ padding:110px 8%;
 font-size:38px;
 margin-bottom:30px;
 }
+
+/* GRID */
 
 .grid{
 display:grid;
@@ -125,6 +133,8 @@ margin-bottom:15px;
 .card:hover{
 transform:translateY(-8px);
 }
+
+/* AI BOX */
 
 .ai-box{
 background:white;
@@ -164,6 +174,8 @@ padding:20px;
 border-radius:8px;
 }
 
+/* PRICING */
+
 .pricing{
 display:flex;
 flex-wrap:wrap;
@@ -199,6 +211,8 @@ text-decoration:none;
 border:2px solid black;
 }
 
+/* ABOUT */
+
 .about{
 display:flex;
 align-items:center;
@@ -210,10 +224,66 @@ width:380px;
 border-radius:14px;
 }
 
+/* FOOTER */
+
 footer{
 text-align:center;
 padding:70px;
 color:#777;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width:900px){
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding:80px 6%;
+}
+
+.hero img{
+width:100%;
+max-width:420px;
+margin-top:30px;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.section{
+padding:80px 6%;
+}
+
+.about{
+flex-direction:column;
+text-align:center;
+}
+
+.about img{
+width:100%;
+max-width:420px;
+}
+
+.pricing{
+justify-content:center;
+}
+
+.price-card{
+width:100%;
+max-width:320px;
+}
+
+nav a{
+margin-left:14px;
+font-size:14px;
+}
+
 }
 
 </style>
@@ -239,7 +309,6 @@ color:#777;
 </header>
 
 
-
 <section class="hero">
 
 <div class="hero-text">
@@ -247,9 +316,7 @@ color:#777;
 <h1>Design Your Global Career</h1>
 
 <p>
-
 AI powered career strategy, CV optimization and interview coaching.
-
 </p>
 
 <a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
@@ -261,7 +328,6 @@ AI powered career strategy, CV optimization and interview coaching.
 </section>
 
 
-
 <section id="services" class="section">
 
 <h2>Career Services</h2>
@@ -269,52 +335,32 @@ AI powered career strategy, CV optimization and interview coaching.
 <div class="grid">
 
 <div class="card">
-
 <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df">
-
 <h3>Career Strategy</h3>
-
 <p>Strategic planning for long term career growth.</p>
-
 </div>
 
-
 <div class="card">
-
 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
-
 <h3>CV Optimization</h3>
-
 <p>ATS optimized CV and resume rewriting.</p>
-
 </div>
 
-
 <div class="card">
-
 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
-
 <h3>Interview Coaching</h3>
-
 <p>Mock interviews and hiring insights.</p>
-
 </div>
 
-
 <div class="card">
-
 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
-
 <h3>LinkedIn Positioning</h3>
-
 <p>Build a powerful professional online brand.</p>
-
 </div>
 
 </div>
 
 </section>
-
 
 
 <section id="ai" class="section">
@@ -346,7 +392,6 @@ AI powered career strategy, CV optimization and interview coaching.
 </section>
 
 
-
 <section id="plans" class="section">
 
 <h2>CareerLab Plans</h2>
@@ -354,57 +399,33 @@ AI powered career strategy, CV optimization and interview coaching.
 <div class="pricing">
 
 <div class="price-card">
-
 <h3>Starter</h3>
-
 <h2>29€</h2>
-
 <a href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Buy</a>
-
 </div>
-
 
 <div class="price-card">
-
 <h3>Professional</h3>
-
 <h2>79€</h2>
-
 <a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Buy</a>
-
 </div>
-
 
 <div class="price-card featured">
-
 <h3>Executive</h3>
-
 <h2>199€</h2>
-
 <a href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
-
 </div>
 
-
 <div class="price-card">
-
 <h3>Strategy Session</h3>
-
 <h2>99€</h2>
-
 <a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Buy</a>
-
 </div>
 
-
 <div class="price-card">
-
 <h3>Consulting</h3>
-
 <h2>50€</h2>
-
 <a href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Buy</a>
-
 </div>
 
 </div>
@@ -412,10 +433,9 @@ AI powered career strategy, CV optimization and interview coaching.
 </section>
 
 
-
 <section id="about" class="section about">
 
-<img src="https://images.unsplash.com/photo-1553877522-43269d4ea984">
+<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c">
 
 <div>
 
@@ -436,23 +456,17 @@ CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping profes
 </section>
 
 
-
 <section id="contact" class="section">
 
 <h2>Start Your Career Strategy</h2>
 
-<p>
-
-Book a consultation and receive personalized career guidance.
-
-</p>
+<p>Book a consultation and receive personalized career guidance.</p>
 
 <br>
 
 <a class="cta" href="https://calendly.com/guntekin-suh/30min">Schedule Call</a>
 
 </section>
-
 
 
 <footer>
@@ -462,19 +476,14 @@ Book a consultation and receive personalized career guidance.
 </footer>
 
 
-
 <script>
 
 function analyzeCV(){
-
 document.getElementById("result").innerText="Your CV should highlight achievements, quantify results and focus on measurable impact.";
-
 }
 
 function uploadCV(){
-
 document.getElementById("result").innerText="File received. AI analysis feature coming soon.";
-
 }
 
 </script>
