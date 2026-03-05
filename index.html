@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,216 +12,169 @@
 <style>
 
 *{
+margin:0;
+padding:0;
 box-sizing:border-box;
 }
 
 body{
-margin:0;
 font-family:'Inter',sans-serif;
-background:#f6f7fb;
+background:#ffffff;
 color:#111;
 line-height:1.6;
 }
-
-/* NAVBAR */
 
 header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 60px;
-background:white;
+padding:25px 40px;
+border-bottom:1px solid #eee;
 position:sticky;
 top:0;
-z-index:100;
-box-shadow:0 4px 20px rgba(0,0,0,0.05);
+background:white;
 }
 
 .logo{
+font-size:20px;
 font-weight:700;
-font-size:22px;
 }
 
 nav a{
-margin-left:30px;
+margin-left:25px;
 text-decoration:none;
-color:#555;
+color:#444;
 font-weight:500;
 }
 
-/* HERO */
-
-.hero{
-display:flex;
-align-items:center;
-justify-content:center;
-padding:120px 40px;
-gap:60px;
-background:linear-gradient(135deg,#eef2ff,#f9fafb);
+.container{
+max-width:1100px;
+margin:auto;
+padding:80px 20px;
 }
 
-.hero-text{
-max-width:520px;
+.hero{
+text-align:center;
+padding-top:100px;
 }
 
 .hero h1{
-font-size:56px;
+font-size:52px;
 margin-bottom:20px;
 }
 
 .hero p{
 font-size:20px;
 color:#666;
+margin-bottom:35px;
 }
 
-.buttons{
-margin-top:30px;
+.hero img{
+width:100%;
+max-width:900px;
+margin-top:40px;
+border-radius:14px;
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
+}
+
+.btn{
+display:inline-block;
+padding:14px 28px;
+border-radius:10px;
+text-decoration:none;
+font-weight:600;
+margin:10px;
+transition:0.2s;
 }
 
 .primary{
 background:black;
 color:white;
-padding:16px 28px;
-border-radius:12px;
-text-decoration:none;
-margin-right:12px;
-font-weight:500;
-transition:0.3s;
 }
 
 .primary:hover{
-transform:translateY(-3px);
+background:#333;
 }
 
 .secondary{
-background:white;
 border:1px solid #ddd;
-color:#111;
-padding:16px 28px;
-border-radius:12px;
-text-decoration:none;
-transition:0.3s;
+color:black;
 }
 
-.secondary:hover{
-background:#f5f5f5;
-}
-
-.hero img{
-width:520px;
-border-radius:18px;
-box-shadow:0 30px 70px rgba(0,0,0,0.15);
-}
-
-/* SECTION */
-
-.section{
-padding:100px 40px;
+.section-title{
 text-align:center;
+font-size:36px;
+margin-bottom:60px;
 }
 
-.section h2{
-font-size:38px;
-margin-bottom:20px;
-}
-
-.section p{
-max-width:650px;
-margin:auto;
-font-size:18px;
-color:#666;
-}
-
-/* FEATURES */
-
-.features{
-display:flex;
-justify-content:center;
-gap:40px;
-margin-top:60px;
-flex-wrap:wrap;
-}
-
-.feature{
-background:white;
-padding:40px;
-border-radius:16px;
-width:260px;
-box-shadow:0 20px 40px rgba(0,0,0,0.06);
-transition:0.3s;
-}
-
-.feature:hover{
-transform:translateY(-8px);
-}
-
-/* PRICING */
-
-.pricing-grid{
-display:flex;
-justify-content:center;
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:30px;
-margin-top:60px;
-flex-wrap:wrap;
 }
 
-.plan{
+.card{
+border:1px solid #eee;
+padding:30px;
+border-radius:12px;
 background:white;
-padding:45px;
-border-radius:16px;
-width:260px;
-box-shadow:0 20px 40px rgba(0,0,0,0.06);
-transition:0.3s;
+transition:0.2s;
 }
 
-.plan:hover{
-transform:translateY(-8px);
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 15px 40px rgba(0,0,0,0.05);
 }
 
-.plan.featured{
-border:2px solid black;
-transform:scale(1.05);
+.pricing{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.price-card{
+border:1px solid #eee;
+border-radius:12px;
+padding:35px;
+text-align:center;
+background:white;
+transition:0.2s;
+}
+
+.price-card:hover{
+transform:translateY(-6px);
+box-shadow:0 20px 50px rgba(0,0,0,0.05);
 }
 
 .price{
-font-size:40px;
-margin:15px 0;
+font-size:36px;
+font-weight:700;
+margin:20px 0;
 }
 
-.plan a{
-display:inline-block;
-margin-top:15px;
-padding:12px 22px;
+.badge{
 background:black;
 color:white;
-border-radius:10px;
-text-decoration:none;
+padding:5px 10px;
+font-size:12px;
+border-radius:6px;
+margin-bottom:10px;
+display:inline-block;
 }
 
-/* FOOTER */
+.ai-box{
+background:#fafafa;
+padding:50px;
+border-radius:12px;
+text-align:center;
+}
 
 footer{
-text-align:center;
-padding:50px;
-background:white;
+margin-top:80px;
+padding:40px;
 border-top:1px solid #eee;
-color:#777;
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-.hero{
-flex-direction:column;
 text-align:center;
-}
-
-.hero img{
-width:100%;
-max-width:450px;
-}
-
+color:#666;
 }
 
 </style>
@@ -234,127 +188,208 @@ max-width:450px;
 <div class="logo">CareerLab</div>
 
 <nav>
-<a href="#features">Services</a>
-<a href="#pricing">Pricing</a>
-<a href="https://calendly.com/guntekin-suh/30min">Book</a>
+
+<a href="#services">Services</a>
+<a href="#pricing">Programs</a>
+<a href="#ai">AI CV Review</a>
+<a href="#contact">Contact</a>
+
 </nav>
 
 </header>
 
-<section class="hero">
+<section class="hero container">
 
-<div class="hero-text">
+<h1>Career Strategy for Global Professionals</h1>
 
-<h1>Land Better Jobs.<br>Earn Higher Salaries.</h1>
+<p>CV Optimization • Interview Coaching • Salary Negotiation</p>
 
-<p>
-Professional career strategy for ambitious professionals.
-Improve your CV, master interviews and negotiate stronger offers.
-</p>
+<a class="btn primary" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
 
-<div class="buttons">
+<a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdcATjrcSIMGerD3UILDlDNQt7Y0VdaiU6L4KXtWdbrzBVT3A/viewform?usp=dialog">Free Career Assessment</a>
 
-<a class="primary" href="https://calendly.com/guntekin-suh/30min">
-Book Consultation
-</a>
-
-<a class="secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdcATjrcSIMGerD3UILDlDNQt7Y0VdaiU6L4KXtWdbrzBVT3A/viewform">
-Submit CV
-</a>
-
-</div>
-
-</div>
-
-<img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1400">
+<img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df">
 
 </section>
 
-<section class="section" id="features">
+<section id="services" class="container">
 
-<h2>Career Strategy Services</h2>
+<h2 class="section-title">Career Consulting Services</h2>
 
-<p>
-Helping professionals stand out in competitive hiring markets.
-</p>
+<div class="cards">
 
-<div class="features">
+<div class="card">
 
-<div class="feature">
 <h3>CV Optimization</h3>
-<p>Improve your resume with modern hiring strategies.</p>
+
+<p>Professional CV restructuring optimized for ATS systems and global hiring processes.</p>
+
 </div>
 
-<div class="feature">
-<h3>Interview Coaching</h3>
-<p>Prepare with structured interview frameworks.</p>
+<div class="card">
+
+<h3>Interview Preparation</h3>
+
+<p>Structured interview coaching using real hiring frameworks.</p>
+
 </div>
 
-<div class="feature">
+<div class="card">
+
 <h3>Salary Negotiation</h3>
-<p>Learn negotiation strategies used by top candidates.</p>
+
+<p>Learn negotiation strategies used by top professionals.</p>
+
+</div>
+
+<div class="card">
+
+<h3>Career Positioning</h3>
+
+<p>Strategic career positioning for promotions and international opportunities.</p>
+
 </div>
 
 </div>
 
 </section>
 
-<section class="section" id="pricing">
+<section id="pricing" class="container">
 
-<h2>Plans</h2>
+<h2 class="section-title">Programs</h2>
 
-<div class="pricing-grid">
+<div class="pricing">
 
-<div class="plan">
+<div class="price-card">
+
 <h3>Starter</h3>
-<div class="price">€29</div>
-<p>Basic CV feedback</p>
-<a href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Buy</a>
+
+<div class="price">29€</div>
+
+<p>Monthly consulting access</p>
+
+<a class="btn primary" href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Join</a>
+
 </div>
 
-<div class="plan">
+<div class="price-card">
+
+<div class="badge">Most Popular</div>
+
 <h3>Professional</h3>
-<div class="price">€79</div>
-<p>CV + interview coaching</p>
-<a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Buy</a>
+
+<div class="price">79€</div>
+
+<p>Full career strategy support</p>
+
+<a class="btn primary" href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Join</a>
+
 </div>
 
-<div class="plan featured">
+<div class="price-card">
+
 <h3>Executive</h3>
-<div class="price">€199</div>
-<p>Full career strategy</p>
-<a href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
+
+<div class="price">199€</div>
+
+<p>Premium career advisory</p>
+
+<a class="btn primary" href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Join</a>
+
+</div>
+
+<div class="price-card">
+
+<h3>Strategy Session</h3>
+
+<div class="price">99€</div>
+
+<p>One-time career strategy consultation</p>
+
+<a class="btn primary" href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Book</a>
+
+</div>
+
+<div class="price-card">
+
+<h3>Consulting Session</h3>
+
+<div class="price">50€</div>
+
+<p>Quick career consulting</p>
+
+<a class="btn primary" href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Book</a>
+
 </div>
 
 </div>
 
 </section>
 
-<section class="section">
+<section id="ai" class="container">
 
-<h2>Strategy Sessions</h2>
+<h2 class="section-title">AI CV Reviewer</h2>
 
-<div class="pricing-grid">
+<div class="ai-box">
 
-<div class="plan">
-<h3>Career Strategy</h3>
-<div class="price">€99</div>
-<a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Book</a>
+<p>Upload your CV and receive AI powered feedback.</p>
+
+<br>
+
+<p>
+
+✔ ATS compatibility analysis  
+✔ CV structure review  
+✔ Experience impact evaluation  
+✔ Career positioning insights
+
+</p>
+
+<br>
+
+<a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdcATjrcSIMGerD3UILDlDNQt7Y0VdaiU6L4KXtWdbrzBVT3A/viewform?usp=dialog">
+
+Upload CV
+
+</a>
+
 </div>
 
-<div class="plan">
-<h3>Consulting</h3>
-<div class="price">€50</div>
-<a href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Book</a>
-</div>
+</section>
 
-</div>
+<section id="contact" class="container">
+
+<h2 class="section-title">Contact</h2>
+
+<p style="text-align:center; margin-bottom:20px">
+
+Connect via LinkedIn
+
+</p>
+
+<p style="text-align:center">
+
+<a href="https://www.linkedin.com/in/guntekinsuh/" target="_blank">
+
+linkedin.com/in/guntekinsuh
+
+</a>
+
+</p>
+
+<br>
+
+<p style="text-align:center">
+
+Or book a consulting call directly through Calendly.
+
+</p>
 
 </section>
 
 <footer>
 
-© CareerLab
+© 2026 CareerLab
 
 </footer>
 
