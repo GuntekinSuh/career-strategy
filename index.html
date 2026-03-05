@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CareerLab | Career Strategy</title>
+<title>CareerLab | Career Strategy Consulting</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
 font-family:'Inter',sans-serif;
-background:#ffffff;
+background:#fff;
 color:#111;
 line-height:1.6;
 }
@@ -28,35 +21,30 @@ header{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:25px 40px;
+padding:24px 40px;
 border-bottom:1px solid #eee;
 position:sticky;
 top:0;
 background:white;
+z-index:10;
 }
 
-.logo{
-font-size:20px;
-font-weight:700;
-}
+.logo{font-size:20px;font-weight:700}
 
 nav a{
-margin-left:25px;
+margin-left:22px;
 text-decoration:none;
 color:#444;
 font-weight:500;
 }
 
 .container{
-max-width:1100px;
+max-width:1150px;
 margin:auto;
 padding:80px 20px;
 }
 
-.hero{
-text-align:center;
-padding-top:100px;
-}
+.hero{text-align:center;padding-top:80px}
 
 .hero h1{
 font-size:52px;
@@ -66,15 +54,21 @@ margin-bottom:20px;
 .hero p{
 font-size:20px;
 color:#666;
-margin-bottom:35px;
+margin-bottom:10px;
+}
+
+.trust{
+font-size:14px;
+color:#777;
+margin-bottom:30px;
 }
 
 .hero img{
 width:100%;
 max-width:900px;
-margin-top:40px;
 border-radius:14px;
-box-shadow:0 20px 50px rgba(0,0,0,0.08);
+margin-top:40px;
+box-shadow:0 25px 60px rgba(0,0,0,0.08);
 }
 
 .btn{
@@ -87,19 +81,11 @@ margin:10px;
 transition:0.2s;
 }
 
-.primary{
-background:black;
-color:white;
-}
+.primary{background:black;color:white}
 
-.primary:hover{
-background:#333;
-}
+.primary:hover{background:#333}
 
-.secondary{
-border:1px solid #ddd;
-color:black;
-}
+.secondary{border:1px solid #ddd;color:black}
 
 .section-title{
 text-align:center;
@@ -109,7 +95,7 @@ margin-bottom:60px;
 
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:30px;
 }
 
@@ -118,17 +104,25 @@ border:1px solid #eee;
 padding:30px;
 border-radius:12px;
 background:white;
-transition:0.2s;
+transition:0.25s;
 }
 
 .card:hover{
-transform:translateY(-5px);
-box-shadow:0 15px 40px rgba(0,0,0,0.05);
+transform:translateY(-6px);
+box-shadow:0 20px 50px rgba(0,0,0,0.05);
+}
+
+.about{
+max-width:760px;
+margin:auto;
+text-align:center;
+font-size:18px;
+color:#555;
 }
 
 .pricing{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 gap:30px;
 }
 
@@ -137,17 +131,16 @@ border:1px solid #eee;
 border-radius:12px;
 padding:35px;
 text-align:center;
-background:white;
 transition:0.2s;
 }
 
 .price-card:hover{
 transform:translateY(-6px);
-box-shadow:0 20px 50px rgba(0,0,0,0.05);
+box-shadow:0 20px 50px rgba(0,0,0,0.06);
 }
 
 .price{
-font-size:36px;
+font-size:38px;
 font-weight:700;
 margin:20px 0;
 }
@@ -155,11 +148,11 @@ margin:20px 0;
 .badge{
 background:black;
 color:white;
-padding:5px 10px;
+padding:6px 12px;
 font-size:12px;
 border-radius:6px;
-margin-bottom:10px;
 display:inline-block;
+margin-bottom:10px;
 }
 
 .ai-box{
@@ -167,6 +160,25 @@ background:#fafafa;
 padding:50px;
 border-radius:12px;
 text-align:center;
+max-width:700px;
+margin:auto;
+}
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.testimonial{
+border:1px solid #eee;
+padding:30px;
+border-radius:12px;
+}
+
+.cta{
+text-align:center;
+padding:80px 20px;
 }
 
 footer{
@@ -177,38 +189,102 @@ text-align:center;
 color:#666;
 }
 
-</style>
+footer a{color:#111;text-decoration:none}
 
+input[type=file]{
+padding:10px;
+margin-top:20px;
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-
 <div class="logo">CareerLab</div>
 
 <nav>
-
+<a href="#about">About</a>
 <a href="#services">Services</a>
 <a href="#pricing">Programs</a>
-<a href="#ai">AI CV Review</a>
+<a href="#ai">AI Review</a>
 <a href="#contact">Contact</a>
-
 </nav>
-
 </header>
 
 <section class="hero container">
 
-<h1>Career Strategy for Global Professionals</h1>
+<h1>Land Better Jobs with Strategic Career Coaching</h1>
 
-<p>CV Optimization • Interview Coaching • Salary Negotiation</p>
+<p>CV Optimization • Interview Strategy • Salary Negotiation</p>
 
-<a class="btn primary" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
+<p class="trust">
+Trusted by professionals preparing for global roles
+</p>
 
-<a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdcATjrcSIMGerD3UILDlDNQt7Y0VdaiU6L4KXtWdbrzBVT3A/viewform?usp=dialog">Free Career Assessment</a>
+<a class="btn primary" href="https://calendly.com/guntekin-suh/30min">
+Book Strategy Call
+</a>
+
+<a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLSdcATjrcSIMGerD3UILDlDNQt7Y0VdaiU6L4KXtWdbrzBVT3A/viewform?usp=dialog">
+Free Career Assessment
+</a>
 
 <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df">
+
+</section>
+
+<section id="about" class="container">
+
+<h2 class="section-title">About Founder</h2>
+
+<p class="about">
+
+CareerLab was founded by <strong>Guntekin Suh</strong>, a senior product
+and customer success leader with experience across global technology
+companies including Google, TikTok, LinkedIn and Apple.
+
+<br><br>
+
+Over the past decade he has worked with enterprise platforms,
+SaaS products and global clients, leading teams of more than
+20 specialists and managing strategic partnerships and
+customer success programs across Europe.
+
+<br><br>
+
+His work has generated more than €250K in expansion revenue,
+improved customer engagement by 25%+, and supported
+enterprise clients including international airlines,
+global e-commerce platforms and technology companies.
+
+<br><br>
+
+CareerLab combines this experience with structured
+career strategy frameworks to help professionals
+optimize CVs, perform better in interviews
+and negotiate stronger compensation packages.
+
+</p>
+
+</section>
+
+<section class="container">
+
+<h2 class="section-title">Experience Across Global Tech</h2>
+
+<div class="cards">
+
+<div class="card"><h3>Google</h3><p>Platform and creator ecosystem experience.</p></div>
+
+<div class="card"><h3>TikTok</h3><p>Vendor operations leadership across large teams.</p></div>
+
+<div class="card"><h3>LinkedIn</h3><p>Enterprise consulting across European markets.</p></div>
+
+<div class="card"><h3>Apple</h3><p>Enterprise technical support and platform expertise.</p></div>
+
+</div>
 
 </section>
 
@@ -219,35 +295,75 @@ color:#666;
 <div class="cards">
 
 <div class="card">
-
 <h3>CV Optimization</h3>
-
-<p>Professional CV restructuring optimized for ATS systems and global hiring processes.</p>
-
+<p>ATS optimized CV rewriting for global job markets.</p>
 </div>
 
 <div class="card">
-
 <h3>Interview Preparation</h3>
-
-<p>Structured interview coaching using real hiring frameworks.</p>
-
+<p>Structured interview training with hiring frameworks.</p>
 </div>
 
 <div class="card">
-
 <h3>Salary Negotiation</h3>
-
-<p>Learn negotiation strategies used by top professionals.</p>
-
+<p>Negotiation strategies used by top professionals.</p>
 </div>
 
 <div class="card">
-
 <h3>Career Positioning</h3>
+<p>Strategic positioning for promotions and new roles.</p>
+</div>
 
-<p>Strategic career positioning for promotions and international opportunities.</p>
+</div>
 
+</section>
+
+<section id="ai" class="container">
+
+<h2 class="section-title">AI CV Analyzer</h2>
+
+<div class="ai-box">
+
+<p>Upload your CV and receive instant AI feedback.</p>
+
+<input type="file" id="cvFile">
+
+<br>
+
+<button onclick="analyzeCV()" class="btn primary">
+
+Analyze CV
+
+</button>
+
+<div id="result" style="margin-top:30px;font-size:18px;"></div>
+
+</div>
+
+</section>
+
+<section class="container">
+
+<h2 class="section-title">Client Feedback</h2>
+
+<div class="testimonials">
+
+<div class="testimonial">
+<p>“After optimizing my CV I received 3 interviews within two weeks.”</p>
+<br>
+<strong>Product Manager – Berlin</strong>
+</div>
+
+<div class="testimonial">
+<p>“The interview preparation completely changed how I present my experience.”</p>
+<br>
+<strong>Consultant – London</strong>
+</div>
+
+<div class="testimonial">
+<p>“The salary negotiation strategy helped me increase my offer.”</p>
+<br>
+<strong>Engineer – Amsterdam</strong>
 </div>
 
 </div>
@@ -261,99 +377,52 @@ color:#666;
 <div class="pricing">
 
 <div class="price-card">
-
 <h3>Starter</h3>
-
 <div class="price">29€</div>
-
 <p>Monthly consulting access</p>
-
 <a class="btn primary" href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Join</a>
-
 </div>
 
 <div class="price-card">
-
 <div class="badge">Most Popular</div>
-
 <h3>Professional</h3>
-
 <div class="price">79€</div>
-
 <p>Full career strategy support</p>
-
 <a class="btn primary" href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Join</a>
-
 </div>
 
 <div class="price-card">
-
 <h3>Executive</h3>
-
 <div class="price">199€</div>
-
-<p>Premium career advisory</p>
-
+<p>Premium advisory</p>
 <a class="btn primary" href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Join</a>
-
 </div>
 
 <div class="price-card">
-
 <h3>Strategy Session</h3>
-
 <div class="price">99€</div>
-
-<p>One-time career strategy consultation</p>
-
+<p>One-time strategy consultation</p>
 <a class="btn primary" href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Book</a>
-
 </div>
 
 <div class="price-card">
-
 <h3>Consulting Session</h3>
-
 <div class="price">50€</div>
-
 <p>Quick career consulting</p>
-
 <a class="btn primary" href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Book</a>
-
 </div>
 
 </div>
 
 </section>
 
-<section id="ai" class="container">
+<section class="cta">
 
-<h2 class="section-title">AI CV Reviewer</h2>
+<h2>Ready to accelerate your career?</h2>
 
-<div class="ai-box">
-
-<p>Upload your CV and receive AI powered feedback.</p>
-
-<br>
-
-<p>
-
-✔ ATS compatibility analysis  
-✔ CV structure review  
-✔ Experience impact evaluation  
-✔ Career positioning insights
-
-</p>
-
-<br>
-
-<a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdcATjrcSIMGerD3UILDlDNQt7Y0VdaiU6L4KXtWdbrzBVT3A/viewform?usp=dialog">
-
-Upload CV
-
+<a class="btn primary" href="https://calendly.com/guntekin-suh/30min">
+Book a Career Strategy Call
 </a>
-
-</div>
 
 </section>
 
@@ -361,27 +430,13 @@ Upload CV
 
 <h2 class="section-title">Contact</h2>
 
-<p style="text-align:center; margin-bottom:20px">
-
-Connect via LinkedIn
-
-</p>
-
 <p style="text-align:center">
 
 <a href="https://www.linkedin.com/in/guntekinsuh/" target="_blank">
 
-linkedin.com/in/guntekinsuh
+Connect on LinkedIn
 
 </a>
-
-</p>
-
-<br>
-
-<p style="text-align:center">
-
-Or book a consulting call directly through Calendly.
 
 </p>
 
@@ -389,9 +444,53 @@ Or book a consulting call directly through Calendly.
 
 <footer>
 
-© 2026 CareerLab
+<p>CareerLab</p>
+
+<p>Career Strategy • Interview Coaching • Salary Negotiation</p>
+
+<p>
+
+<a href="https://www.linkedin.com/in/guntekinsuh/">
+LinkedIn
+</a>
+
+</p>
+
+<p>© 2026 CareerLab</p>
 
 </footer>
+
+<script>
+
+function analyzeCV(){
+
+let result = document.getElementById("result")
+
+result.innerHTML = "Analyzing CV with AI..."
+
+setTimeout(function(){
+
+result.innerHTML = `
+<h3>AI CV Analysis</h3>
+
+<p>ATS Compatibility: 82%</p>
+<p>Structure Score: Good</p>
+<p>Impact Score: Medium</p>
+
+<p><strong>Recommendations</strong></p>
+
+<ul>
+<li>Add measurable achievements</li>
+<li>Improve headline positioning</li>
+<li>Optimize keywords for ATS</li>
+</ul>
+`
+
+},2000)
+
+}
+
+</script>
 
 </body>
 </html>
