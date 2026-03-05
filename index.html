@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>CareerLab | Career Strategy Consulting</title>
+<title>CareerLab | Career Strategy</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -28,6 +28,7 @@ background:white;
 position:sticky;
 top:0;
 box-shadow:0 5px 20px rgba(0,0,0,0.05);
+z-index:10;
 }
 
 nav a{
@@ -38,26 +39,22 @@ font-weight:500;
 }
 
 .hero{
-padding:120px 20px;
+padding:140px 20px;
 text-align:center;
 background:white;
 }
 
 .hero h1{
-font-size:56px;
+font-size:58px;
 font-weight:700;
 margin-bottom:20px;
 }
 
 .hero p{
 font-size:20px;
-color:#555;
+color:#666;
 max-width:700px;
 margin:auto;
-}
-
-.cta{
-margin-top:40px;
 }
 
 .button{
@@ -66,14 +63,19 @@ color:white;
 padding:14px 28px;
 border-radius:8px;
 text-decoration:none;
-margin:10px;
 display:inline-block;
+margin:10px;
 }
 
 .section{
 padding:120px 20px;
 max-width:1100px;
 margin:auto;
+}
+
+.section h2{
+font-size:36px;
+margin-bottom:20px;
 }
 
 .cards{
@@ -92,7 +94,7 @@ transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-6px);
+transform:translateY(-8px);
 }
 
 .pricing{
@@ -111,32 +113,24 @@ text-align:center;
 }
 
 .price{
-font-size:36px;
+font-size:38px;
 margin:20px 0;
+font-weight:600;
 }
 
-.about{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:60px;
-align-items:center;
-}
-
-.about img{
+img{
 width:100%;
-border-radius:16px;
+border-radius:12px;
+margin-top:40px;
 }
 
-input,textarea{
+textarea,input{
 width:100%;
-padding:12px;
+padding:14px;
 margin-top:10px;
-border-radius:6px;
+border-radius:8px;
 border:1px solid #ddd;
-}
-
-.upload{
-margin-top:20px;
+font-family:Inter;
 }
 
 footer{
@@ -146,10 +140,6 @@ color:#777;
 }
 
 @media(max-width:900px){
-
-.about{
-grid-template-columns:1fr;
-}
 
 .hero h1{
 font-size:40px;
@@ -172,7 +162,6 @@ font-size:40px;
 <a href="#services">Services</a>
 <a href="#ai">AI CV</a>
 <a href="#plans">Plans</a>
-<a href="#about">Founder</a>
 <a href="#contact">Contact</a>
 
 </div>
@@ -185,16 +174,27 @@ font-size:40px;
 <h1>Build Your Career Strategy</h1>
 
 <p>
-Career consulting, CV optimization, interview preparation and salary negotiation strategies for ambitious professionals.
+
+Professional career consulting, CV optimization, interview preparation and salary negotiation strategies.
+
 </p>
 
-<div class="cta">
+<br>
 
-<a class="button" href="https://calendly.com/guntekin-suh/30min" target="_blank">Book Consultation</a>
+<a class="button" href="https://calendly.com/guntekin-suh/30min" target="_blank">
+Book Consultation
+</a>
 
-<a class="button" href="https://www.linkedin.com/in/guntekinsuh/" target="_blank">LinkedIn</a>
+<a class="button" href="https://www.linkedin.com/in/guntekinsuh/" target="_blank">
+LinkedIn
+</a>
 
-</div>
+</section>
+
+
+<section class="section">
+
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
 
 </section>
 
@@ -207,25 +207,32 @@ Career consulting, CV optimization, interview preparation and salary negotiation
 
 <div class="card">
 <h3>CV Optimization</h3>
-<p>Make your CV stand out and pass ATS filters.</p>
+<p>Improve your CV to pass ATS systems and stand out.</p>
 </div>
 
 <div class="card">
 <h3>Interview Preparation</h3>
-<p>Practice interviews and real hiring strategies.</p>
+<p>Learn hiring frameworks used by global companies.</p>
 </div>
 
 <div class="card">
 <h3>Salary Negotiation</h3>
-<p>Learn how to negotiate higher compensation.</p>
+<p>Understand compensation structures and negotiation tactics.</p>
 </div>
 
 <div class="card">
 <h3>Career Strategy</h3>
-<p>Long-term positioning for global career growth.</p>
+<p>Position yourself for long-term professional growth.</p>
 </div>
 
 </div>
+
+</section>
+
+
+<section class="section">
+
+<img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 
 </section>
 
@@ -234,17 +241,13 @@ Career consulting, CV optimization, interview preparation and salary negotiation
 
 <h2>AI CV Analyzer</h2>
 
-<p>Paste your CV or upload it to receive AI-based feedback.</p>
+<p>Paste your CV or upload a file to analyze.</p>
 
 <textarea rows="8" placeholder="Paste your CV here"></textarea>
 
-<div class="upload">
-
 <input type="file">
 
-</div>
-
-<br>
+<br><br>
 
 <button class="button">Analyze CV</button>
 
@@ -258,62 +261,38 @@ Career consulting, CV optimization, interview preparation and salary negotiation
 <div class="pricing">
 
 <div class="price-card">
-
 <h3>Starter</h3>
 <div class="price">29€</div>
-
 <p>Basic CV review</p>
-
-<a class="button" href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01" target="_blank">Buy</a>
-
+<a class="button" href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Buy</a>
 </div>
 
-
 <div class="price-card">
-
 <h3>Professional</h3>
 <div class="price">79€</div>
-
 <p>CV + interview coaching</p>
-
-<a class="button" href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02" target="_blank">Buy</a>
-
+<a class="button" href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Buy</a>
 </div>
 
-
 <div class="price-card">
-
 <h3>Executive</h3>
 <div class="price">199€</div>
-
-<p>Full career strategy package</p>
-
-<a class="button" href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03" target="_blank">Buy</a>
-
+<p>Full career strategy</p>
+<a class="button" href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
 </div>
 
-
 <div class="price-card">
-
 <h3>Strategy Session</h3>
 <div class="price">99€</div>
-
-<p>One-off career strategy call</p>
-
-<a class="button" href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04" target="_blank">Buy</a>
-
+<p>One-off consulting call</p>
+<a class="button" href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Buy</a>
 </div>
 
-
 <div class="price-card">
-
 <h3>Consulting Session</h3>
 <div class="price">50€</div>
-
-<p>Quick consulting call</p>
-
-<a class="button" href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05" target="_blank">Buy</a>
-
+<p>Quick consultation</p>
+<a class="button" href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Buy</a>
 </div>
 
 </div>
@@ -321,35 +300,9 @@ Career consulting, CV optimization, interview preparation and salary negotiation
 </section>
 
 
-<section id="about" class="section">
+<section class="section">
 
-<h2>Founder</h2>
-
-<div class="about">
-
-<img src="founder.jpg">
-
-<div>
-
-<h3>Guntekin Suh</h3>
-
-<p>
-
-Founder of CareerLab with 15+ years experience across consulting, strategy, technology and international business.
-
-</p>
-
-<p>
-
-CareerLab was created to help professionals navigate modern careers more strategically through CV optimization, interview preparation and career positioning.
-
-</p>
-
-<a class="button" href="https://www.linkedin.com/in/guntekinsuh/" target="_blank">LinkedIn</a>
-
-</div>
-
-</div>
+<img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0">
 
 </section>
 
@@ -358,12 +311,10 @@ CareerLab was created to help professionals navigate modern careers more strateg
 
 <h2>Contact</h2>
 
-<p>Get in touch for career consulting.</p>
+<p>Send a message for career consulting.</p>
 
 <input placeholder="Name">
-
 <input placeholder="Email">
-
 <textarea rows="5" placeholder="Message"></textarea>
 
 <br><br>
