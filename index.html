@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,12 +55,12 @@ align-items:center;
 justify-content:center;
 color:white;
 font-weight:700;
-font-size:16px;
 }
 
 .logo span{
 font-weight:400;
-color:#555;
+color:#666;
+font-size:14px;
 }
 
 nav a{
@@ -89,6 +90,12 @@ margin-bottom:20px;
 .hero p{
 font-size:20px;
 color:#666;
+}
+
+.trust{
+margin-top:10px;
+font-size:14px;
+color:#888;
 }
 
 .hero img{
@@ -175,12 +182,32 @@ border-radius:6px;
 cursor:pointer;
 }
 
+#loading{
+margin-top:20px;
+display:none;
+color:#666;
+}
+
 #result{
 margin-top:20px;
 background:#fafafa;
 padding:20px;
 border-radius:8px;
 display:none;
+}
+
+.bar{
+height:10px;
+background:#eee;
+border-radius:6px;
+margin:6px 0 12px 0;
+overflow:hidden;
+}
+
+.bar-fill{
+height:10px;
+background:black;
+width:0%;
 }
 
 /* PRICING */
@@ -203,15 +230,15 @@ transition:0.3s;
 
 .price-card:hover{transform:translateY(-8px);}
 
-.price-card small{
-color:#777;
-font-size:13px;
+.price-card ul{
+margin-top:10px;
+font-size:14px;
+color:#555;
+padding-left:18px;
 }
 
-.price-card p{
-font-size:14px;
-margin-top:10px;
-color:#555;
+.price-card small{
+color:#888;
 }
 
 .price-card a{
@@ -304,7 +331,10 @@ font-size:14px;
 
 <div class="logo">
 <div class="logo-icon">CL</div>
-Career<span>Lab</span>
+<div>
+CareerLab<br>
+<span>AI Career Strategy</span>
+</div>
 </div>
 
 <nav>
@@ -321,15 +351,15 @@ Career<span>Lab</span>
 
 <div class="hero-text">
 
-<h1>Design Your Global Career</h1>
+<h1>AI Career Strategy for Global Professionals</h1>
 
 <p>
-AI powered career strategy, CV optimization and interview coaching.
+Optimize your CV, prepare for interviews and position yourself for international career opportunities.
 </p>
 
-<p style="margin-top:10px;color:#888;font-size:14px;">
-Trusted by professionals relocating to Europe and global markets.
-</p>
+<div class="trust">
+CV Optimization • Interview Strategy • Career Positioning
+</div>
 
 <a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
 
@@ -350,7 +380,7 @@ Trusted by professionals relocating to Europe and global markets.
 <h3>Career Strategy</h3>
 <p>Strategic planning for long term career growth.</p>
 <div class="service-desc">
-Roadmap for international career positioning, market targeting and long-term growth planning.
+Roadmap for international career positioning, job market targeting and long term growth planning.
 </div>
 </div>
 
@@ -368,7 +398,7 @@ Professional CV restructuring aligned with recruiter screening and ATS systems.
 <h3>Interview Coaching</h3>
 <p>Mock interviews and hiring insights.</p>
 <div class="service-desc">
-Mock interviews with real hiring scenarios used by international recruiters.
+Mock interviews based on real hiring scenarios used by recruiters.
 </div>
 </div>
 
@@ -377,7 +407,7 @@ Mock interviews with real hiring scenarios used by international recruiters.
 <h3>LinkedIn Positioning</h3>
 <p>Build a powerful professional online brand.</p>
 <div class="service-desc">
-Create a high authority LinkedIn profile that attracts recruiters and opportunities.
+Create a high authority LinkedIn profile that attracts recruiters and global opportunities.
 </div>
 </div>
 
@@ -389,18 +419,15 @@ Create a high authority LinkedIn profile that attracts recruiters and opportunit
 
 <h2>AI CV Analyzer</h2>
 
-<p>
-Upload your CV and receive AI powered analysis including ATS compatibility,
-keyword strength and impact scoring.
-</p>
+<p>Upload your CV (PDF) and receive AI based career feedback.</p>
 
 <div class="ai-box">
-
-<h3>Upload CV (PDF)</h3>
 
 <input type="file" id="cvFile" accept="application/pdf">
 
 <button onclick="analyzePDF()">Analyze CV</button>
+
+<div id="loading">Analyzing CV...</div>
 
 <div id="result"></div>
 
@@ -415,43 +442,52 @@ keyword strength and impact scoring.
 <div class="pricing">
 
 <div class="price-card">
+
 <h3>Starter</h3>
 <small>Monthly</small>
 <h2>29€</h2>
-<p>Basic AI CV insights and career improvement suggestions.</p>
+
+<ul>
+<li>AI CV scan</li>
+<li>Career insights</li>
+<li>Basic improvement suggestions</li>
+</ul>
+
 <a href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Buy</a>
+
 </div>
 
 <div class="price-card">
+
 <h3>Professional</h3>
 <small>Monthly</small>
 <h2>79€</h2>
-<p>Advanced CV optimization and professional positioning support.</p>
+
+<ul>
+<li>Advanced CV analysis</li>
+<li>LinkedIn positioning tips</li>
+<li>Interview preparation insights</li>
+</ul>
+
 <a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Buy</a>
+
 </div>
 
 <div class="price-card featured">
+
 <h3>Executive</h3>
 <small>Monthly</small>
 <h2>199€</h2>
-<p>Full career strategy including CV, LinkedIn and interview coaching.</p>
+
+<ul>
+<li>Full career strategy</li>
+<li>CV optimization</li>
+<li>LinkedIn optimization</li>
+<li>Interview coaching</li>
+</ul>
+
 <a href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
-</div>
 
-<div class="price-card">
-<h3>Strategy Session</h3>
-<small>One-off</small>
-<h2>99€</h2>
-<p>60 minute deep career strategy consultation.</p>
-<a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Buy</a>
-</div>
-
-<div class="price-card">
-<h3>Consulting</h3>
-<small>One-off</small>
-<h2>50€</h2>
-<p>Short consultation for targeted career questions.</p>
-<a href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Buy</a>
 </div>
 
 </div>
@@ -468,7 +504,7 @@ keyword strength and impact scoring.
 
 <p>
 
-CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping professionals position themselves for global opportunities through CV optimization, interview preparation and strategic career planning.
+CareerLab was founded by <b>Guntekin Suh</b>, helping professionals position themselves for international careers through CV optimization, interview preparation and career strategy.
 
 </p>
 
@@ -501,92 +537,99 @@ CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping profes
 <script>
 
 function toggleService(card){
-
 let desc=card.querySelector(".service-desc");
-
 desc.style.display=desc.style.display==="block" ? "none":"block";
-
 }
-
-/* PDF ANALYZER */
 
 async function analyzePDF(){
 
 let file=document.getElementById("cvFile").files[0];
+if(!file){alert("Upload CV PDF");return;}
 
-if(!file){
-alert("Please upload a PDF CV");
-return;
-}
+document.getElementById("loading").style.display="block";
 
 let reader=new FileReader();
 
 reader.onload=async function(){
 
 let typedarray=new Uint8Array(this.result);
-
 let pdf=await pdfjsLib.getDocument(typedarray).promise;
 
 let text="";
 
 for(let i=1;i<=pdf.numPages;i++){
-
 let page=await pdf.getPage(i);
 let content=await page.getTextContent();
+content.items.forEach(item=>{text+=item.str+" ";});
+}
 
-content.items.forEach(item=>{
-text+=item.str+" ";
-});
+analyzeText(text);
+
+};
+
+reader.readAsArrayBuffer(file);
 
 }
 
-/* SIMPLE ANALYSIS */
+function analyzeText(text){
 
-let words=text.split(" ").length;
+let words=text.split(/\s+/).length;
 
 let achievements=(text.match(/\d+/g)||[]).length;
 
-let score=Math.min(100,Math.floor((words/10)+(achievements*2)));
+let leadershipWords=["managed","led","developed","created","improved","increased","reduced","achieved"];
+
+let leadership=0;
+
+leadershipWords.forEach(w=>{
+if(text.toLowerCase().includes(w)) leadership++;
+});
+
+let ats=Math.min(100,Math.floor(words/8));
+let keyword=Math.min(100,leadership*15);
+let impact=Math.min(100,achievements*8);
+let structure=80;
+
+let score=Math.floor((ats+keyword+impact+structure)/4);
 
 let result=`
 
 <h3>AI CV Score: ${score}/100</h3>
 
-<br>
+<strong>ATS Compatibility ${ats}%</strong>
+<div class="bar"><div class="bar-fill" style="width:${ats}%"></div></div>
 
-<strong>Word Count</strong>
-<p>${words} words detected in CV.</p>
+<strong>Keyword Strength ${keyword}%</strong>
+<div class="bar"><div class="bar-fill" style="width:${keyword}%"></div></div>
 
-<br>
+<strong>Impact Score ${impact}%</strong>
+<div class="bar"><div class="bar-fill" style="width:${impact}%"></div></div>
 
-<strong>Achievements</strong>
-<p>${achievements} measurable metrics detected.</p>
+<strong>Structure Score ${structure}%</strong>
+<div class="bar"><div class="bar-fill" style="width:${structure}%"></div></div>
 
 <br>
 
 <strong>Suggestions</strong>
 
 <ul>
-<li>Add more quantified achievements</li>
-<li>Include stronger action verbs</li>
+<li>Add measurable achievements</li>
+<li>Use stronger action verbs</li>
 <li>Align keywords with job descriptions</li>
-<li>Highlight leadership impact</li>
+<li>Highlight leadership experience</li>
 </ul>
 
 <br>
 
 <a class="cta" href="https://calendly.com/guntekin-suh/30min">
-Get Professional CV Review
+Book Professional CV Review
 </a>
 
 `;
 
+document.getElementById("loading").style.display="none";
 document.getElementById("result").style.display="block";
 document.getElementById("result").innerHTML=result;
-
-}
-
-reader.readAsArrayBuffer(file);
 
 }
 
@@ -594,3 +637,4 @@ reader.readAsArrayBuffer(file);
 
 </body>
 </html>
+```
