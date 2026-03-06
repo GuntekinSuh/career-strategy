@@ -10,13 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:Inter;
@@ -39,8 +37,24 @@ z-index:100;
 }
 
 .logo{
+display:flex;
+align-items:center;
+gap:10px;
 font-weight:700;
 font-size:22px;
+}
+
+.logo-icon{
+width:34px;
+height:34px;
+background:linear-gradient(135deg,#000,#555);
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+font-weight:700;
+font-size:16px;
 }
 
 .logo span{
@@ -64,9 +78,7 @@ justify-content:space-between;
 padding:120px 8%;
 }
 
-.hero-text{
-max-width:550px;
-}
+.hero-text{max-width:550px;}
 
 .hero h1{
 font-size:60px;
@@ -97,15 +109,11 @@ font-weight:500;
 transition:0.3s;
 }
 
-.cta:hover{
-transform:translateY(-3px);
-}
+.cta:hover{transform:translateY(-3px);}
 
 /* SECTIONS */
 
-.section{
-padding:110px 8%;
-}
+.section{padding:110px 8%;}
 
 .section h2{
 font-size:38px;
@@ -127,7 +135,10 @@ padding:30px;
 border-radius:14px;
 box-shadow:0 10px 40px rgba(0,0,0,0.05);
 transition:0.3s;
+cursor:pointer;
 }
+
+.card:hover{transform:translateY(-8px);}
 
 .card img{
 width:100%;
@@ -135,8 +146,11 @@ border-radius:10px;
 margin-bottom:15px;
 }
 
-.card:hover{
-transform:translateY(-8px);
+.service-desc{
+margin-top:10px;
+font-size:14px;
+color:#666;
+display:none;
 }
 
 /* AI BOX */
@@ -149,18 +163,7 @@ box-shadow:0 10px 40px rgba(0,0,0,0.05);
 margin-top:40px;
 }
 
-textarea{
-width:100%;
-height:180px;
-margin-top:15px;
-padding:12px;
-border-radius:8px;
-border:1px solid #ddd;
-}
-
-input[type=file]{
-margin-top:20px;
-}
+input[type=file]{margin-top:20px;}
 
 button{
 margin-top:20px;
@@ -198,8 +201,17 @@ box-shadow:0 10px 40px rgba(0,0,0,0.05);
 transition:0.3s;
 }
 
-.price-card:hover{
-transform:translateY(-8px);
+.price-card:hover{transform:translateY(-8px);}
+
+.price-card small{
+color:#777;
+font-size:13px;
+}
+
+.price-card p{
+font-size:14px;
+margin-top:10px;
+color:#555;
 }
 
 .price-card a{
@@ -213,9 +225,7 @@ border-radius:6px;
 text-decoration:none;
 }
 
-.featured{
-border:2px solid black;
-}
+.featured{border:2px solid black;}
 
 /* ABOUT */
 
@@ -254,17 +264,11 @@ max-width:420px;
 margin-top:30px;
 }
 
-.hero h1{
-font-size:42px;
-}
+.hero h1{font-size:42px;}
 
-.hero p{
-font-size:18px;
-}
+.hero p{font-size:18px;}
 
-.section{
-padding:80px 6%;
-}
+.section{padding:80px 6%;}
 
 .about{
 flex-direction:column;
@@ -276,9 +280,7 @@ width:100%;
 max-width:420px;
 }
 
-.pricing{
-justify-content:center;
-}
+.pricing{justify-content:center;}
 
 .price-card{
 width:100%;
@@ -300,16 +302,17 @@ font-size:14px;
 
 <header>
 
-<div class="logo">🚀 Career<span>Lab</span></div>
+<div class="logo">
+<div class="logo-icon">CL</div>
+Career<span>Lab</span>
+</div>
 
 <nav>
-
 <a href="#services">Services</a>
 <a href="#ai">AI CV</a>
 <a href="#plans">Plans</a>
 <a href="#about">Founder</a>
 <a href="#contact">Contact</a>
-
 </nav>
 
 </header>
@@ -322,6 +325,10 @@ font-size:14px;
 
 <p>
 AI powered career strategy, CV optimization and interview coaching.
+</p>
+
+<p style="margin-top:10px;color:#888;font-size:14px;">
+Trusted by professionals relocating to Europe and global markets.
 </p>
 
 <a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
@@ -338,28 +345,40 @@ AI powered career strategy, CV optimization and interview coaching.
 
 <div class="grid">
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df">
 <h3>Career Strategy</h3>
 <p>Strategic planning for long term career growth.</p>
+<div class="service-desc">
+Roadmap for international career positioning, market targeting and long-term growth planning.
+</div>
 </div>
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
 <h3>CV Optimization</h3>
 <p>ATS optimized CV and resume rewriting.</p>
+<div class="service-desc">
+Professional CV restructuring aligned with recruiter screening and ATS systems.
+</div>
 </div>
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
 <h3>Interview Coaching</h3>
 <p>Mock interviews and hiring insights.</p>
+<div class="service-desc">
+Mock interviews with real hiring scenarios used by international recruiters.
+</div>
 </div>
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 <h3>LinkedIn Positioning</h3>
 <p>Build a powerful professional online brand.</p>
+<div class="service-desc">
+Create a high authority LinkedIn profile that attracts recruiters and opportunities.
+</div>
 </div>
 
 </div>
@@ -370,23 +389,18 @@ AI powered career strategy, CV optimization and interview coaching.
 
 <h2>AI CV Analyzer</h2>
 
-<p>Upload or paste your CV and receive instant feedback.</p>
+<p>
+Upload your CV and receive AI powered analysis including ATS compatibility,
+keyword strength and impact scoring.
+</p>
 
 <div class="ai-box">
 
-<h3>Paste CV</h3>
+<h3>Upload CV (PDF)</h3>
 
-<textarea id="cv"></textarea>
+<input type="file" id="cvFile" accept="application/pdf">
 
-<button onclick="analyzeCV()">Analyze CV</button>
-
-<hr style="margin:40px 0;">
-
-<h3>Upload CV</h3>
-
-<input type="file" id="cvFile">
-
-<button onclick="uploadCV()">Analyze File</button>
+<button onclick="analyzePDF()">Analyze CV</button>
 
 <div id="result"></div>
 
@@ -402,31 +416,41 @@ AI powered career strategy, CV optimization and interview coaching.
 
 <div class="price-card">
 <h3>Starter</h3>
+<small>Monthly</small>
 <h2>29€</h2>
+<p>Basic AI CV insights and career improvement suggestions.</p>
 <a href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Buy</a>
 </div>
 
 <div class="price-card">
 <h3>Professional</h3>
+<small>Monthly</small>
 <h2>79€</h2>
+<p>Advanced CV optimization and professional positioning support.</p>
 <a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Buy</a>
 </div>
 
 <div class="price-card featured">
 <h3>Executive</h3>
+<small>Monthly</small>
 <h2>199€</h2>
+<p>Full career strategy including CV, LinkedIn and interview coaching.</p>
 <a href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
 </div>
 
 <div class="price-card">
 <h3>Strategy Session</h3>
+<small>One-off</small>
 <h2>99€</h2>
+<p>60 minute deep career strategy consultation.</p>
 <a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Buy</a>
 </div>
 
 <div class="price-card">
 <h3>Consulting</h3>
+<small>One-off</small>
 <h2>50€</h2>
+<p>Short consultation for targeted career questions.</p>
 <a href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Buy</a>
 </div>
 
@@ -476,41 +500,84 @@ CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping profes
 
 <script>
 
-function analyzeCV(){
+function toggleService(card){
 
-let cv=document.getElementById("cv").value;
+let desc=card.querySelector(".service-desc");
 
-if(cv.length<50){
-
-alert("Please paste your CV text.");
-
-return;
+desc.style.display=desc.style.display==="block" ? "none":"block";
 
 }
 
-let score=Math.floor(Math.random()*30)+70;
+/* PDF ANALYZER */
+
+async function analyzePDF(){
+
+let file=document.getElementById("cvFile").files[0];
+
+if(!file){
+alert("Please upload a PDF CV");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=async function(){
+
+let typedarray=new Uint8Array(this.result);
+
+let pdf=await pdfjsLib.getDocument(typedarray).promise;
+
+let text="";
+
+for(let i=1;i<=pdf.numPages;i++){
+
+let page=await pdf.getPage(i);
+let content=await page.getTextContent();
+
+content.items.forEach(item=>{
+text+=item.str+" ";
+});
+
+}
+
+/* SIMPLE ANALYSIS */
+
+let words=text.split(" ").length;
+
+let achievements=(text.match(/\d+/g)||[]).length;
+
+let score=Math.min(100,Math.floor((words/10)+(achievements*2)));
 
 let result=`
 
 <h3>AI CV Score: ${score}/100</h3>
+
+<br>
+
+<strong>Word Count</strong>
+<p>${words} words detected in CV.</p>
+
+<br>
+
+<strong>Achievements</strong>
+<p>${achievements} measurable metrics detected.</p>
 
 <br>
 
 <strong>Suggestions</strong>
 
 <ul>
-
-<li>Add measurable achievements</li>
-
-<li>Use more industry keywords</li>
-
-<li>Improve impact statements</li>
-
+<li>Add more quantified achievements</li>
+<li>Include stronger action verbs</li>
+<li>Align keywords with job descriptions</li>
+<li>Highlight leadership impact</li>
 </ul>
 
 <br>
 
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Career Strategy Call</a>
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">
+Get Professional CV Review
+</a>
 
 `;
 
@@ -519,46 +586,7 @@ document.getElementById("result").innerHTML=result;
 
 }
 
-function uploadCV(){
-
-let file=document.getElementById("cvFile").files[0];
-
-if(!file){
-
-alert("Please upload your CV.");
-
-return;
-
-}
-
-let score=Math.floor(Math.random()*30)+70;
-
-let result=`
-
-<h3>AI CV Score: ${score}/100</h3>
-
-<br>
-
-<strong>Initial Analysis</strong>
-
-<ul>
-
-<li>File received successfully</li>
-
-<li>AI screening simulated</li>
-
-<li>Detailed review available in consultation</li>
-
-</ul>
-
-<br>
-
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Career Strategy Call</a>
-
-`;
-
-document.getElementById("result").style.display="block";
-document.getElementById("result").innerHTML=result;
+reader.readAsArrayBuffer(file);
 
 }
 
