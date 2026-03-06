@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CareerLab | Human CV Review & Career Strategy</title>
+<title>CareerLab | AI Career Strategy</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 
 body{
 font-family:Inter;
-background:#f7f7f8;
+background:#f5f5f7;
 color:#111;
 }
 
@@ -47,7 +47,7 @@ font-size:22px;
 .logo-icon{
 width:34px;
 height:34px;
-background:linear-gradient(135deg,#000,#444);
+background:linear-gradient(135deg,#000,#555);
 border-radius:8px;
 display:flex;
 align-items:center;
@@ -59,7 +59,7 @@ font-size:16px;
 
 .logo span{
 font-weight:400;
-color:#777;
+color:#555;
 }
 
 nav a{
@@ -78,10 +78,10 @@ justify-content:space-between;
 padding:120px 8%;
 }
 
-.hero-text{max-width:560px;}
+.hero-text{max-width:550px;}
 
 .hero h1{
-font-size:58px;
+font-size:60px;
 line-height:1.1;
 margin-bottom:20px;
 }
@@ -89,17 +89,6 @@ margin-bottom:20px;
 .hero p{
 font-size:20px;
 color:#666;
-}
-
-.trust-badge{
-margin-top:16px;
-font-size:14px;
-color:#777;
-background:#fff;
-padding:10px 14px;
-border-radius:8px;
-display:inline-block;
-box-shadow:0 6px 18px rgba(0,0,0,0.05);
 }
 
 .hero img{
@@ -120,10 +109,7 @@ font-weight:500;
 transition:0.3s;
 }
 
-.cta:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 30px rgba(0,0,0,0.15);
-}
+.cta:hover{transform:translateY(-3px);}
 
 /* SECTIONS */
 
@@ -131,7 +117,7 @@ box-shadow:0 10px 30px rgba(0,0,0,0.15);
 
 .section h2{
 font-size:38px;
-margin-bottom:20px;
+margin-bottom:30px;
 }
 
 /* GRID */
@@ -152,10 +138,7 @@ transition:0.3s;
 cursor:pointer;
 }
 
-.card:hover{
-transform:translateY(-8px);
-box-shadow:0 20px 50px rgba(0,0,0,0.08);
-}
+.card:hover{transform:translateY(-8px);}
 
 .card img{
 width:100%;
@@ -168,19 +151,6 @@ margin-top:10px;
 font-size:14px;
 color:#666;
 display:none;
-}
-
-/* HUMAN NOTE */
-
-.human-note{
-margin-top:20px;
-font-size:14px;
-color:#555;
-background:#fff;
-padding:14px 16px;
-border-radius:10px;
-border-left:4px solid #000;
-box-shadow:0 8px 25px rgba(0,0,0,0.04);
 }
 
 /* AI BOX */
@@ -270,13 +240,6 @@ width:380px;
 border-radius:14px;
 }
 
-.founder-quote{
-margin-top:18px;
-font-size:15px;
-color:#555;
-font-style:italic;
-}
-
 /* FOOTER */
 
 footer{
@@ -346,7 +309,7 @@ Career<span>Lab</span>
 
 <nav>
 <a href="#services">Services</a>
-<a href="#ai">CV Review</a>
+<a href="#ai">AI CV</a>
 <a href="#plans">Plans</a>
 <a href="#about">Founder</a>
 <a href="#contact">Contact</a>
@@ -358,20 +321,17 @@ Career<span>Lab</span>
 
 <div class="hero-text">
 
-<h1>Build a Career That Works Internationally</h1>
+<h1>Design Your Global Career</h1>
 
 <p>
-Professional CV review, career strategy and interview coaching
-for global opportunities.
+AI powered career strategy, CV optimization and interview coaching.
 </p>
 
-<div class="trust-badge">
-Human CV Review • International Career Strategy • Recruiter Insights
-</div>
+<p style="margin-top:10px;color:#888;font-size:14px;">
+Trusted by professionals relocating to Europe and global markets.
+</p>
 
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">
-Book Career Strategy Call
-</a>
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
 
 </div>
 
@@ -381,65 +341,57 @@ Book Career Strategy Call
 
 <section id="services" class="section">
 
-<h2>Career Support Services</h2>
-
-<p style="color:#666;">
-Practical guidance from real hiring market experience.
-</p>
+<h2>Career Services</h2>
 
 <div class="grid">
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df">
 <h3>Career Strategy</h3>
-<p>Clear direction for international career growth.</p>
+<p>Strategic planning for long term career growth.</p>
 <div class="service-desc">
-Personalized strategy session focusing on market positioning, industry targeting and long-term growth planning.
+Roadmap for international career positioning, market targeting and long-term growth planning.
 </div>
 </div>
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
 <h3>CV Optimization</h3>
-<p>Human reviewed CV rewriting.</p>
+<p>ATS optimized CV and resume rewriting.</p>
 <div class="service-desc">
-Your CV is carefully reviewed and rewritten based on recruiter expectations and ATS screening systems.
+Professional CV restructuring aligned with recruiter screening and ATS systems.
 </div>
 </div>
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
 <h3>Interview Coaching</h3>
-<p>Prepare for real hiring conversations.</p>
+<p>Mock interviews and hiring insights.</p>
 <div class="service-desc">
-Mock interviews with structured feedback and strategies used by international hiring managers.
+Mock interviews with real hiring scenarios used by international recruiters.
 </div>
 </div>
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 <h3>LinkedIn Positioning</h3>
-<p>Build a profile recruiters actually notice.</p>
+<p>Build a powerful professional online brand.</p>
 <div class="service-desc">
-Transform your LinkedIn profile into a strong professional brand that attracts recruiters.
+Create a high authority LinkedIn profile that attracts recruiters and opportunities.
 </div>
 </div>
 
-</div>
-
-<div class="human-note">
-Every CV reviewed through CareerLab is checked with real hiring market insights — not just automated scoring.
 </div>
 
 </section>
 
 <section id="ai" class="section">
 
-<h2>CV Analysis Tool</h2>
+<h2>AI CV Analyzer</h2>
 
 <p>
-Upload your CV and receive an instant analysis.  
-Then optionally book a **human CV review session** for deeper feedback.
+Upload your CV and receive AI powered analysis including ATS compatibility,
+keyword strength and impact scoring.
 </p>
 
 <div class="ai-box">
@@ -460,34 +412,46 @@ Then optionally book a **human CV review session** for deeper feedback.
 
 <h2>CareerLab Plans</h2>
 
-<p style="color:#666;">
-Choose the level of support you need.
-</p>
-
 <div class="pricing">
 
 <div class="price-card">
 <h3>Starter</h3>
 <small>Monthly</small>
 <h2>29€</h2>
-<p>AI insights + improvement suggestions.</p>
-<a href="#">Buy</a>
+<p>Basic AI CV insights and career improvement suggestions.</p>
+<a href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Buy</a>
 </div>
 
 <div class="price-card">
 <h3>Professional</h3>
 <small>Monthly</small>
 <h2>79€</h2>
-<p>Includes human CV review and improvement guidance.</p>
-<a href="#">Buy</a>
+<p>Advanced CV optimization and professional positioning support.</p>
+<a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Buy</a>
 </div>
 
 <div class="price-card featured">
 <h3>Executive</h3>
 <small>Monthly</small>
 <h2>199€</h2>
-<p>Full career strategy, CV optimization and interview coaching.</p>
-<a href="#">Buy</a>
+<p>Full career strategy including CV, LinkedIn and interview coaching.</p>
+<a href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
+</div>
+
+<div class="price-card">
+<h3>Strategy Session</h3>
+<small>One-off</small>
+<h2>99€</h2>
+<p>60 minute deep career strategy consultation.</p>
+<a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Buy</a>
+</div>
+
+<div class="price-card">
+<h3>Consulting</h3>
+<small>One-off</small>
+<h2>50€</h2>
+<p>Short consultation for targeted career questions.</p>
+<a href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Buy</a>
 </div>
 
 </div>
@@ -508,10 +472,6 @@ CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping profes
 
 </p>
 
-<p class="founder-quote">
-"My goal is simple: help professionals present their real value in the global job market."
-</p>
-
 <br>
 
 <a class="cta" href="https://www.linkedin.com/in/guntekinsuh/">LinkedIn</a>
@@ -524,15 +484,11 @@ CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping profes
 
 <h2>Start Your Career Strategy</h2>
 
-<p>
-Book a call and receive direct guidance on your CV and career direction.
-</p>
+<p>Book a consultation and receive personalized career guidance.</p>
 
 <br>
 
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">
-Schedule Call
-</a>
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">Schedule Call</a>
 
 </section>
 
@@ -541,6 +497,100 @@ Schedule Call
 © CareerLab
 
 </footer>
+
+<script>
+
+function toggleService(card){
+
+let desc=card.querySelector(".service-desc");
+
+desc.style.display=desc.style.display==="block" ? "none":"block";
+
+}
+
+/* PDF ANALYZER */
+
+async function analyzePDF(){
+
+let file=document.getElementById("cvFile").files[0];
+
+if(!file){
+alert("Please upload a PDF CV");
+return;
+}
+
+let reader=new FileReader();
+
+reader.onload=async function(){
+
+let typedarray=new Uint8Array(this.result);
+
+let pdf=await pdfjsLib.getDocument(typedarray).promise;
+
+let text="";
+
+for(let i=1;i<=pdf.numPages;i++){
+
+let page=await pdf.getPage(i);
+let content=await page.getTextContent();
+
+content.items.forEach(item=>{
+text+=item.str+" ";
+});
+
+}
+
+/* SIMPLE ANALYSIS */
+
+let words=text.split(" ").length;
+
+let achievements=(text.match(/\d+/g)||[]).length;
+
+let score=Math.min(100,Math.floor((words/10)+(achievements*2)));
+
+let result=`
+
+<h3>AI CV Score: ${score}/100</h3>
+
+<br>
+
+<strong>Word Count</strong>
+<p>${words} words detected in CV.</p>
+
+<br>
+
+<strong>Achievements</strong>
+<p>${achievements} measurable metrics detected.</p>
+
+<br>
+
+<strong>Suggestions</strong>
+
+<ul>
+<li>Add more quantified achievements</li>
+<li>Include stronger action verbs</li>
+<li>Align keywords with job descriptions</li>
+<li>Highlight leadership impact</li>
+</ul>
+
+<br>
+
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">
+Get Professional CV Review
+</a>
+
+`;
+
+document.getElementById("result").style.display="block";
+document.getElementById("result").innerHTML=result;
+
+}
+
+reader.readAsArrayBuffer(file);
+
+}
+
+</script>
 
 </body>
 </html>
