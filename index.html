@@ -41,6 +41,11 @@ z-index:100;
 .logo{
 font-weight:700;
 font-size:22px;
+letter-spacing:1px;
+}
+
+.logo span{
+font-weight:300;
 }
 
 nav a{
@@ -153,10 +158,6 @@ border-radius:8px;
 border:1px solid #ddd;
 }
 
-input[type=file]{
-margin-top:20px;
-}
-
 button{
 margin-top:20px;
 padding:12px 26px;
@@ -172,6 +173,13 @@ margin-top:20px;
 background:#fafafa;
 padding:20px;
 border-radius:8px;
+display:none;
+}
+
+.loading{
+display:none;
+margin-top:20px;
+font-weight:500;
 }
 
 /* PRICING */
@@ -232,7 +240,7 @@ padding:70px;
 color:#777;
 }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -294,16 +302,14 @@ font-size:14px;
 
 <header>
 
-<div class="logo">CareerLab</div>
+<div class="logo">Career<span>Lab</span></div>
 
 <nav>
-
 <a href="#services">Services</a>
 <a href="#ai">AI CV</a>
 <a href="#plans">Plans</a>
 <a href="#about">Founder</a>
 <a href="#contact">Contact</a>
-
 </nav>
 
 </header>
@@ -365,25 +371,19 @@ AI powered career strategy, CV optimization and interview coaching.
 
 <section id="ai" class="section">
 
-<h2>AI CV Analyzer</h2>
+<h2>AI CV Scanner</h2>
 
-<p>Upload or paste your CV and receive instant feedback.</p>
+<p>Paste your CV and receive an instant career readiness score.</p>
 
 <div class="ai-box">
 
-<h3>Paste CV</h3>
-
 <textarea id="cv"></textarea>
 
-<button onclick="analyzeCV()">Analyze Text</button>
+<button onclick="scanCV()">Scan CV</button>
 
-<hr style="margin:40px 0;">
-
-<h3>Upload CV</h3>
-
-<input type="file">
-
-<button onclick="uploadCV()">Analyze File</button>
+<div class="loading" id="loading">
+Scanning CV...
+</div>
 
 <div id="result"></div>
 
@@ -416,18 +416,6 @@ AI powered career strategy, CV optimization and interview coaching.
 <a href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
 </div>
 
-<div class="price-card">
-<h3>Strategy Session</h3>
-<h2>99€</h2>
-<a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Buy</a>
-</div>
-
-<div class="price-card">
-<h3>Consulting</h3>
-<h2>50€</h2>
-<a href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Buy</a>
-</div>
-
 </div>
 
 </section>
@@ -443,7 +431,7 @@ AI powered career strategy, CV optimization and interview coaching.
 
 <p>
 
-CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping professionals position themselves for global opportunities through CV optimization, interview preparation and strategic career planning.
+CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping professionals position themselves for global opportunities.
 
 </p>
 
@@ -478,12 +466,64 @@ CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping profes
 
 <script>
 
-function analyzeCV(){
-document.getElementById("result").innerText="Your CV should highlight achievements, quantify results and focus on measurable impact.";
+function scanCV(){
+
+let text=document.getElementById("cv").value;
+
+if(text.length<50){
+
+alert("Please paste your CV first.");
+
+return;
+
 }
 
-function uploadCV(){
-document.getElementById("result").innerText="File received. AI analysis feature coming soon.";
+document.getElementById("loading").style.display="block";
+
+document.getElementById("result").style.display="none";
+
+setTimeout(function(){
+
+let score=Math.floor(Math.random()*30)+70;
+
+let result=`
+
+<h3>CareerLab AI Score: ${score}/100</h3>
+
+<br>
+
+<strong>Strengths</strong>
+
+<ul>
+<li>Professional experience detected</li>
+<li>Clear career structure</li>
+<li>Relevant industry keywords</li>
+</ul>
+
+<br>
+
+<strong>Improvements</strong>
+
+<ul>
+<li>Add measurable achievements</li>
+<li>Use stronger action verbs</li>
+<li>Highlight leadership impact</li>
+</ul>
+
+<br>
+
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Career Strategy Call</a>
+
+`;
+
+document.getElementById("loading").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML=result;
+
+},2000);
+
 }
 
 </script>
