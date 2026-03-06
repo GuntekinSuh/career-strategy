@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CareerLab | Career Strategy</title>
+<title>CareerLab | Human CV Review & Career Strategy</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,15 +14,11 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:Inter;
-background:#f5f5f7;
+background:#f7f7f8;
 color:#111;
 }
 
@@ -51,18 +47,19 @@ font-size:22px;
 .logo-icon{
 width:34px;
 height:34px;
-background:black;
-color:white;
+background:linear-gradient(135deg,#000,#444);
+border-radius:8px;
 display:flex;
 align-items:center;
 justify-content:center;
-border-radius:8px;
+color:white;
 font-weight:700;
+font-size:16px;
 }
 
 .logo span{
 font-weight:400;
-color:#555;
+color:#777;
 }
 
 nav a{
@@ -81,12 +78,10 @@ justify-content:space-between;
 padding:120px 8%;
 }
 
-.hero-text{
-max-width:550px;
-}
+.hero-text{max-width:560px;}
 
 .hero h1{
-font-size:60px;
+font-size:58px;
 line-height:1.1;
 margin-bottom:20px;
 }
@@ -94,6 +89,17 @@ margin-bottom:20px;
 .hero p{
 font-size:20px;
 color:#666;
+}
+
+.trust-badge{
+margin-top:16px;
+font-size:14px;
+color:#777;
+background:#fff;
+padding:10px 14px;
+border-radius:8px;
+display:inline-block;
+box-shadow:0 6px 18px rgba(0,0,0,0.05);
 }
 
 .hero img{
@@ -116,17 +122,16 @@ transition:0.3s;
 
 .cta:hover{
 transform:translateY(-3px);
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
 /* SECTIONS */
 
-.section{
-padding:110px 8%;
-}
+.section{padding:110px 8%;}
 
 .section h2{
 font-size:38px;
-margin-bottom:30px;
+margin-bottom:20px;
 }
 
 /* GRID */
@@ -144,6 +149,12 @@ padding:30px;
 border-radius:14px;
 box-shadow:0 10px 40px rgba(0,0,0,0.05);
 transition:0.3s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 50px rgba(0,0,0,0.08);
 }
 
 .card img{
@@ -152,11 +163,27 @@ border-radius:10px;
 margin-bottom:15px;
 }
 
-.card:hover{
-transform:translateY(-8px);
+.service-desc{
+margin-top:10px;
+font-size:14px;
+color:#666;
+display:none;
 }
 
-/* ANALYZER */
+/* HUMAN NOTE */
+
+.human-note{
+margin-top:20px;
+font-size:14px;
+color:#555;
+background:#fff;
+padding:14px 16px;
+border-radius:10px;
+border-left:4px solid #000;
+box-shadow:0 8px 25px rgba(0,0,0,0.04);
+}
+
+/* AI BOX */
 
 .ai-box{
 background:white;
@@ -166,18 +193,7 @@ box-shadow:0 10px 40px rgba(0,0,0,0.05);
 margin-top:40px;
 }
 
-textarea{
-width:100%;
-height:180px;
-margin-top:15px;
-padding:12px;
-border-radius:8px;
-border:1px solid #ddd;
-}
-
-input[type=file]{
-margin-top:20px;
-}
+input[type=file]{margin-top:20px;}
 
 button{
 margin-top:20px;
@@ -215,20 +231,17 @@ box-shadow:0 10px 40px rgba(0,0,0,0.05);
 transition:0.3s;
 }
 
-.price-card:hover{
-transform:translateY(-8px);
+.price-card:hover{transform:translateY(-8px);}
+
+.price-card small{
+color:#777;
+font-size:13px;
 }
 
 .price-card p{
 font-size:14px;
-color:#666;
 margin-top:10px;
-}
-
-.price-card small{
-display:block;
-margin-top:8px;
-color:#888;
+color:#555;
 }
 
 .price-card a{
@@ -242,9 +255,7 @@ border-radius:6px;
 text-decoration:none;
 }
 
-.featured{
-border:2px solid black;
-}
+.featured{border:2px solid black;}
 
 /* ABOUT */
 
@@ -257,6 +268,13 @@ gap:40px;
 .about img{
 width:380px;
 border-radius:14px;
+}
+
+.founder-quote{
+margin-top:18px;
+font-size:15px;
+color:#555;
+font-style:italic;
 }
 
 /* FOOTER */
@@ -283,17 +301,11 @@ max-width:420px;
 margin-top:30px;
 }
 
-.hero h1{
-font-size:42px;
-}
+.hero h1{font-size:42px;}
 
-.hero p{
-font-size:18px;
-}
+.hero p{font-size:18px;}
 
-.section{
-padding:80px 6%;
-}
+.section{padding:80px 6%;}
 
 .about{
 flex-direction:column;
@@ -305,9 +317,7 @@ width:100%;
 max-width:420px;
 }
 
-.pricing{
-justify-content:center;
-}
+.pricing{justify-content:center;}
 
 .price-card{
 width:100%;
@@ -335,13 +345,11 @@ Career<span>Lab</span>
 </div>
 
 <nav>
-
 <a href="#services">Services</a>
-<a href="#ai">CV Analyzer</a>
+<a href="#ai">CV Review</a>
 <a href="#plans">Plans</a>
 <a href="#about">Founder</a>
 <a href="#contact">Contact</a>
-
 </nav>
 
 </header>
@@ -350,14 +358,20 @@ Career<span>Lab</span>
 
 <div class="hero-text">
 
-<h1>Design Your Global Career</h1>
+<h1>Build a Career That Works Internationally</h1>
 
 <p>
-Career strategy, CV optimization and interview preparation
-for professionals seeking international opportunities.
+Professional CV review, career strategy and interview coaching
+for global opportunities.
 </p>
 
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
+<div class="trust-badge">
+Human CV Review • International Career Strategy • Recruiter Insights
+</div>
+
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">
+Book Career Strategy Call
+</a>
 
 </div>
 
@@ -367,59 +381,74 @@ for professionals seeking international opportunities.
 
 <section id="services" class="section">
 
-<h2>Career Services</h2>
+<h2>Career Support Services</h2>
+
+<p style="color:#666;">
+Practical guidance from real hiring market experience.
+</p>
 
 <div class="grid">
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df">
 <h3>Career Strategy</h3>
-<p>Strategic planning for long-term career direction and positioning.</p>
+<p>Clear direction for international career growth.</p>
+<div class="service-desc">
+Personalized strategy session focusing on market positioning, industry targeting and long-term growth planning.
+</div>
 </div>
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
 <h3>CV Optimization</h3>
-<p>Professional CV rewriting aligned with recruiter expectations.</p>
+<p>Human reviewed CV rewriting.</p>
+<div class="service-desc">
+Your CV is carefully reviewed and rewritten based on recruiter expectations and ATS screening systems.
+</div>
 </div>
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
 <h3>Interview Coaching</h3>
-<p>Preparation and mock interviews for real hiring processes.</p>
+<p>Prepare for real hiring conversations.</p>
+<div class="service-desc">
+Mock interviews with structured feedback and strategies used by international hiring managers.
+</div>
 </div>
 
-<div class="card">
+<div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
 <h3>LinkedIn Positioning</h3>
-<p>Build a strong professional presence and recruiter visibility.</p>
+<p>Build a profile recruiters actually notice.</p>
+<div class="service-desc">
+Transform your LinkedIn profile into a strong professional brand that attracts recruiters.
+</div>
 </div>
 
+</div>
+
+<div class="human-note">
+Every CV reviewed through CareerLab is checked with real hiring market insights — not just automated scoring.
 </div>
 
 </section>
 
 <section id="ai" class="section">
 
-<h2>CV Analyzer</h2>
+<h2>CV Analysis Tool</h2>
 
-<p>Upload or paste your CV to receive quick structural feedback.</p>
+<p>
+Upload your CV and receive an instant analysis.  
+Then optionally book a **human CV review session** for deeper feedback.
+</p>
 
 <div class="ai-box">
 
-<h3>Paste CV</h3>
+<h3>Upload CV (PDF)</h3>
 
-<textarea id="cv"></textarea>
+<input type="file" id="cvFile" accept="application/pdf">
 
-<button onclick="analyzeCV()">Analyze CV</button>
-
-<hr style="margin:40px 0;">
-
-<h3>Upload CV</h3>
-
-<input type="file" id="cvFile">
-
-<button onclick="uploadCV()">Analyze File</button>
+<button onclick="analyzePDF()">Analyze CV</button>
 
 <div id="result"></div>
 
@@ -431,46 +460,34 @@ for professionals seeking international opportunities.
 
 <h2>CareerLab Plans</h2>
 
+<p style="color:#666;">
+Choose the level of support you need.
+</p>
+
 <div class="pricing">
 
 <div class="price-card">
 <h3>Starter</h3>
+<small>Monthly</small>
 <h2>29€</h2>
-<p>Basic CV review with written feedback.</p>
-<small>one-off</small>
-<a href="https://buy.stripe.com/5kQ28qa7n46Zaar8T8fMA01">Buy</a>
+<p>AI insights + improvement suggestions.</p>
+<a href="#">Buy</a>
 </div>
 
 <div class="price-card">
 <h3>Professional</h3>
+<small>Monthly</small>
 <h2>79€</h2>
-<p>Detailed CV optimization and improvement suggestions.</p>
-<small>one-off</small>
-<a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Buy</a>
+<p>Includes human CV review and improvement guidance.</p>
+<a href="#">Buy</a>
 </div>
 
 <div class="price-card featured">
 <h3>Executive</h3>
+<small>Monthly</small>
 <h2>199€</h2>
-<p>Full CV positioning and strategic career feedback.</p>
-<small>one-off</small>
-<a href="https://buy.stripe.com/aFa9AS0wNdHz0zRfhwfMA03">Buy</a>
-</div>
-
-<div class="price-card">
-<h3>Strategy Session</h3>
-<h2>99€</h2>
-<p>1:1 discussion about your career direction.</p>
-<small>consulting session</small>
-<a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Buy</a>
-</div>
-
-<div class="price-card">
-<h3>Consulting</h3>
-<h2>50€</h2>
-<p>Short focused consultation for specific questions.</p>
-<small>one-off</small>
-<a href="https://buy.stripe.com/8x2bJ0bbrcDv0zR0mCfMA05">Buy</a>
+<p>Full career strategy, CV optimization and interview coaching.</p>
+<a href="#">Buy</a>
 </div>
 
 </div>
@@ -487,10 +504,12 @@ for professionals seeking international opportunities.
 
 <p>
 
-CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping
-professionals position themselves for international opportunities
-through CV optimization, interview preparation and strategic career planning.
+CareerLab was founded by <b>Guntekin Suh</b>, a career strategist helping professionals position themselves for global opportunities through CV optimization, interview preparation and strategic career planning.
 
+</p>
+
+<p class="founder-quote">
+"My goal is simple: help professionals present their real value in the global job market."
 </p>
 
 <br>
@@ -505,11 +524,15 @@ through CV optimization, interview preparation and strategic career planning.
 
 <h2>Start Your Career Strategy</h2>
 
-<p>Book a consultation and receive personalized career guidance.</p>
+<p>
+Book a call and receive direct guidance on your CV and career direction.
+</p>
 
 <br>
 
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Schedule Call</a>
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">
+Schedule Call
+</a>
 
 </section>
 
@@ -518,89 +541,6 @@ through CV optimization, interview preparation and strategic career planning.
 © CareerLab
 
 </footer>
-
-<script>
-
-function analyzeCV(){
-
-let cv=document.getElementById("cv").value;
-
-if(cv.length<50){
-
-alert("Please paste your CV text.");
-
-return;
-
-}
-
-let words=cv.split(" ").length;
-
-let numbers=(cv.match(/\d+/g)||[]).length;
-
-let leadership=(cv.match(/managed|led|developed|created|improved/gi)||[]).length;
-
-let score=70+Math.min(numbers*2,20)+leadership*3;
-
-let result=`
-
-<h3>CV Score: ${score}/100</h3>
-
-<strong>Observations</strong>
-
-<ul>
-<li>${words} words detected</li>
-<li>${numbers} numerical achievements found</li>
-<li>${leadership} leadership/action keywords detected</li>
-</ul>
-
-<strong>Suggestions</strong>
-
-<ul>
-<li>Highlight measurable achievements where possible</li>
-<li>Use clear action verbs describing your impact</li>
-<li>Structure sections clearly for easier scanning</li>
-<li>Align keywords with the roles you target</li>
-</ul>
-
-<br>
-
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Career Strategy Call</a>
-
-`;
-
-document.getElementById("result").style.display="block";
-document.getElementById("result").innerHTML=result;
-
-}
-
-function uploadCV(){
-
-let file=document.getElementById("cvFile").files[0];
-
-if(!file){
-alert("Please upload your CV.");
-return;
-}
-
-let score=Math.floor(Math.random()*25)+75;
-
-let result=`
-
-<h3>CV Score: ${score}/100</h3>
-
-<p>Basic structural indicators detected. For a detailed review and
-practical improvements, consider a professional CV consultation.</p>
-
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Career Strategy Call</a>
-
-`;
-
-document.getElementById("result").style.display="block";
-document.getElementById("result").innerHTML=result;
-
-}
-
-</script>
 
 </body>
 </html>
