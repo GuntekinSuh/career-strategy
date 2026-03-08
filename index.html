@@ -62,11 +62,39 @@ font-weight:400;
 color:#555;
 }
 
+nav{
+display:flex;
+align-items:center;
+gap:0;
+}
+
 nav a{
 margin-left:24px;
 text-decoration:none;
 color:#333;
 font-weight:500;
+}
+
+.lang-toggle{
+margin-left:24px;
+background:none;
+border:1px solid #ddd;
+border-radius:6px;
+padding:6px 12px;
+cursor:pointer;
+font-size:14px;
+font-weight:500;
+display:flex;
+align-items:center;
+gap:6px;
+transition:0.2s;
+color:#333;
+font-family:Inter;
+}
+
+.lang-toggle:hover{
+background:#f5f5f7;
+border-color:#bbb;
 }
 
 /* HERO */
@@ -165,7 +193,7 @@ margin-top:40px;
 
 input[type=file]{margin-top:20px;}
 
-button{
+button:not(.lang-toggle){
 margin-top:20px;
 padding:12px 26px;
 border:none;
@@ -292,6 +320,12 @@ margin-left:14px;
 font-size:14px;
 }
 
+.lang-toggle{
+margin-left:14px;
+padding:4px 8px;
+font-size:13px;
+}
+
 }
 
 /* SCROLL ANIMATIONS */
@@ -325,11 +359,12 @@ Career<span>Lab</span>
 </div>
 
 <nav>
-<a href="#services">Services</a>
-<a href="#ai">AI CV</a>
-<a href="#plans">Plans</a>
-<a href="#about">Founder</a>
-<a href="#contact">Contact</a>
+<a href="#services" data-i18n="nav_services">Services</a>
+<a href="#ai" data-i18n="nav_ai">AI CV</a>
+<a href="#plans" data-i18n="nav_plans">Plans</a>
+<a href="#about" data-i18n="nav_about">Founder</a>
+<a href="#contact" data-i18n="nav_contact">Contact</a>
+<button class="lang-toggle" onclick="toggleLang()">🇹🇷 TR</button>
 </nav>
 
 </header>
@@ -338,23 +373,23 @@ Career<span>Lab</span>
 
 <div class="hero-text">
 
-<h1>Design Your Global Career</h1>
+<h1 data-i18n="hero_title">Design Your Global Career</h1>
 
-<p>
+<p data-i18n="hero_desc">
 Career strategy, CV optimization and interview coaching
 led by an experienced product and customer success leader
 from global technology companies
 </p>
 
-<p style="margin-top:10px;color:#888;font-size:14px;">
+<p style="margin-top:10px;color:#888;font-size:14px;" data-i18n="hero_exp">
 8+ years experience across global companies including Google, TikTok and LinkedIn.
 </p>
 
-<p style="margin-top:20px;font-size:13px;color:#777;">
+<p style="margin-top:20px;font-size:13px;color:#777;" data-i18n="hero_checks">
 ✔ Career strategy for Europe • ✔ CV optimization • ✔ Interview coaching
 </p>
 
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Book Strategy Call</a>
+<a class="cta" href="https://calendly.com/guntekin-suh/30min" data-i18n="hero_cta">Book Strategy Call</a>
 
 </div>
 
@@ -364,7 +399,7 @@ from global technology companies
 
 <section style="padding:40px 8%; text-align:center; background:#fafafa;">
 
-<p style="font-size:14px;color:#777;margin-bottom:15px;">
+<p style="font-size:14px;color:#777;margin-bottom:15px;" data-i18n="logos_desc">
 Experience from global companies and enterprise clients
 </p>
 
@@ -388,22 +423,22 @@ Experience from global companies and enterprise clients
 
 <div class="fade-up">
 <h2 style="font-size:32px;" class="counter" data-target="8" data-suffix="+">0+</h2>
-<p style="color:#666;">Years Global Tech Experience</p>
+<p style="color:#666;" data-i18n="stat_years">Years Global Tech Experience</p>
 </div>
 
 <div class="fade-up">
 <h2 style="font-size:32px;" class="counter" data-target="20" data-suffix="+">0+</h2>
-<p style="color:#666;">Professionals Led</p>
+<p style="color:#666;" data-i18n="stat_pros">Professionals Led</p>
 </div>
 
 <div class="fade-up">
 <h2 style="font-size:32px;" class="counter" data-target="250" data-prefix="€" data-suffix="K+">€0K+</h2>
-<p style="color:#666;">Revenue Expansion Delivered</p>
+<p style="color:#666;" data-i18n="stat_revenue">Revenue Expansion Delivered</p>
 </div>
 
 <div class="fade-up">
 <h2 style="font-size:32px;" class="counter" data-target="5" data-suffix="+">0+</h2>
-<p style="color:#666;">Enterprise Airline Clients</p>
+<p style="color:#666;" data-i18n="stat_clients">Enterprise Airline Clients</p>
 </div>
 
 </div>
@@ -412,9 +447,9 @@ Experience from global companies and enterprise clients
 
 <section id="services" class="section">
 
-<h2>Career Services</h2>
+<h2 data-i18n="services_title">Career Services</h2>
 
-<p style="max-width:700px;color:#666;margin-top:10px;">
+<p style="max-width:700px;color:#666;margin-top:10px;" data-i18n="services_desc">
 Personalised career guidance built on real experience working with global technology companies and enterprise clients. Each service is designed to help you position yourself stronger in international job markets
 </p>
 
@@ -422,53 +457,48 @@ Personalised career guidance built on real experience working with global techno
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df">
-<h3>Career Strategy</h3>
-
-<p>Strategic planning for long term career growth</p>
-
-<p style="font-size:13px;color:#777;margin-top:6px;">
+<h3 data-i18n="s1_title">Career Strategy</h3>
+<p data-i18n="s1_desc">Strategic planning for long term career growth</p>
+<p style="font-size:13px;color:#777;margin-top:6px;" data-i18n="s1_best">
 Best for: Professionals targeting international roles
 </p>
-
-<div class="service-desc">
+<div class="service-desc" data-i18n="s1_detail">
 Roadmap for international career positioning, market targeting and long-term growth planning.
 </div>
 </div>
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
-<h3>CV Optimization</h3>
-<p>CV and resume rewriting</p>
-
-<p style="font-size:13px;color:#777;margin-top:6px;">
+<h3 data-i18n="s2_title">CV Optimization</h3>
+<p data-i18n="s2_desc">CV and resume rewriting</p>
+<p style="font-size:13px;color:#777;margin-top:6px;" data-i18n="s2_best">
 Best for: Professionals applying to competitive roles
 </p>
-
-<div class="service-desc">
+<div class="service-desc" data-i18n="s2_detail">
 Professional CV restructuring aligned with recruiter screening and ATS systems.
 </div>
 </div>
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
-<h3>Interview Coaching</h3>
-<p>Mock interviews and hiring insights</p>
-<p style="font-size:13px;color:#777;margin-top:6px;">
+<h3 data-i18n="s3_title">Interview Coaching</h3>
+<p data-i18n="s3_desc">Mock interviews and hiring insights</p>
+<p style="font-size:13px;color:#777;margin-top:6px;" data-i18n="s3_best">
 Best for: Candidates preparing for tech and global companies
 </p>
-<div class="service-desc">
+<div class="service-desc" data-i18n="s3_detail">
 Mock interviews with real hiring scenarios used by international recruiters.
 </div>
 </div>
 
 <div class="card" onclick="toggleService(this)">
 <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
-<h3>LinkedIn Positioning</h3>
-<p>Build a powerful professional online brand</p>
-<p style="font-size:13px;color:#777;margin-top:6px;">
+<h3 data-i18n="s4_title">LinkedIn Positioning</h3>
+<p data-i18n="s4_desc">Build a powerful professional online brand</p>
+<p style="font-size:13px;color:#777;margin-top:6px;" data-i18n="s4_best">
 Best for: Professionals wanting to attract recruiters
 </p>
-<div class="service-desc">
+<div class="service-desc" data-i18n="s4_detail">
 Create a high authority LinkedIn profile that attracts recruiters and opportunities.
 </div>
 </div>
@@ -479,43 +509,37 @@ Create a high authority LinkedIn profile that attracts recruiters and opportunit
 
 <section style="padding:100px 8%;background:#fafafa;">
 
-<h2>What Professionals Say</h2>
+<h2 data-i18n="testimonials_title">What Professionals Say</h2>
 
 <div class="grid">
 
 <div class="card">
-<p>
+<p data-i18n="t1_text">
 "Guntekin helped me completely restructure my CV and positioning. 
 Within two months I started receiving interview invitations from companies in Germany."
 </p>
-
 <br>
-
-<strong>Product Manager</strong>
+<strong data-i18n="t1_role">Product Manager</strong>
 <p style="color:#777;font-size:13px;">Berlin</p>
 </div>
 
 <div class="card">
-<p>
+<p data-i18n="t2_text">
 "The interview coaching sessions were incredibly helpful. 
 I felt much more confident and structured in my answers."
 </p>
-
 <br>
-
-<strong>Software Engineer</strong>
+<strong data-i18n="t2_role">Software Engineer</strong>
 <p style="color:#777;font-size:13px;">Amsterdam</p>
 </div>
 
 <div class="card">
-<p>
+<p data-i18n="t3_text">
 "My LinkedIn profile visibility improved significantly after the session. 
 Recruiters started reaching out within a few weeks."
 </p>
-
 <br>
-
-<strong>Data Analyst</strong>
+<strong data-i18n="t3_role">Data Analyst</strong>
 <p style="color:#777;font-size:13px;">Dublin</p>
 </div>
 
@@ -525,21 +549,21 @@ Recruiters started reaching out within a few weeks."
 
 <section id="ai" class="section">
 
-<h2>Free CV Diagnostic</h2>
+<h2 data-i18n="ai_title">Free CV Diagnostic</h2>
 
-<p>
+<p data-i18n="ai_desc">
 Upload your CV to receive a quick diagnostic review including CV structure,
-keyword strength and measurable achievements
-This tool provides an initial assessment before a professional consultation
+keyword strength and measurable achievements.
+This tool provides an initial assessment before a professional consultation.
 </p>
 
 <div class="ai-box">
 
-<h3>Upload Your CV for a Quick Diagnostic</h3>
+<h3 data-i18n="ai_upload_title">Upload Your CV for a Quick Diagnostic</h3>
 
 <input type="file" id="cvFile" accept="application/pdf">
 
-<button onclick="analyzePDF()">Analyze CV</button>
+<button onclick="analyzePDF()" data-i18n="ai_btn">Analyze CV</button>
 
 <div id="result"></div>
 
@@ -549,9 +573,9 @@ This tool provides an initial assessment before a professional consultation
 
 <section id="plans" class="section">
 
-<h2>CareerLab Plans</h2>
+<h2 data-i18n="plans_title">CareerLab Plans</h2>
 
-<p style="max-width:700px;color:#666;margin-top:10px;">
+<p style="max-width:700px;color:#666;margin-top:10px;" data-i18n="plans_desc">
 Flexible career support packages designed for professionals targeting international roles. Sessions are conducted online and focus on practical CV improvement, interview preparation and long-term career positioning.
 </p>
 
@@ -559,64 +583,64 @@ Flexible career support packages designed for professionals targeting internatio
 
 <div class="price-card">
 <h3>Starter</h3>
-<small>Monthly</small>
+<small data-i18n="price_monthly">Monthly</small>
 <h2>39€</h2>
-<p>
+<p data-i18n="p1_desc">
 AI CV analysis, improvement suggestions and
 <b>1 private consultation per month (30 minutes)</b>.
 </p>
-<a href="https://buy.stripe.com/5kQ7sK1ARcDv0zR6L0fMA07">Start Plan</a>
+<a href="https://buy.stripe.com/5kQ7sK1ARcDv0zR6L0fMA07" data-i18n="p1_btn">Start Plan</a>
 </div>
 
 <div class="price-card">
 <h3>Professional</h3>
-<small>Monthly</small>
+<small data-i18n="price_monthly2">Monthly</small>
 <h2>79€</h2>
-<p>
+<p data-i18n="p2_desc">
 Advanced CV optimization, LinkedIn suggestions and
 <b>2 private consultations per month (45 minutes each)</b>.
 </p>
-<a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02">Start Plan</a>
+<a href="https://buy.stripe.com/6oUbJ0djzdHzgyP5GWfMA02" data-i18n="p2_btn">Start Plan</a>
 </div>
 
 <div class="price-card featured">
 <h3>Executive</h3>
-<small>Monthly · Most Popular</small>
+<small data-i18n="price_popular">Monthly · Most Popular</small>
 <h2>149€</h2>
-<p>
+<p data-i18n="p3_desc">
 Complete career strategy including CV optimization,
 LinkedIn positioning and
 <b>3 private consultations per month (45 minutes each)</b>.
 </p>
-<a href="https://buy.stripe.com/7sYcN4bbr0UNbev8T8fMA06">Start Plan</a>
+<a href="https://buy.stripe.com/7sYcN4bbr0UNbev8T8fMA06" data-i18n="p3_btn">Start Plan</a>
 </div>
 
 <div class="price-card">
-<h3>Short Consulting</h3>
-<small>One-off</small>
+<h3 data-i18n="p4_name">Short Consulting</h3>
+<small data-i18n="price_oneoff">One-off</small>
 <h2>50€</h2>
-<p>
+<p data-i18n="p4_desc">
 Quick consultation for targeted career questions.
 <b>30 minute session.</b>
 </p>
-<a href="https://buy.stripe.com/4gMaEWgvL46ZbevfhwfMA08">Book Call</a>
+<a href="https://buy.stripe.com/4gMaEWgvL46ZbevfhwfMA08" data-i18n="p4_btn">Book Call</a>
 </div>
 
 <div class="price-card">
-<h3>Strategy Session</h3>
-<small>One-off</small>
+<h3 data-i18n="p5_name">Strategy Session</h3>
+<small data-i18n="price_oneoff2">One-off</small>
 <h2>99€</h2>
-<p>
+<p data-i18n="p5_desc">
 Deep career strategy consultation focused on
 international and European job markets.
 <b>60 minute session.</b>
 </p>
-<a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04">Book Session</a>
+<a href="https://buy.stripe.com/aFadR83IZeLDeqH6L0fMA04" data-i18n="p5_btn">Book Session</a>
 </div>
 
 </div>
 
-<p style="margin-top:30px;color:#777;font-size:14px;">
+<p style="margin-top:30px;color:#777;font-size:14px;" data-i18n="plans_note">
 Consultations are scheduled via Calendly. Unused sessions do not roll over to the next month.
 </p>
 
@@ -628,10 +652,9 @@ Consultations are scheduled via Calendly. Unused sessions do not roll over to th
 
 <div>
 
-<h2>Founder</h2>
+<h2 data-i18n="about_title">Founder</h2>
 
-<p>
-
+<p data-i18n="about_text">
 CareerLab was founded by <b>Guntekin Suh</b>, a product and customer success leader with over 8 years of experience in global technology and SaaS companies.
 
 <br><br>
@@ -645,7 +668,6 @@ He has supported global brands such as <b>Lufthansa and Aer Lingus</b>, helping 
 <br><br>
 
 Through CareerLab he now helps professionals strengthen their CVs, improve their positioning and successfully navigate international job markets.
-
 </p>
 
 <br>
@@ -658,13 +680,13 @@ Through CareerLab he now helps professionals strengthen their CVs, improve their
 
 <section id="contact" class="section">
 
-<h2>Start Your Career Strategy</h2>
+<h2 data-i18n="contact_title">Start Your Career Strategy</h2>
 
-<p>Book a consultation and receive personalized career guidance.</p>
+<p data-i18n="contact_desc">Book a consultation and receive personalized career guidance.</p>
 
 <br>
 
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">Schedule Call</a>
+<a class="cta" href="https://calendly.com/guntekin-suh/30min" data-i18n="contact_cta">Schedule Call</a>
 
 </section>
 
@@ -675,6 +697,110 @@ Through CareerLab he now helps professionals strengthen their CVs, improve their
 </footer>
 
 <script>
+
+/* ========== TRANSLATIONS ========== */
+
+const translations = {
+  tr: {
+    nav_services: "Hizmetler",
+    nav_ai: "AI CV",
+    nav_plans: "Planlar",
+    nav_about: "Kurucu",
+    nav_contact: "İletişim",
+    hero_title: "Global Kariyerinizi Tasarlayın",
+    hero_desc: "Global teknoloji şirketlerinde deneyimli bir ürün ve müşteri başarısı lideri tarafından yürütülen kariyer stratejisi, CV optimizasyonu ve mülakat koçluğu",
+    hero_exp: "Google, TikTok ve LinkedIn dahil global şirketlerde 8+ yıl deneyim.",
+    hero_checks: "✔ Avrupa kariyer stratejisi • ✔ CV optimizasyonu • ✔ Mülakat koçluğu",
+    hero_cta: "Strateji Görüşmesi",
+    logos_desc: "Global şirketler ve kurumsal müşterilerden deneyim",
+    stat_years: "Yıl Global Teknoloji Deneyimi",
+    stat_pros: "Yönetilen Profesyonel",
+    stat_revenue: "Sağlanan Gelir Büyümesi",
+    stat_clients: "Kurumsal Havayolu Müşterisi",
+    services_title: "Kariyer Hizmetleri",
+    services_desc: "Global teknoloji şirketleri ve kurumsal müşterilerle çalışma deneyimine dayanan kişiselleştirilmiş kariyer rehberliği. Her hizmet, uluslararası iş pazarlarında daha güçlü konumlanmanıza yardımcı olmak için tasarlanmıştır.",
+    s1_title: "Kariyer Stratejisi",
+    s1_desc: "Uzun vadeli kariyer büyümesi için stratejik planlama",
+    s1_best: "En uygun: Uluslararası rolleri hedefleyen profesyoneller",
+    s1_detail: "Uluslararası kariyer konumlandırma, pazar hedefleme ve uzun vadeli büyüme planlaması için yol haritası.",
+    s2_title: "CV Optimizasyonu",
+    s2_desc: "CV ve özgeçmiş yeniden yazımı",
+    s2_best: "En uygun: Rekabetçi pozisyonlara başvuran profesyoneller",
+    s2_detail: "İşe alım taraması ve ATS sistemlerine uygun profesyonel CV yeniden yapılandırması.",
+    s3_title: "Mülakat Koçluğu",
+    s3_desc: "Deneme mülakatları ve işe alım bilgileri",
+    s3_best: "En uygun: Teknoloji ve global şirketlere hazırlanan adaylar",
+    s3_detail: "Uluslararası işe alım uzmanları tarafından kullanılan gerçek senaryolarla deneme mülakatları.",
+    s4_title: "LinkedIn Konumlandırma",
+    s4_desc: "Güçlü bir profesyonel online marka oluşturun",
+    s4_best: "En uygun: İşe alım uzmanlarını çekmek isteyen profesyoneller",
+    s4_detail: "İşe alım uzmanlarını ve fırsatları çeken yüksek otoriteli bir LinkedIn profili oluşturun.",
+    testimonials_title: "Profesyoneller Ne Diyor",
+    t1_text: "\"Guntekin CV'mi ve konumlandırmamı tamamen yeniden yapılandırmama yardımcı oldu. İki ay içinde Almanya'daki şirketlerden mülakat davetleri almaya başladım.\"",
+    t1_role: "Ürün Yöneticisi",
+    t2_text: "\"Mülakat koçluğu seansları inanılmaz faydalıydı. Cevaplarımda çok daha özgüvenli ve yapılandırılmış hissettim.\"",
+    t2_role: "Yazılım Mühendisi",
+    t3_text: "\"LinkedIn profil görünürlüğüm seanstan sonra önemli ölçüde arttı. İşe alım uzmanları birkaç hafta içinde ulaşmaya başladı.\"",
+    t3_role: "Veri Analisti",
+    ai_title: "Ücretsiz CV Teşhisi",
+    ai_desc: "CV yapısı, anahtar kelime gücü ve ölçülebilir başarılar dahil hızlı bir teşhis incelemesi almak için CV'nizi yükleyin. Bu araç, profesyonel bir danışmanlık öncesi ilk değerlendirme sağlar.",
+    ai_upload_title: "Hızlı Teşhis İçin CV'nizi Yükleyin",
+    ai_btn: "CV Analiz Et",
+    plans_title: "CareerLab Planları",
+    plans_desc: "Uluslararası rolleri hedefleyen profesyoneller için tasarlanmış esnek kariyer destek paketleri. Seanslar online olarak gerçekleştirilir ve pratik CV iyileştirme, mülakat hazırlığı ve uzun vadeli kariyer konumlandırmasına odaklanır.",
+    price_monthly: "Aylık",
+    price_monthly2: "Aylık",
+    price_popular: "Aylık · En Popüler",
+    price_oneoff: "Tek Seferlik",
+    price_oneoff2: "Tek Seferlik",
+    p1_desc: "AI CV analizi, iyileştirme önerileri ve <b>ayda 1 özel danışmanlık (30 dakika)</b>.",
+    p1_btn: "Planı Başlat",
+    p2_desc: "Gelişmiş CV optimizasyonu, LinkedIn önerileri ve <b>ayda 2 özel danışmanlık (her biri 45 dakika)</b>.",
+    p2_btn: "Planı Başlat",
+    p3_desc: "CV optimizasyonu, LinkedIn konumlandırma dahil komple kariyer stratejisi ve <b>ayda 3 özel danışmanlık (her biri 45 dakika)</b>.",
+    p3_btn: "Planı Başlat",
+    p4_name: "Kısa Danışmanlık",
+    p4_desc: "Hedefli kariyer soruları için hızlı danışmanlık. <b>30 dakikalık seans.</b>",
+    p4_btn: "Görüşme Ayarla",
+    p5_name: "Strateji Seansı",
+    p5_desc: "Uluslararası ve Avrupa iş pazarlarına odaklanan derinlemesine kariyer stratejisi danışmanlığı. <b>60 dakikalık seans.</b>",
+    p5_btn: "Seans Ayarla",
+    plans_note: "Danışmanlıklar Calendly üzerinden planlanır. Kullanılmayan seanslar bir sonraki aya devredilmez.",
+    about_title: "Kurucu",
+    about_text: "CareerLab, global teknoloji ve SaaS şirketlerinde 8 yılı aşkın deneyime sahip bir ürün ve müşteri başarısı lideri olan <b>Guntekin Suh</b> tarafından kurulmuştur.<br><br>Kariyeri boyunca <b>Google, TikTok ve LinkedIn</b> dahil kuruluşlarla çalışmış, kurumsal müşterileri yönetmiş ve Avrupa genelinde uluslararası ekiplere liderlik etmiştir.<br><br><b>Lufthansa ve Aer Lingus</b> gibi global markaları desteklemiş, SaaS platformlarını ölçeklendirmesine, ürün benimsenmesini artırmasına ve stratejik büyüme girişimleri sunmasına yardımcı olmuştur.<br><br>CareerLab aracılığıyla artık profesyonellerin CV'lerini güçlendirmelerine, konumlandırmalarını iyileştirmelerine ve uluslararası iş pazarlarında başarıyla ilerlemelerine yardımcı olmaktadır.",
+    contact_title: "Kariyer Stratejinize Başlayın",
+    contact_desc: "Bir danışmanlık ayarlayın ve kişiselleştirilmiş kariyer rehberliği alın.",
+    contact_cta: "Görüşme Planla"
+  }
+};
+
+/* Store English originals */
+const originals = {};
+let currentLang = "en";
+
+document.querySelectorAll("[data-i18n]").forEach(el => {
+  originals[el.dataset.i18n] = el.innerHTML;
+});
+
+function toggleLang() {
+  const btn = document.querySelector(".lang-toggle");
+  if (currentLang === "en") {
+    currentLang = "tr";
+    document.documentElement.lang = "tr";
+    btn.innerHTML = "🇬🇧 EN";
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
+      if (translations.tr[key]) el.innerHTML = translations.tr[key];
+    });
+  } else {
+    currentLang = "en";
+    document.documentElement.lang = "en";
+    btn.innerHTML = "🇹🇷 TR";
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      el.innerHTML = originals[el.dataset.i18n];
+    });
+  }
+}
 
 /* SCROLL FADE-IN */
 
@@ -733,7 +859,7 @@ async function analyzePDF(){
 let file=document.getElementById("cvFile").files[0];
 
 if(!file){
-alert("Please upload a PDF CV");
+alert(currentLang==="tr" ? "Lütfen bir PDF CV yükleyin" : "Please upload a PDF CV");
 return;
 }
 
@@ -766,7 +892,46 @@ let achievements=(text.match(/\d+/g)||[]).length;
 
 let score=Math.min(100,Math.floor((words/10)+(achievements*2)));
 
-let result=`
+let result = currentLang === "tr" ? `
+
+<h3>CV Teşhis Puanı: ${score}/100</h3>
+
+<br>
+
+<strong>Belge Özeti</strong>
+
+<p><b>Kelime Sayısı:</b> ${words} kelime tespit edildi</p>
+
+<p><b>Ölçülebilir Başarılar:</b> ${achievements} ölçülebilir metrik bulundu</p>
+
+<br>
+
+<strong>İlk Teşhis Bilgileri</strong>
+
+<ul>
+<li>CV yapınız daha net başarı odaklı maddelerden faydalanabilir</li>
+<li>İşe alım uzmanları genellikle ölçülebilir iş etkisi arar</li>
+<li>Daha güçlü eylem fiilleri algılanan liderliği artırabilir</li>
+<li>İş tanımlarıyla anahtar kelime uyumu ATS görünürlüğünü artırabilir</li>
+</ul>
+
+<br>
+
+<strong>Sonraki Adım</strong>
+
+<p>
+Bu otomatik teşhis hızlı bir genel bakış sağlar. 
+Yapı optimizasyonu, işe alım konumlandırması ve uluslararası iş pazarı stratejisi 
+dahil daha derin bir inceleme için profesyonel bir seans ayarlayabilirsiniz.
+</p>
+
+<br>
+
+<a class="cta" href="https://calendly.com/guntekin-suh/30min">
+Profesyonel CV İncelemesi Ayarla
+</a>
+
+` : `
 
 <h3>CV Diagnostic Score: ${score}/100</h3>
 
