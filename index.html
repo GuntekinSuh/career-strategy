@@ -294,6 +294,23 @@ font-size:14px;
 
 }
 
+/* SCROLL ANIMATIONS */
+
+.fade-up{
+opacity:0;
+transform:translateY(30px);
+transition:opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-up.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+.fade-up:nth-child(2){transition-delay:0.1s;}
+.fade-up:nth-child(3){transition-delay:0.2s;}
+.fade-up:nth-child(4){transition-delay:0.3s;}
+
 </style>
 
 </head>
@@ -369,23 +386,23 @@ Experience from global companies and enterprise clients
 
 <div style="display:flex;justify-content:center;gap:60px;flex-wrap:wrap;">
 
-<div>
-<h2 style="font-size:32px;">8+</h2>
+<div class="fade-up">
+<h2 style="font-size:32px;" class="counter" data-target="8" data-suffix="+">0+</h2>
 <p style="color:#666;">Years Global Tech Experience</p>
 </div>
 
-<div>
-<h2 style="font-size:32px;">20+</h2>
+<div class="fade-up">
+<h2 style="font-size:32px;" class="counter" data-target="20" data-suffix="+">0+</h2>
 <p style="color:#666;">Professionals Led</p>
 </div>
 
-<div>
-<h2 style="font-size:32px;">€250K+</h2>
+<div class="fade-up">
+<h2 style="font-size:32px;" class="counter" data-target="250" data-prefix="€" data-suffix="K+">€0K+</h2>
 <p style="color:#666;">Revenue Expansion Delivered</p>
 </div>
 
-<div>
-<h2 style="font-size:32px;">5+</h2>
+<div class="fade-up">
+<h2 style="font-size:32px;" class="counter" data-target="5" data-suffix="+">0+</h2>
 <p style="color:#666;">Enterprise Airline Clients</p>
 </div>
 
@@ -658,6 +675,48 @@ Through CareerLab he now helps professionals strengthen their CVs, improve their
 </footer>
 
 <script>
+
+/* SCROLL FADE-IN */
+
+const fadeObserver=new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting) e.target.classList.add("visible");
+});
+},{threshold:0.15});
+
+document.querySelectorAll(".card, .price-card, .fade-up, .hero-text, .hero>img, .about>img, .about>div, .ai-box").forEach(el=>{
+el.classList.add("fade-up");
+fadeObserver.observe(el);
+});
+
+/* ANIMATED COUNTERS */
+
+let countersDone=false;
+
+const counterObserver=new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting && !countersDone){
+countersDone=true;
+document.querySelectorAll(".counter").forEach(c=>{
+let target=+c.dataset.target;
+let prefix=c.dataset.prefix||"";
+let suffix=c.dataset.suffix||"";
+let duration=1500;
+let start=performance.now();
+function update(now){
+let progress=Math.min((now-start)/duration,1);
+let val=Math.floor(progress*target);
+c.textContent=prefix+val+suffix;
+if(progress<1) requestAnimationFrame(update);
+else c.textContent=prefix+target+suffix;
+}
+requestAnimationFrame(update);
+});
+}
+});
+},{threshold:0.3});
+
+document.querySelectorAll(".counter").forEach(c=>counterObserver.observe(c));
 
 function toggleService(card){
 
