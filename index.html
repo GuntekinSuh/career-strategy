@@ -278,53 +278,170 @@ color:#777;
 
 /* MOBILE */
 
-@media(max-width:900px){
+/* Hamburger */
+.hamburger{
+display:none;
+flex-direction:column;
+gap:5px;
+cursor:pointer;
+background:none;
+border:none;
+padding:6px;
+z-index:200;
+}
+.hamburger span{
+display:block;
+width:24px;
+height:2px;
+background:#333;
+border-radius:2px;
+transition:0.3s;
+}
+
+@media(max-width:768px){
+
+header{
+padding:16px 5%;
+}
+
+.logo img{
+height:28px !important;
+}
+
+.hamburger{display:flex;}
+
+nav{
+position:fixed;
+top:0;
+right:-100%;
+width:75%;
+max-width:300px;
+height:100vh;
+background:white;
+flex-direction:column;
+align-items:flex-start;
+padding:80px 30px 30px;
+box-shadow:-5px 0 30px rgba(0,0,0,0.1);
+transition:right 0.35s ease;
+z-index:150;
+}
+
+nav.open{right:0;}
+
+nav a{
+margin-left:0;
+font-size:18px;
+padding:12px 0;
+width:100%;
+border-bottom:1px solid #f0f0f0;
+}
+
+.lang-toggle{
+margin-left:0;
+margin-top:16px;
+padding:8px 16px;
+font-size:15px;
+}
+
+.nav-overlay{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.3);
+z-index:140;
+}
+
+.nav-overlay.show{display:block;}
 
 .hero{
 flex-direction:column;
 text-align:center;
-padding:80px 6%;
+padding:50px 5%;
 }
 
 .hero img{
 width:100%;
-max-width:420px;
-margin-top:30px;
+max-width:100%;
+margin-top:24px;
+border-radius:12px;
 }
 
-.hero h1{font-size:42px;}
+.hero h1{font-size:30px;line-height:1.2;}
 
-.hero p{font-size:18px;}
+.hero p{font-size:16px;}
 
-.section{padding:80px 6%;}
+.hero .cta{
+padding:12px 24px;
+font-size:15px;
+}
+
+.section{padding:50px 5%;}
+
+.section h2{font-size:26px;margin-bottom:20px;}
+
+.grid{
+grid-template-columns:1fr;
+gap:20px;
+}
+
+.card{padding:20px;}
+
+.card img{border-radius:8px;}
 
 .about{
 flex-direction:column;
 text-align:center;
+gap:24px;
 }
 
 .about img{
 width:100%;
-max-width:420px;
+max-width:100%;
+border-radius:12px;
 }
 
-.pricing{justify-content:center;}
+.pricing{
+flex-direction:column;
+align-items:center;
+gap:16px;
+}
 
 .price-card{
 width:100%;
-max-width:320px;
+max-width:100%;
 }
 
-nav a{
-margin-left:14px;
-font-size:14px;
+.ai-box{
+padding:20px;
 }
 
-.lang-toggle{
-margin-left:14px;
-padding:4px 8px;
+footer{
+padding:40px 5%;
 font-size:13px;
 }
+
+}
+
+@media(min-width:769px) and (max-width:1024px){
+
+header{padding:18px 5%;}
+
+.hero{padding:80px 5%;}
+
+.hero h1{font-size:44px;}
+
+.hero img{width:400px;}
+
+.section{padding:80px 5%;}
+
+.about img{width:300px;}
+
+nav a{margin-left:16px;font-size:14px;}
+
+.pricing{flex-wrap:wrap;justify-content:center;}
+
+.price-card{width:220px;}
 
 }
 
@@ -354,16 +471,21 @@ transform:translateY(0);
 <header>
 
 <div class="logo">
-<div class="logo-icon">CL</div>
-Career<span>Lab</span>
+<img src="/careerlab-logo-startup2.png" alt="CareerLab Logo" style="height:36px;">
 </div>
 
+<button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+
+<div class="nav-overlay" onclick="toggleMenu()"></div>
+
 <nav>
-<a href="#services" data-i18n="nav_services">Services</a>
-<a href="#ai" data-i18n="nav_ai">AI CV</a>
-<a href="#plans" data-i18n="nav_plans">Plans</a>
-<a href="#about" data-i18n="nav_about">Founder</a>
-<a href="#contact" data-i18n="nav_contact">Contact</a>
+<a href="#services" data-i18n="nav_services" onclick="closeMenu()">Services</a>
+<a href="#ai" data-i18n="nav_ai" onclick="closeMenu()">AI CV</a>
+<a href="#plans" data-i18n="nav_plans" onclick="closeMenu()">Plans</a>
+<a href="#about" data-i18n="nav_about" onclick="closeMenu()">Founder</a>
+<a href="#contact" data-i18n="nav_contact" onclick="closeMenu()">Contact</a>
 <button class="lang-toggle" onclick="toggleLang()">🇹🇷 TR</button>
 </nav>
 
@@ -742,7 +864,7 @@ const translations = {
     t2_role: "Yazılım Mühendisi",
     t3_text: "\"LinkedIn profil görünürlüğüm seanstan sonra önemli ölçüde arttı. İşe alım uzmanları birkaç hafta içinde ulaşmaya başladı.\"",
     t3_role: "Veri Analisti",
-    ai_title: "Ücretsiz CV İnceleme",
+    ai_title: "Ücretsiz CV Teşhisi",
     ai_desc: "CV yapısı, anahtar kelime gücü ve ölçülebilir başarılar dahil hızlı bir teşhis incelemesi almak için CV'nizi yükleyin. Bu araç, profesyonel bir danışmanlık öncesi ilk değerlendirme sağlar.",
     ai_upload_title: "Hızlı Teşhis İçin CV'nizi Yükleyin",
     ai_btn: "CV Analiz Et",
@@ -979,6 +1101,18 @@ document.getElementById("result").innerHTML=result;
 
 reader.readAsArrayBuffer(file);
 
+}
+
+/* HAMBURGER MENU */
+function toggleMenu(){
+document.querySelector("nav").classList.toggle("open");
+document.querySelector(".nav-overlay").classList.toggle("show");
+document.body.style.overflow = document.querySelector("nav").classList.contains("open") ? "hidden" : "";
+}
+function closeMenu(){
+document.querySelector("nav").classList.remove("open");
+document.querySelector(".nav-overlay").classList.remove("show");
+document.body.style.overflow = "";
 }
 
 </script>
