@@ -303,18 +303,23 @@ transition:0.3s;
 header{
 padding:16px 5%;
 align-items:center;
+flex-wrap:nowrap;
 }
 
 .logo{
 display:flex;
 align-items:center;
+flex-shrink:0;
 }
 
 .logo img{
 height:28px !important;
 }
 
-.hamburger{display:flex;}
+.hamburger{
+display:flex;
+margin-left:auto;
+}
 
 nav{
 position:fixed;
