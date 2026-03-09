@@ -1018,128 +1018,207 @@ desc.style.display=desc.style.display==="block" ? "none":"block";
 
 async function analyzePDF(){
 
-let file=document.getElementById("cvFile").files[0];
-
-if(!file){
-alert(currentLang==="tr" ? "Lütfen bir PDF CV yükleyin" : "Please upload a PDF CV");
-return;
-}
-
-let reader=new FileReader();
-
-reader.onload=async function(){
-
-let typedarray=new Uint8Array(this.result);
-
-let pdf=await pdfjsLib.getDocument(typedarray).promise;
-
-let text="";
-
-for(let i=1;i<=pdf.numPages;i++){
-
-let page=await pdf.getPage(i);
-let content=await page.getTextContent();
-
-content.items.forEach(item=>{
-text+=item.str+" ";
-});
-
-}
-
-/* SIMPLE ANALYSIS */
-
-let words=text.split(" ").length;
-
-let achievements=(text.match(/\d+/g)||[]).length;
-
-let score=Math.min(100,Math.floor((words/10)+(achievements*2)));
-
-let result = currentLang === "tr" ? `
-
-<h3>CV Teşhis Puanı: ${score}/100</h3>
-
-<br>
-
-<strong>Belge Özeti</strong>
-
-<p><b>Kelime Sayısı:</b> ${words} kelime tespit edildi</p>
-
-<p><b>Ölçülebilir Başarılar:</b> ${achievements} ölçülebilir metrik bulundu</p>
-
-<br>
-
-<strong>İlk Teşhis Bilgileri</strong>
-
-<ul>
-<li>CV yapınız daha net başarı odaklı maddelerden faydalanabilir</li>
-<li>İşe alım uzmanları genellikle ölçülebilir iş etkisi arar</li>
-<li>Daha güçlü eylem fiilleri algılanan liderliği artırabilir</li>
-<li>İş tanımlarıyla anahtar kelime uyumu ATS görünürlüğünü artırabilir</li>
-</ul>
-
-<br>
-
-<strong>Sonraki Adım</strong>
-
-<p>
-Bu otomatik teşhis hızlı bir genel bakış sağlar. 
-Yapı optimizasyonu, işe alım konumlandırması ve uluslararası iş pazarı stratejisi 
-dahil daha derin bir inceleme için profesyonel bir seans ayarlayabilirsiniz.
-</p>
-
-<br>
-
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">
-Profesyonel CV İncelemesi Ayarla
-</a>
-
-` : `
-
-<h3>CV Diagnostic Score: ${score}/100</h3>
-
-<br>
-
-<strong>Document Overview</strong>
-
-<p><b>Word Count:</b> ${words} words detected</p>
-
-<p><b>Quantified Achievements:</b> ${achievements} measurable metrics found</p>
-
-<br>
-
-<strong>Initial Diagnostic Insights</strong>
-
-<ul>
-<li>Your CV structure may benefit from clearer achievement-driven bullet points</li>
-<li>Recruiters typically look for measurable business impact</li>
-<li>Stronger action verbs can improve perceived leadership and ownership</li>
-<li>Keyword alignment with job descriptions can improve ATS visibility</li>
-</ul>
-
-<br>
-
-<strong>Next Step</strong>
-
-<p>
-This automated diagnostic provides a quick overview. 
-For a deeper review including structure optimisation, recruiter positioning 
-and international job market strategy, you can book a professional session.
-</p>
-
-<br>
-
-<a class="cta" href="https://calendly.com/guntekin-suh/30min">
-Book Professional CV Review
-</a>
-
-`;
-
-document.getElementById("result").style.display="block";
-document.getElementById("result").innerHTML=result;
-
-}
-
-reader.readAsArrayBuffer(file);
+let file = document.getElementById("cvFile").files[0];
+  if(!file){
+    alert(currentLang === "tr" ? "Lütfen bir PDF CV yükleyin" : "Please upload a PDF CV");
+    return;
+  }
+  // Show loading state
+  let resultDiv = document.getElementById("result");
+  resultDiv.style.display = "block";
+  resultDiv.innerHTML = currentLang === "tr" 
+    ? "<p style='text-align:center;padding:40px;'>⏳ CV analiz ediliyor...</p>" 
+    : "<p style='text-align:center;padding:40px;'>⏳ Analyzing your CV...</p>";
+  let reader = new FileReader();
+  reader.onload = async function(){
+    let typedarray = new Uint8Array(this.result);
+    let pdf = await pdfjsLib.getDocument(typedarray).promise;
+    let text = "";
+    for(let i = 1; i <= pdf.numPages; i++){
+      let page = await pdf.getPage(i);
+      let content = await page.getTextContent();
+      content.items.forEach(item => { text += item.str + " "; });
+    }
+    let lower = text.toLowerCase();
+    let words = text.split(/\s+/).filter(w => w.length > 0).length;
+    let pages = pdf.numPages;
+    // --- Contact Info ---
+    let hasEmail = /[\w.-]+@[\w.-]+\.\w{2,}/.test(text);
+    let hasPhone = /(\+?\d[\d\s\-().]{7,})/.test(text);
+    let hasLinkedIn = /linkedin\.com/i.test(text);
+    let contactScore = (hasEmail ? 1 : 0) + (hasPhone ? 1 : 0) + (hasLinkedIn ? 1 : 0);
+    // --- Sections Detection ---
+    let sectionKeywords = {
+      en: {
+        "Summary / Profile": /\b(summary|profile|objective|about me|personal statement)\b/i,
+        "Experience": /\b(experience|employment|work history|professional background)\b/i,
+        "Education": /\b(education|academic|qualification|degree|university)\b/i,
+        "Skills": /\b(skills|competencies|technical skills|tools|technologies)\b/i,
+        "Languages": /\b(languages|language proficiency)\b/i,
+        "Certifications": /\b(certifications?|certificates?|accreditations?|licenses?)\b/i,
+        "Projects": /\b(projects|portfolio|key projects)\b/i,
+        "Awards": /\b(awards?|honors?|achievements?|recognition)\b/i
+      },
+      tr: {
+        "Özet / Profil": /\b(özet|profil|hakkımda|kişisel bilgi)\b/i,
+        "Deneyim": /\b(deneyim|iş deneyimi|çalışma geçmişi|profesyonel)\b/i,
+        "Eğitim": /\b(eğitim|akademik|üniversite|lisans|yüksek lisans)\b/i,
+        "Beceriler": /\b(beceri|yetkinlik|teknik beceri|araçlar)\b/i,
+        "Diller": /\b(dil|diller|yabancı dil)\b/i,
+        "Sertifikalar": /\b(sertifika|belge|akreditasyon)\b/i,
+        "Projeler": /\b(proje|portföy)\b/i,
+        "Ödüller": /\b(ödül|başarı|takdir)\b/i
+      }
+    };
+    let sections = sectionKeywords.en;
+    let foundSections = [];
+    let missingSections = [];
+    for(let [name, regex] of Object.entries(sections)){
+      if(regex.test(text)) foundSections.push(name);
+      else missingSections.push(name);
+    }
+    // --- Action Verbs ---
+    let actionVerbs = [
+      "led","managed","developed","created","designed","implemented","launched","built",
+      "increased","reduced","improved","optimized","delivered","achieved","generated",
+      "drove","established","negotiated","coordinated","streamlined","spearheaded",
+      "transformed","accelerated","pioneered","orchestrated","executed","facilitated",
+      "mentored","scaled","resolved","analyzed","strategized","automated","consolidated",
+      "influenced","cultivated","revamped","elevated","supervised","directed"
+    ];
+    let foundVerbs = actionVerbs.filter(v => new RegExp("\\b" + v + "\\b", "i").test(lower));
+    // --- Quantified Metrics ---
+    let percentages = (text.match(/\d+\s*%/g) || []).length;
+    let currencies = (text.match(/[\$€£₺]\s*[\d,.]+[KkMmBb]?|\d+[\d,.]*\s*(USD|EUR|GBP|TRY|TL)/g) || []).length;
+    let growthMetrics = (text.match(/\b\d+[xX]\b|\b\d+\s*times\b/g) || []).length;
+    let specificNumbers = (text.match(/\b\d{2,}\b/g) || []).length;
+    let totalMetrics = percentages + currencies + growthMetrics;
+    // --- Red Flags ---
+    let buzzwords = ["team player","hard worker","passionate","dynamic","self-starter",
+      "think outside the box","go-getter","detail-oriented","results-driven","synergy",
+      "guru","ninja","rockstar","responsible for"];
+    let foundBuzzwords = buzzwords.filter(b => lower.includes(b));
+    let firstPerson = (lower.match(/\b(i |my |me |myself)\b/g) || []).length;
+    let hasFirstPerson = firstPerson > 3;
+    // --- Scoring (100 points) ---
+    let score = 0;
+    // Contact completeness (10 pts)
+    score += Math.min(10, contactScore * 3.33);
+    // Sections coverage (20 pts)
+    score += Math.min(20, (foundSections.length / 6) * 20);
+    // Action verbs (20 pts)
+    score += Math.min(20, foundVerbs.length * 2);
+    // Quantified achievements (20 pts)
+    score += Math.min(20, totalMetrics * 4);
+    // Length appropriateness (15 pts)
+    if(words >= 300 && words <= 900) score += 15;
+    else if(words >= 200 && words <= 1200) score += 10;
+    else if(words >= 100) score += 5;
+    // Page count (5 pts)
+    if(pages >= 1 && pages <= 2) score += 5;
+    else if(pages === 3) score += 2;
+    // Penalties
+    if(foundBuzzwords.length > 2) score -= foundBuzzwords.length * 2;
+    if(hasFirstPerson) score -= 5;
+    score = Math.max(0, Math.min(100, Math.round(score)));
+    // --- Rating ---
+    let rating, ratingColor;
+    if(score >= 80){ rating = currentLang === "tr" ? "Güçlü" : "Strong"; ratingColor = "#22c55e"; }
+    else if(score >= 60){ rating = currentLang === "tr" ? "Orta" : "Average"; ratingColor = "#f59e0b"; }
+    else { rating = currentLang === "tr" ? "İyileştirme Gerekli" : "Needs Improvement"; ratingColor = "#ef4444"; }
+    // --- Build Feedback ---
+    let strengths = [];
+    let improvements = [];
+    // Strengths
+    if(contactScore === 3) strengths.push(currentLang === "tr" ? "İletişim bilgileri eksiksiz (e-posta, telefon, LinkedIn)" : "Complete contact information (email, phone, LinkedIn)");
+    if(foundVerbs.length >= 8) strengths.push(currentLang === "tr" ? "Güçlü eylem fiilleri kullanılmış (" + foundVerbs.length + " adet)" : "Strong action verbs used (" + foundVerbs.length + " found)");
+    if(totalMetrics >= 5) strengths.push(currentLang === "tr" ? "İyi düzeyde ölçülebilir başarılar (" + totalMetrics + " metrik)" : "Good level of quantified achievements (" + totalMetrics + " metrics)");
+    if(foundSections.length >= 5) strengths.push(currentLang === "tr" ? "CV bölüm yapısı kapsamlı" : "Comprehensive CV section structure");
+    if(pages <= 2 && words >= 300) strengths.push(currentLang === "tr" ? "Uygun uzunluk ve sayfa sayısı" : "Appropriate length and page count");
+    if(foundBuzzwords.length === 0) strengths.push(currentLang === "tr" ? "Klişe ifadelerden kaçınılmış" : "No cliché buzzwords detected");
+    // Improvements
+    if(!hasEmail) improvements.push(currentLang === "tr" ? "E-posta adresi eksik veya tespit edilemedi" : "Email address missing or not detected");
+    if(!hasLinkedIn) improvements.push(currentLang === "tr" ? "LinkedIn profil linki ekleyin" : "Add your LinkedIn profile link");
+    if(foundVerbs.length < 5) improvements.push(currentLang === "tr" ? "Daha güçlü eylem fiilleri kullanın (led, managed, increased, vb.)" : "Use stronger action verbs (led, managed, increased, etc.)");
+    if(totalMetrics < 3) improvements.push(currentLang === "tr" ? "Daha fazla ölçülebilir başarı ekleyin (%, $, rakamlar)" : "Add more quantified achievements (%, $, numbers)");
+    if(foundBuzzwords.length > 0) improvements.push(currentLang === "tr" ? "Klişe ifadelerden kaçının: " + foundBuzzwords.join(", ") : "Avoid cliché phrases: " + foundBuzzwords.join(", "));
+    if(hasFirstPerson) improvements.push(currentLang === "tr" ? "Birinci şahıs zamirlerini azaltın (Ben, Benim)" : "Reduce first-person pronouns (I, My, Me)");
+    if(pages > 2) improvements.push(currentLang === "tr" ? "CV'yi 1-2 sayfaya sığdırmaya çalışın" : "Try to keep your CV to 1-2 pages");
+    if(words < 250) improvements.push(currentLang === "tr" ? "CV çok kısa — daha fazla detay ekleyin" : "CV seems too short — add more detail");
+    // Missing sections
+    let criticalMissing = missingSections.filter(s => 
+      ["Summary / Profile","Experience","Education","Skills"].includes(s)
+    );
+    // --- Gauge SVG ---
+    let gaugeAngle = (score / 100) * 180;
+    let gaugeRadians = (gaugeAngle - 90) * Math.PI / 180;
+    let gaugeX = 100 + 70 * Math.cos(gaugeRadians);
+    let gaugeY = 100 + 70 * Math.sin(gaugeRadians);
+    let largeArc = gaugeAngle > 90 ? 1 : 0;
+    let gauge = `<svg viewBox="0 0 200 120" style="width:200px;margin:0 auto;display:block;">
+      <path d="M 30 100 A 70 70 0 0 1 170 100" fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round"/>
+      <path d="M 30 100 A 70 70 0 ${largeArc} 1 ${gaugeX.toFixed(1)} ${gaugeY.toFixed(1)}" fill="none" stroke="${ratingColor}" stroke-width="12" stroke-linecap="round"/>
+      <text x="100" y="90" text-anchor="middle" font-size="28" font-weight="700" fill="#111">${score}</text>
+      <text x="100" y="110" text-anchor="middle" font-size="11" fill="${ratingColor}" font-weight="600">${rating}</text>
+    </svg>`;
+    // --- Render Result ---
+    let strengthsHTML = strengths.length > 0 
+      ? strengths.map(s => `<li style="margin-bottom:6px;">✅ ${s}</li>`).join("") 
+      : `<li>${currentLang === "tr" ? "Daha detaylı analiz için profesyonel inceleme önerilir" : "Professional review recommended for detailed analysis"}</li>`;
+    let improvementsHTML = improvements.length > 0 
+      ? improvements.map(s => `<li style="margin-bottom:6px;">⚠️ ${s}</li>`).join("") 
+      : `<li>${currentLang === "tr" ? "Belirgin bir sorun tespit edilmedi" : "No major issues detected"}</li>`;
+    let missingHTML = criticalMissing.length > 0 
+      ? `<div style="margin-top:20px;padding:14px 18px;background:#fef3c7;border-radius:10px;border-left:4px solid #f59e0b;">
+          <strong>${currentLang === "tr" ? "⚠️ Eksik Bölümler" : "⚠️ Missing Sections"}</strong>
+          <ul style="margin-top:8px;padding-left:18px;">${criticalMissing.map(s => `<li>${s}</li>`).join("")}</ul>
+         </div>` 
+      : "";
+    let result = `
+      <div style="text-align:center;margin-bottom:20px;">
+        <h3 style="font-size:20px;margin-bottom:16px;">${currentLang === "tr" ? "CV Teşhis Raporu" : "CV Diagnostic Report"}</h3>
+        ${gauge}
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;text-align:center;">
+        <div style="background:#f0f9ff;padding:12px;border-radius:10px;">
+          <div style="font-size:20px;font-weight:700;">${words}</div>
+          <div style="font-size:11px;color:#666;">${currentLang === "tr" ? "Kelime" : "Words"}</div>
+        </div>
+        <div style="background:#f0fdf4;padding:12px;border-radius:10px;">
+          <div style="font-size:20px;font-weight:700;">${totalMetrics}</div>
+          <div style="font-size:11px;color:#666;">${currentLang === "tr" ? "Metrik" : "Metrics"}</div>
+        </div>
+        <div style="background:#fdf4ff;padding:12px;border-radius:10px;">
+          <div style="font-size:20px;font-weight:700;">${foundVerbs.length}</div>
+          <div style="font-size:11px;color:#666;">${currentLang === "tr" ? "Eylem Fiili" : "Action Verbs"}</div>
+        </div>
+      </div>
+      <div style="margin-bottom:18px;">
+        <strong style="color:#22c55e;">✅ ${currentLang === "tr" ? "Güçlü Yönler" : "Strengths"}</strong>
+        <ul style="margin-top:8px;padding-left:18px;list-style:none;">${strengthsHTML}</ul>
+      </div>
+      <div style="margin-bottom:18px;">
+        <strong style="color:#f59e0b;">⚠️ ${currentLang === "tr" ? "Geliştirme Alanları" : "Areas for Improvement"}</strong>
+        <ul style="margin-top:8px;padding-left:18px;list-style:none;">${improvementsHTML}</ul>
+      </div>
+      ${missingHTML}
+      <div style="margin-top:24px;padding:16px 20px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;">
+        <strong>${currentLang === "tr" ? "📋 Sonraki Adım" : "📋 Next Step"}</strong>
+        <p style="margin-top:8px;font-size:14px;color:#555;">
+          ${currentLang === "tr" 
+            ? "Bu otomatik teşhis hızlı bir genel bakış sağlar. Yapı optimizasyonu, işe alım konumlandırması ve uluslararası iş pazarı stratejisi dahil daha derin bir inceleme için profesyonel bir seans ayarlayabilirsiniz." 
+            : "This automated diagnostic provides a quick overview. For a deeper review including structure optimization, recruiter positioning and international job market strategy, book a professional session."}
+        </p>
+        <div style="text-align:center;margin-top:14px;">
+          <a class="cta" href="https://calendly.com/guntekin-suh/30min" style="display:inline-block;">
+            ${currentLang === "tr" ? "Profesyonel CV İncelemesi Ayarla" : "Book Professional CV Review"}
+          </a>
+        </div>
+      </div>
+    `;
+    resultDiv.innerHTML = result;
+  };
+  reader.readAsArrayBuffer(file);
 
 }
 
