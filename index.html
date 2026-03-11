@@ -287,18 +287,22 @@ nav a:hover{color:#6e6e73;}
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:24px;
+  align-items:start;
 }
 
 .service-card{
   background:#fff;
-  border-radius:16px;
-  border:1px solid #e8e8e8;
+  border-radius:20px;
+  border:1px solid rgba(0,0,0,0.06);
   overflow:hidden;
-  transition:all 0.3s ease;
+  transition:all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
   cursor:pointer;
+  box-shadow:0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
 }
 .service-card:hover{
-  box-shadow:0 8px 30px rgba(0,0,0,0.06);
+  box-shadow:0 12px 40px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+  transform:translateY(-4px);
+  border-color:rgba(0,0,0,0.03);
 }
 
 .service-card img{
