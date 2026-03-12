@@ -1071,7 +1071,14 @@ This tool provides an initial assessment before a professional consultation.
 
 <h3 style="font-size:22px;font-weight:700;letter-spacing:-0.02em;" data-i18n="ai_upload_title">Upload Your CV for a Quick Diagnostic</h3>
 
-<input type="file" id="cvFile" accept="application/pdf">
+<div id="cvDropZone" style="border:2px dashed #d1d5db;border-radius:16px;padding:40px 20px;text-align:center;cursor:pointer;transition:all 0.3s;margin-top:20px;background:#fafafa;" ondragover="event.preventDefault();this.style.borderColor='#1d1d1f';this.style.background='#f0f0f0';" ondragleave="this.style.borderColor='#d1d5db';this.style.background='#fafafa';" ondrop="handleDrop(event);" onclick="document.getElementById('cvFile').click();">
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#86868b" stroke-width="1.5" style="margin:0 auto 12px;display:block;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
+  <p style="font-size:15px;font-weight:600;color:#1d1d1f;" data-i18n="ai_drop">Drag & drop your PDF here or click to browse</p>
+  <p style="font-size:12px;color:#86868b;margin-top:6px;" data-i18n="ai_formats">PDF only · Max 10MB</p>
+  <p id="selectedFileName" style="font-size:13px;color:#1d1d1f;font-weight:600;margin-top:10px;display:none;"></p>
+</div>
+
+<input type="file" id="cvFile" accept="application/pdf" style="display:none;" onchange="handleFileSelect(this)">
 
 <button onclick="analyzePDF()" data-i18n="ai_btn">Analyze CV</button>
 
@@ -1312,6 +1319,8 @@ const translations = {
     ai_title: "Ücretsiz CV İnceleme",
     ai_desc: "CV yapısı, anahtar kelime gücü ve ölçülebilir başarılar dahil hızlı bir teşhis incelemesi almak için CV'nizi yükleyin. Bu araç, profesyonel bir danışmanlık öncesi ilk değerlendirme sağlar.",
     ai_upload_title: "Hızlı Teşhis İçin CV'nizi Yükleyin",
+    ai_drop: "PDF'inizi sürükleyip bırakın veya tıklayarak seçin",
+    ai_formats: "Sadece PDF · Maks 10MB",
     ai_btn: "CV Analiz Et",
     plans_title: "CareerLab Planları",
     plans_desc: "Uluslararası rolleri hedefleyen profesyoneller için tasarlanmış esnek kariyer destek paketleri. Seanslar online olarak gerçekleştirilir ve pratik CV iyileştirme, mülakat hazırlığı ve uzun vadeli kariyer konumlandırmasına odaklanır.",
@@ -1413,131 +1422,382 @@ function toggleService(card){
   card.classList.toggle("open");
 }
 
-/* PDF ANALYZER */
+/* ========== FILE UPLOAD HANDLERS ========== */
+
+function handleDrop(e){
+  e.preventDefault();
+  e.currentTarget.style.borderColor='#d1d5db';
+  e.currentTarget.style.background='#fafafa';
+  let file = e.dataTransfer.files[0];
+  if(file){
+    let dt = new DataTransfer();
+    dt.items.add(file);
+    document.getElementById('cvFile').files = dt.files;
+    handleFileSelect(document.getElementById('cvFile'));
+  }
+}
+
+function handleFileSelect(input){
+  let file = input.files[0];
+  let nameEl = document.getElementById('selectedFileName');
+  if(file){
+    nameEl.textContent = '📄 ' + file.name;
+    nameEl.style.display = 'block';
+  } else {
+    nameEl.style.display = 'none';
+  }
+}
+
+/* ========== PDF ANALYZER - Professional Edition ========== */
+
 async function analyzePDF(){
   let file = document.getElementById("cvFile").files[0];
   if(!file){
     alert(currentLang === "tr" ? "Lütfen bir PDF CV yükleyin" : "Please upload a PDF CV");
     return;
   }
+
+  /* === FILE VALIDATION === */
+  if(file.type !== "application/pdf" && !file.name.toLowerCase().endsWith('.pdf')){
+    showError(currentLang === "tr" 
+      ? "⚠️ Sadece PDF dosyaları kabul edilmektedir. Lütfen CV'nizi PDF formatında yükleyin." 
+      : "⚠️ Only PDF files are accepted. Please upload your CV in PDF format.");
+    return;
+  }
+  if(file.size > 10 * 1024 * 1024){
+    showError(currentLang === "tr" 
+      ? "⚠️ Dosya boyutu 10MB'dan büyük. Lütfen daha küçük bir dosya yükleyin." 
+      : "⚠️ File size exceeds 10MB. Please upload a smaller file.");
+    return;
+  }
+  if(file.size < 1000){
+    showError(currentLang === "tr" 
+      ? "⚠️ Bu dosya çok küçük ve geçerli bir CV içermiyor olabilir." 
+      : "⚠️ This file is too small and may not contain a valid CV.");
+    return;
+  }
+
   let resultDiv = document.getElementById("result");
   resultDiv.style.display = "block";
-  resultDiv.innerHTML = currentLang === "tr" 
-    ? "<p style='text-align:center;padding:40px;'>⏳ CV analiz ediliyor...</p>" 
-    : "<p style='text-align:center;padding:40px;'>⏳ Analyzing your CV...</p>";
+  resultDiv.innerHTML = `<div style="text-align:center;padding:50px 20px;">
+    <div style="width:40px;height:40px;border:3px solid #e5e7eb;border-top-color:#1d1d1f;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px;"></div>
+    <p style="font-weight:600;font-size:15px;">${currentLang === "tr" ? "CV analiz ediliyor..." : "Analyzing your CV..."}</p>
+    <p style="font-size:12px;color:#86868b;margin-top:6px;" id="analysisStep">${currentLang === "tr" ? "Belge okunuyor..." : "Reading document..."}</p>
+  </div>
+  <style>@keyframes spin{to{transform:rotate(360deg)}}</style>`;
+
   let reader = new FileReader();
+  reader.onerror = function(){
+    showError(currentLang === "tr" ? "⚠️ Dosya okunamadı. Lütfen tekrar deneyin." : "⚠️ Could not read the file. Please try again.");
+  };
   reader.onload = async function(){
-    let typedarray = new Uint8Array(this.result);
-    let pdf = await pdfjsLib.getDocument(typedarray).promise;
-    let text = "";
-    for(let i = 1; i <= pdf.numPages; i++){
-      let page = await pdf.getPage(i);
-      let content = await page.getTextContent();
-      content.items.forEach(item => { text += item.str + " "; });
+    try {
+      let typedarray = new Uint8Array(this.result);
+      let pdf;
+      try {
+        pdf = await pdfjsLib.getDocument(typedarray).promise;
+      } catch(e){
+        showError(currentLang === "tr" 
+          ? "⚠️ Bu dosya geçerli bir PDF değil. Resim veya bozuk bir dosya yüklemiş olabilirsiniz." 
+          : "⚠️ This is not a valid PDF. You may have uploaded an image or corrupted file.");
+        return;
+      }
+
+      updateStep(currentLang === "tr" ? "Metin çıkarılıyor..." : "Extracting text...");
+      let text = "";
+      let lineCount = 0;
+      for(let i = 1; i <= pdf.numPages; i++){
+        let page = await pdf.getPage(i);
+        let content = await page.getTextContent();
+        content.items.forEach(item => { 
+          text += item.str + " ";
+          if(item.str.trim()) lineCount++;
+        });
+      }
+
+      /* === CV VALIDITY CHECK === */
+      let words = text.split(/\s+/).filter(w => w.length > 0).length;
+      
+      if(words < 20){
+        showError(currentLang === "tr" 
+          ? "⚠️ Bu PDF'den metin çıkarılamadı. Taranmış bir görsel olabilir. Lütfen metin tabanlı bir PDF yükleyin." 
+          : "⚠️ Could not extract text from this PDF. It may be a scanned image. Please upload a text-based PDF.");
+        return;
+      }
+
+      updateStep(currentLang === "tr" ? "İçerik doğrulanıyor..." : "Validating content...");
+      let lower = text.toLowerCase();
+      let cvSignals = 0;
+      let cvIndicators = [
+        /\b(experience|deneyim|iş deneyimi)\b/i,
+        /\b(education|eğitim|üniversite|university)\b/i,
+        /\b(skills?|beceri|yetkinlik|competenc)\b/i,
+        /[\w.-]+@[\w.-]+\.\w{2,}/,
+        /(\+?\d[\d\s\-().]{7,})/,
+        /\b(summary|profile|profil|özet|objective)\b/i,
+        /\b(linkedin|github)\b/i,
+        /\b(20\d{2})\s*[-–]\s*(20\d{2}|present|current|halen|devam)/i,
+        /\b(bachelor|master|mba|phd|lisans|yüksek lisans|doktora)\b/i,
+        /\b(manager|engineer|developer|analyst|director|specialist|consultant|coordinator|müdür|mühendis|uzman)\b/i
+      ];
+      cvIndicators.forEach(regex => { if(regex.test(text)) cvSignals++; });
+
+      if(cvSignals < 3){
+        showError(currentLang === "tr" 
+          ? "⚠️ Bu belge bir CV/özgeçmiş gibi görünmüyor. Lütfen bir özgeçmiş yükleyin." 
+          : "⚠️ This document does not appear to be a CV/resume. Please upload a resume.");
+        return;
+      }
+
+      /* === DEEP ANALYSIS === */
+      updateStep(currentLang === "tr" ? "Detaylı analiz yapılıyor..." : "Running detailed analysis...");
+      await new Promise(r => setTimeout(r, 400));
+
+      let pages = pdf.numPages;
+      let hasEmail = /[\w.-]+@[\w.-]+\.\w{2,}/.test(text);
+      let hasPhone = /(\+?\d[\d\s\-().]{7,})/.test(text);
+      let hasLinkedIn = /linkedin\.com/i.test(text);
+      let hasGithub = /github\.com/i.test(text);
+      let hasPortfolio = /\b(portfolio|website|blog)\b/i.test(text) || /https?:\/\/[^\s]+/i.test(text);
+      let contactScore = (hasEmail?1:0) + (hasPhone?1:0) + (hasLinkedIn?1:0);
+
+      let sections = {
+        "Summary / Profile": /\b(summary|profile|objective|about me|personal statement|özet|profil|hakkımda)\b/i,
+        "Experience": /\b(experience|employment|work history|professional background|deneyim|iş deneyimi)\b/i,
+        "Education": /\b(education|academic|qualification|degree|university|eğitim|üniversite)\b/i,
+        "Skills": /\b(skills|competencies|technical skills|tools|technologies|beceri|yetkinlik)\b/i,
+        "Languages": /\b(languages|language proficiency|diller|yabancı dil)\b/i,
+        "Certifications": /\b(certifications?|certificates?|accreditations?|licenses?|sertifika)\b/i,
+        "Projects": /\b(projects|portfolio|key projects|projeler)\b/i,
+        "Awards": /\b(awards?|honors?|achievements?|recognition|ödüller?)\b/i
+      };
+      let foundSections = [];
+      let missingSections = [];
+      for(let [name, regex] of Object.entries(sections)){
+        if(regex.test(text)) foundSections.push(name);
+        else missingSections.push(name);
+      }
+
+      let actionVerbs = ["led","managed","developed","created","designed","implemented","launched","built","increased","reduced","improved","optimized","delivered","achieved","generated","drove","established","negotiated","coordinated","streamlined","spearheaded","transformed","accelerated","pioneered","orchestrated","executed","facilitated","mentored","scaled","resolved","analyzed","strategized","automated","consolidated","influenced","cultivated","revamped","elevated","supervised","directed","architected","initiated","secured","authored","published","presented","trained","migrated","integrated","configured","deployed","monitored","collaborated","contributed"];
+      let foundVerbs = actionVerbs.filter(v => new RegExp("\\b" + v + "\\b", "i").test(lower));
+
+      let percentages = (text.match(/\d+\s*%/g) || []).length;
+      let currencies = (text.match(/[\$€£₺]\s*[\d,.]+[KkMmBb]?|\d+[\d,.]*\s*(USD|EUR|GBP|TRY|TL)/g) || []).length;
+      let growthMetrics = (text.match(/\b\d+[xX]\b|\b\d+\s*times\b/g) || []).length;
+      let numberMetrics = (text.match(/\b\d{1,3}(?:,\d{3})+\b/g) || []).length;
+      let totalMetrics = percentages + currencies + growthMetrics + numberMetrics;
+
+      let buzzwords = ["team player","hard worker","passionate","dynamic","self-starter","think outside the box","go-getter","detail-oriented","results-driven","synergy","guru","ninja","rockstar","responsible for","duties included","tasked with"];
+      let foundBuzzwords = buzzwords.filter(b => lower.includes(b));
+      let firstPerson = (lower.match(/\b(i |my |me |myself|i'm|i've)\b/g) || []).length;
+      let hasFirstPerson = firstPerson > 3;
+
+      let hasSpecialChars = (text.match(/[★☆●◆■□▪▫►▸◉⬥⬧⬛]/g) || []).length;
+      let hasCleanFormatting = hasSpecialChars < 5;
+
+      let dateRanges = text.match(/\b(20\d{2}|19\d{2})\s*[-–]\s*(20\d{2}|19\d{2}|present|current|ongoing|halen|devam|günümüz)/gi) || [];
+      let hasChronology = dateRanges.length >= 2;
+
+      let emailMatch = text.match(/[\w.-]+@[\w.-]+\.\w{2,}/);
+      let isProfessionalEmail = emailMatch ? !/\d{4,}/.test(emailMatch[0]) && !/^(sexy|cool|baby|hot|cute)/i.test(emailMatch[0]) : false;
+
+      /* === SCORING === */
+      let categoryScores = {};
+
+      let contactPts = 0;
+      contactPts += hasEmail ? 5 : 0;
+      contactPts += hasPhone ? 4 : 0;
+      contactPts += hasLinkedIn ? 4 : 0;
+      contactPts += (hasGithub || hasPortfolio) ? 2 : 0;
+      categoryScores.contact = Math.min(15, contactPts);
+
+      let structPts = (foundSections.length / 6) * 20;
+      categoryScores.structure = Math.min(20, Math.round(structPts));
+
+      let impactPts = Math.min(10, foundVerbs.length * 1.5) + Math.min(10, totalMetrics * 2.5);
+      categoryScores.impact = Math.min(20, Math.round(impactPts));
+
+      let atsPts = 15;
+      if(hasSpecialChars > 10) atsPts -= 5;
+      if(pages > 3) atsPts -= 3;
+      if(!hasCleanFormatting) atsPts -= 3;
+      if(foundBuzzwords.length > 3) atsPts -= 4;
+      categoryScores.ats = Math.max(0, atsPts);
+
+      let lengthPts = 0;
+      if(words >= 300 && words <= 900 && pages <= 2) lengthPts = 15;
+      else if(words >= 200 && words <= 1200 && pages <= 3) lengthPts = 10;
+      else if(words >= 100) lengthPts = 5;
+      categoryScores.length = lengthPts;
+
+      let profPts = 15;
+      if(foundBuzzwords.length > 0) profPts -= Math.min(5, foundBuzzwords.length * 1.5);
+      if(hasFirstPerson) profPts -= 4;
+      if(!isProfessionalEmail && hasEmail) profPts -= 2;
+      categoryScores.professionalism = Math.max(0, Math.round(profPts));
+
+      let score = Object.values(categoryScores).reduce((a,b) => a+b, 0);
+      score = Math.max(0, Math.min(100, Math.round(score)));
+
+      let rating, ratingColor, ratingIcon;
+      if(score >= 80){ rating = currentLang==="tr"?"Güçlü":"Strong"; ratingColor="#22c55e"; ratingIcon="🏆"; }
+      else if(score >= 60){ rating = currentLang==="tr"?"Orta":"Average"; ratingColor="#f59e0b"; ratingIcon="📊"; }
+      else { rating = currentLang==="tr"?"İyileştirme Gerekli":"Needs Improvement"; ratingColor="#ef4444"; ratingIcon="🔧"; }
+
+      /* === INSIGHTS === */
+      let strengths = [];
+      let improvements = [];
+      let tips = [];
+
+      if(contactScore === 3) strengths.push(currentLang==="tr"?"İletişim bilgileri eksiksiz (e-posta, telefon, LinkedIn)":"Complete contact info (email, phone, LinkedIn)");
+      else {
+        if(!hasEmail) improvements.push(currentLang==="tr"?"📧 Profesyonel e-posta adresi ekleyin":"📧 Add a professional email address");
+        if(!hasLinkedIn) improvements.push(currentLang==="tr"?"🔗 LinkedIn profil linki ekleyin":"🔗 Add your LinkedIn profile link");
+        if(!hasPhone) tips.push(currentLang==="tr"?"📱 Telefon numarası eklemeyi düşünün":"📱 Consider adding a phone number");
+      }
+
+      if(foundVerbs.length >= 10) strengths.push(currentLang==="tr"?`Güçlü eylem fiilleri (${foundVerbs.length} tespit edildi: ${foundVerbs.slice(0,5).join(", ")}...)`:`Strong action verbs (${foundVerbs.length} found: ${foundVerbs.slice(0,5).join(", ")}...)`);
+      else if(foundVerbs.length >= 5) strengths.push(currentLang==="tr"?`İyi eylem fiili kullanımı (${foundVerbs.length})`:`Good action verb usage (${foundVerbs.length})`);
+      else improvements.push(currentLang==="tr"?`💪 Daha güçlü eylem fiilleri kullanın (örn: led, implemented, achieved)`:`💪 Use stronger action verbs (e.g., led, implemented, achieved)`);
+
+      if(totalMetrics >= 5) strengths.push(currentLang==="tr"?`Ölçülebilir başarılar iyi (${totalMetrics} metrik)`:`Good quantified achievements (${totalMetrics} metrics)`);
+      else if(totalMetrics >= 2) tips.push(currentLang==="tr"?`📈 Daha fazla sayısal başarı ekleyin (şu an ${totalMetrics})`:`📈 Add more quantified results (currently ${totalMetrics})`);
+      else improvements.push(currentLang==="tr"?"📊 Ölçülebilir başarılar ekleyin (%, $, büyüme oranları)":"📊 Add quantified achievements (%, $, growth rates)");
+
+      if(foundSections.length >= 5) strengths.push(currentLang==="tr"?"Kapsamlı bölüm yapısı":"Comprehensive section structure");
+      if(hasChronology) strengths.push(currentLang==="tr"?"Kronolojik iş geçmişi mevcut":"Chronological work history present");
+
+      if(pages <= 2 && words >= 300) strengths.push(currentLang==="tr"?`Uygun uzunluk (${words} kelime, ${pages} sayfa)`:`Appropriate length (${words} words, ${pages} pages)`);
+      else if(pages > 2) improvements.push(currentLang==="tr"?`📄 CV'nizi 1-2 sayfaya sığdırın (şu an ${pages} sayfa)`:`📄 Keep your CV to 1-2 pages (currently ${pages} pages)`);
+      else if(words < 250) improvements.push(currentLang==="tr"?"📝 CV çok kısa, daha fazla detay ekleyin":"📝 CV seems too short, add more detail");
+
+      if(foundBuzzwords.length === 0) strengths.push(currentLang==="tr"?"Klişe ifade tespit edilmedi":"No cliché phrases detected");
+      else improvements.push(currentLang==="tr"?`🚫 Klişe ifadelerden kaçının: "${foundBuzzwords.slice(0,3).join('", "')}"` : `🚫 Avoid clichés: "${foundBuzzwords.slice(0,3).join('", "')}" `);
+      if(hasFirstPerson) improvements.push(currentLang==="tr"?"👤 Birinci şahıs kullanımını azaltın (\"I\", \"my\")":"👤 Reduce first-person pronouns (\"I\", \"my\")");
+
+      if(hasSpecialChars > 5) tips.push(currentLang==="tr"?"🤖 Özel karakterleri azaltın (★, ●, ◆) — ATS sistemleri bunları okuyamayabilir":"🤖 Reduce special characters (★, ●, ◆) — ATS systems may not read them");
+      if(!hasCleanFormatting) tips.push(currentLang==="tr"?"📋 Daha temiz formatlama kullanın — basit bullet point'ler tercih edin":"📋 Use cleaner formatting — prefer simple bullet points");
+
+      let criticalMissing = missingSections.filter(s => ["Summary / Profile","Experience","Education","Skills"].includes(s));
+      if(criticalMissing.length > 0) {
+        improvements.push(currentLang==="tr"
+          ?`📋 Eksik kritik bölümler: ${criticalMissing.join(", ")}`
+          :`📋 Missing critical sections: ${criticalMissing.join(", ")}`);
+      }
+
+      /* === RENDER REPORT === */
+      updateStep(currentLang === "tr" ? "Rapor oluşturuluyor..." : "Generating report...");
+      await new Promise(r => setTimeout(r, 300));
+
+      let gaugeAngle = (score / 100) * 180;
+      let gaugeRadians = (gaugeAngle - 90) * Math.PI / 180;
+      let gaugeX = 100 + 70 * Math.cos(gaugeRadians);
+      let gaugeY = 100 + 70 * Math.sin(gaugeRadians);
+      let largeArc = gaugeAngle > 90 ? 1 : 0;
+      let gauge = `<svg viewBox="0 0 200 120" style="width:180px;margin:0 auto;display:block;">
+        <path d="M 30 100 A 70 70 0 0 1 170 100" fill="none" stroke="#e5e7eb" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 30 100 A 70 70 0 ${largeArc} 1 ${gaugeX.toFixed(1)} ${gaugeY.toFixed(1)}" fill="none" stroke="${ratingColor}" stroke-width="14" stroke-linecap="round" style="transition:all 1s ease;"/>
+        <text x="100" y="85" text-anchor="middle" font-size="32" font-weight="800" fill="#1d1d1f">${score}</text>
+        <text x="100" y="112" text-anchor="middle" font-size="12" fill="${ratingColor}" font-weight="700">${ratingIcon} ${rating}</text>
+      </svg>`;
+
+      function catBar(label, val, max, color){
+        let pct = Math.round((val/max)*100);
+        return `<div style="margin-bottom:10px;">
+          <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;">
+            <span style="font-weight:600;">${label}</span>
+            <span style="color:#86868b;">${val}/${max}</span>
+          </div>
+          <div style="height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;">
+            <div style="height:100%;width:${pct}%;background:${color};border-radius:3px;transition:width 0.8s ease;"></div>
+          </div>
+        </div>`;
+      }
+
+      let categoryLabels = currentLang === "tr" 
+        ? {contact:"İletişim Bilgileri",structure:"Bölüm Yapısı",impact:"Etki Dili",ats:"ATS Uyumluluğu",length:"Uzunluk & Format",professionalism:"Profesyonellik"}
+        : {contact:"Contact Info",structure:"Structure",impact:"Impact Language",ats:"ATS Compatibility",length:"Length & Format",professionalism:"Professionalism"};
+
+      let barsHTML = catBar(categoryLabels.contact, categoryScores.contact, 15, "#3b82f6")
+        + catBar(categoryLabels.structure, categoryScores.structure, 20, "#8b5cf6")
+        + catBar(categoryLabels.impact, categoryScores.impact, 20, "#06b6d4")
+        + catBar(categoryLabels.ats, categoryScores.ats, 15, "#f59e0b")
+        + catBar(categoryLabels.length, categoryScores.length, 15, "#22c55e")
+        + catBar(categoryLabels.professionalism, categoryScores.professionalism, 15, "#ec4899");
+
+      let strengthsHTML = strengths.length > 0 ? strengths.map(s => `<li style="margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;"><span style="color:#22c55e;flex-shrink:0;">✅</span><span>${s}</span></li>`).join("") : "";
+      let improvementsHTML = improvements.length > 0 ? improvements.map(s => `<li style="margin-bottom:8px;display:flex;align-items:flex-start;gap:8px;"><span style="flex-shrink:0;">⚠️</span><span>${s}</span></li>`).join("") : "";
+      let tipsHTML = tips.length > 0 ? `<div style="margin-top:18px;padding:14px 18px;background:#eff6ff;border-radius:12px;border-left:4px solid #3b82f6;">
+        <strong style="font-size:14px;">💡 ${currentLang==="tr"?"Profesyonel İpuçları":"Pro Tips"}</strong>
+        <ul style="margin-top:10px;padding:0;list-style:none;font-size:13px;color:#374151;">${tips.map(t => `<li style="margin-bottom:6px;">• ${t}</li>`).join("")}</ul>
+      </div>` : "";
+
+      let result = `
+        <div style="text-align:center;margin-bottom:24px;">
+          <h3 style="font-size:20px;font-weight:800;margin-bottom:16px;">${currentLang==="tr"?"CV Teşhis Raporu":"CV Diagnostic Report"}</h3>
+          ${gauge}
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:24px;text-align:center;">
+          <div style="background:#f0f9ff;padding:12px 8px;border-radius:12px;"><div style="font-size:22px;font-weight:800;">${words}</div><div style="font-size:10px;color:#6e6e73;font-weight:600;">${currentLang==="tr"?"Kelime":"Words"}</div></div>
+          <div style="background:#f0fdf4;padding:12px 8px;border-radius:12px;"><div style="font-size:22px;font-weight:800;">${totalMetrics}</div><div style="font-size:10px;color:#6e6e73;font-weight:600;">${currentLang==="tr"?"Metrik":"Metrics"}</div></div>
+          <div style="background:#fdf4ff;padding:12px 8px;border-radius:12px;"><div style="font-size:22px;font-weight:800;">${foundVerbs.length}</div><div style="font-size:10px;color:#6e6e73;font-weight:600;">${currentLang==="tr"?"Eylem Fiili":"Verbs"}</div></div>
+          <div style="background:#fefce8;padding:12px 8px;border-radius:12px;"><div style="font-size:22px;font-weight:800;">${foundSections.length}/${Object.keys(sections).length}</div><div style="font-size:10px;color:#6e6e73;font-weight:600;">${currentLang==="tr"?"Bölüm":"Sections"}</div></div>
+        </div>
+
+        <div style="padding:18px;background:#f9fafb;border-radius:14px;margin-bottom:20px;">
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:14px;">${currentLang==="tr"?"Kategori Puanları":"Category Scores"}</h4>
+          ${barsHTML}
+        </div>
+
+        ${strengths.length > 0 ? `<div style="margin-bottom:18px;">
+          <h4 style="font-size:14px;font-weight:700;color:#22c55e;margin-bottom:10px;">${currentLang==="tr"?"Güçlü Yönler":"Strengths"}</h4>
+          <ul style="padding:0;list-style:none;font-size:13px;line-height:1.6;">${strengthsHTML}</ul>
+        </div>` : ""}
+
+        ${improvements.length > 0 ? `<div style="margin-bottom:18px;">
+          <h4 style="font-size:14px;font-weight:700;color:#f59e0b;margin-bottom:10px;">${currentLang==="tr"?"Geliştirme Alanları":"Areas for Improvement"}</h4>
+          <ul style="padding:0;list-style:none;font-size:13px;line-height:1.6;">${improvementsHTML}</ul>
+        </div>` : ""}
+
+        ${tipsHTML}
+
+        <div style="margin-top:24px;padding:18px 20px;background:linear-gradient(135deg,#f8fafc,#f0f4ff);border-radius:14px;border:1px solid #e2e8f0;">
+          <strong style="font-size:15px;">📋 ${currentLang==="tr"?"Sonraki Adım":"Next Step"}</strong>
+          <p style="margin-top:8px;font-size:13px;color:#6e6e73;line-height:1.6;">${currentLang==="tr"
+            ?"Bu otomatik analiz genel bir değerlendirme sağlar. ATS optimizasyonu, uluslararası iş pazarı stratejisi ve kişiselleştirilmiş geri bildirim için profesyonel bir seans ayarlayın."
+            :"This automated analysis provides a general assessment. For ATS optimization, international job market strategy and personalized feedback, schedule a professional session."}</p>
+          <div style="text-align:center;margin-top:14px;">
+            <a class="price-btn" href="https://calendly.com/guntekin-suh/30min" style="display:inline-block;padding:12px 28px;">${currentLang==="tr"?"Profesyonel CV İncelemesi":"Book Professional CV Review"}</a>
+          </div>
+        </div>
+      `;
+      resultDiv.innerHTML = result;
+
+    } catch(e){
+      console.error("CV analysis error:", e);
+      showError(currentLang==="tr"?"⚠️ Analiz sırasında bir hata oluştu. Lütfen tekrar deneyin.":"⚠️ An error occurred during analysis. Please try again.");
     }
-    let lower = text.toLowerCase();
-    let words = text.split(/\s+/).filter(w => w.length > 0).length;
-    let pages = pdf.numPages;
-    let hasEmail = /[\w.-]+@[\w.-]+\.\w{2,}/.test(text);
-    let hasPhone = /(\+?\d[\d\s\-().]{7,})/.test(text);
-    let hasLinkedIn = /linkedin\.com/i.test(text);
-    let contactScore = (hasEmail ? 1 : 0) + (hasPhone ? 1 : 0) + (hasLinkedIn ? 1 : 0);
-    let sections = {
-      "Summary / Profile": /\b(summary|profile|objective|about me|personal statement)\b/i,
-      "Experience": /\b(experience|employment|work history|professional background)\b/i,
-      "Education": /\b(education|academic|qualification|degree|university)\b/i,
-      "Skills": /\b(skills|competencies|technical skills|tools|technologies)\b/i,
-      "Languages": /\b(languages|language proficiency)\b/i,
-      "Certifications": /\b(certifications?|certificates?|accreditations?|licenses?)\b/i,
-      "Projects": /\b(projects|portfolio|key projects)\b/i,
-      "Awards": /\b(awards?|honors?|achievements?|recognition)\b/i
-    };
-    let foundSections = [];
-    let missingSections = [];
-    for(let [name, regex] of Object.entries(sections)){
-      if(regex.test(text)) foundSections.push(name);
-      else missingSections.push(name);
-    }
-    let actionVerbs = ["led","managed","developed","created","designed","implemented","launched","built","increased","reduced","improved","optimized","delivered","achieved","generated","drove","established","negotiated","coordinated","streamlined","spearheaded","transformed","accelerated","pioneered","orchestrated","executed","facilitated","mentored","scaled","resolved","analyzed","strategized","automated","consolidated","influenced","cultivated","revamped","elevated","supervised","directed"];
-    let foundVerbs = actionVerbs.filter(v => new RegExp("\\b" + v + "\\b", "i").test(lower));
-    let percentages = (text.match(/\d+\s*%/g) || []).length;
-    let currencies = (text.match(/[\$€£₺]\s*[\d,.]+[KkMmBb]?|\d+[\d,.]*\s*(USD|EUR|GBP|TRY|TL)/g) || []).length;
-    let growthMetrics = (text.match(/\b\d+[xX]\b|\b\d+\s*times\b/g) || []).length;
-    let totalMetrics = percentages + currencies + growthMetrics;
-    let buzzwords = ["team player","hard worker","passionate","dynamic","self-starter","think outside the box","go-getter","detail-oriented","results-driven","synergy","guru","ninja","rockstar","responsible for"];
-    let foundBuzzwords = buzzwords.filter(b => lower.includes(b));
-    let firstPerson = (lower.match(/\b(i |my |me |myself)\b/g) || []).length;
-    let hasFirstPerson = firstPerson > 3;
-    let score = 0;
-    score += Math.min(10, contactScore * 3.33);
-    score += Math.min(20, (foundSections.length / 6) * 20);
-    score += Math.min(20, foundVerbs.length * 2);
-    score += Math.min(20, totalMetrics * 4);
-    if(words >= 300 && words <= 900) score += 15;
-    else if(words >= 200 && words <= 1200) score += 10;
-    else if(words >= 100) score += 5;
-    if(pages >= 1 && pages <= 2) score += 5;
-    else if(pages === 3) score += 2;
-    if(foundBuzzwords.length > 2) score -= foundBuzzwords.length * 2;
-    if(hasFirstPerson) score -= 5;
-    score = Math.max(0, Math.min(100, Math.round(score)));
-    let rating, ratingColor;
-    if(score >= 80){ rating = currentLang === "tr" ? "Güçlü" : "Strong"; ratingColor = "#22c55e"; }
-    else if(score >= 60){ rating = currentLang === "tr" ? "Orta" : "Average"; ratingColor = "#f59e0b"; }
-    else { rating = currentLang === "tr" ? "İyileştirme Gerekli" : "Needs Improvement"; ratingColor = "#ef4444"; }
-    let strengths = [];
-    let improvements = [];
-    if(contactScore === 3) strengths.push(currentLang === "tr" ? "İletişim bilgileri eksiksiz" : "Complete contact information");
-    if(foundVerbs.length >= 8) strengths.push(currentLang === "tr" ? "Güçlü eylem fiilleri (" + foundVerbs.length + ")" : "Strong action verbs (" + foundVerbs.length + " found)");
-    if(totalMetrics >= 5) strengths.push(currentLang === "tr" ? "İyi ölçülebilir başarılar (" + totalMetrics + ")" : "Good quantified achievements (" + totalMetrics + ")");
-    if(foundSections.length >= 5) strengths.push(currentLang === "tr" ? "Kapsamlı bölüm yapısı" : "Comprehensive section structure");
-    if(pages <= 2 && words >= 300) strengths.push(currentLang === "tr" ? "Uygun uzunluk" : "Appropriate length");
-    if(foundBuzzwords.length === 0) strengths.push(currentLang === "tr" ? "Klişe yok" : "No clichés detected");
-    if(!hasEmail) improvements.push(currentLang === "tr" ? "E-posta eksik" : "Email missing");
-    if(!hasLinkedIn) improvements.push(currentLang === "tr" ? "LinkedIn linki ekleyin" : "Add LinkedIn link");
-    if(foundVerbs.length < 5) improvements.push(currentLang === "tr" ? "Daha güçlü eylem fiilleri kullanın" : "Use stronger action verbs");
-    if(totalMetrics < 3) improvements.push(currentLang === "tr" ? "Daha fazla ölçülebilir başarı ekleyin" : "Add more quantified achievements");
-    if(foundBuzzwords.length > 0) improvements.push(currentLang === "tr" ? "Klişelerden kaçının: " + foundBuzzwords.join(", ") : "Avoid clichés: " + foundBuzzwords.join(", "));
-    if(hasFirstPerson) improvements.push(currentLang === "tr" ? "Birinci şahıs azaltın" : "Reduce first-person pronouns");
-    if(pages > 2) improvements.push(currentLang === "tr" ? "1-2 sayfaya sığdırın" : "Keep to 1-2 pages");
-    if(words < 250) improvements.push(currentLang === "tr" ? "CV çok kısa" : "CV seems too short");
-    let criticalMissing = missingSections.filter(s => ["Summary / Profile","Experience","Education","Skills"].includes(s));
-    let gaugeAngle = (score / 100) * 180;
-    let gaugeRadians = (gaugeAngle - 90) * Math.PI / 180;
-    let gaugeX = 100 + 70 * Math.cos(gaugeRadians);
-    let gaugeY = 100 + 70 * Math.sin(gaugeRadians);
-    let largeArc = gaugeAngle > 90 ? 1 : 0;
-    let gauge = `<svg viewBox="0 0 200 120" style="width:200px;margin:0 auto;display:block;">
-      <path d="M 30 100 A 70 70 0 0 1 170 100" fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round"/>
-      <path d="M 30 100 A 70 70 0 ${largeArc} 1 ${gaugeX.toFixed(1)} ${gaugeY.toFixed(1)}" fill="none" stroke="${ratingColor}" stroke-width="12" stroke-linecap="round"/>
-      <text x="100" y="90" text-anchor="middle" font-size="28" font-weight="700" fill="#1d1d1f">${score}</text>
-      <text x="100" y="110" text-anchor="middle" font-size="11" fill="${ratingColor}" font-weight="600">${rating}</text>
-    </svg>`;
-    let strengthsHTML = strengths.length > 0 ? strengths.map(s => `<li style="margin-bottom:6px;">✅ ${s}</li>`).join("") : `<li>Professional review recommended</li>`;
-    let improvementsHTML = improvements.length > 0 ? improvements.map(s => `<li style="margin-bottom:6px;">⚠️ ${s}</li>`).join("") : `<li>No major issues</li>`;
-    let missingHTML = criticalMissing.length > 0 ? `<div style="margin-top:20px;padding:14px 18px;background:#fef3c7;border-radius:10px;border-left:4px solid #f59e0b;"><strong>⚠️ ${currentLang === "tr" ? "Eksik Bölümler" : "Missing Sections"}</strong><ul style="margin-top:8px;padding-left:18px;">${criticalMissing.map(s => `<li>${s}</li>`).join("")}</ul></div>` : "";
-    let result = `
-      <div style="text-align:center;margin-bottom:20px;">
-        <h3 style="font-size:20px;margin-bottom:16px;">${currentLang === "tr" ? "CV Teşhis Raporu" : "CV Diagnostic Report"}</h3>
-        ${gauge}
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;text-align:center;">
-        <div style="background:#f0f9ff;padding:12px;border-radius:10px;"><div style="font-size:20px;font-weight:700;">${words}</div><div style="font-size:11px;color:#6e6e73;">${currentLang === "tr" ? "Kelime" : "Words"}</div></div>
-        <div style="background:#f0fdf4;padding:12px;border-radius:10px;"><div style="font-size:20px;font-weight:700;">${totalMetrics}</div><div style="font-size:11px;color:#6e6e73;">${currentLang === "tr" ? "Metrik" : "Metrics"}</div></div>
-        <div style="background:#fdf4ff;padding:12px;border-radius:10px;"><div style="font-size:20px;font-weight:700;">${foundVerbs.length}</div><div style="font-size:11px;color:#6e6e73;">${currentLang === "tr" ? "Eylem Fiili" : "Action Verbs"}</div></div>
-      </div>
-      <div style="margin-bottom:18px;"><strong style="color:#22c55e;">✅ ${currentLang === "tr" ? "Güçlü Yönler" : "Strengths"}</strong><ul style="margin-top:8px;padding-left:18px;list-style:none;">${strengthsHTML}</ul></div>
-      <div style="margin-bottom:18px;"><strong style="color:#f59e0b;">⚠️ ${currentLang === "tr" ? "Geliştirme Alanları" : "Areas for Improvement"}</strong><ul style="margin-top:8px;padding-left:18px;list-style:none;">${improvementsHTML}</ul></div>
-      ${missingHTML}
-      <div style="margin-top:24px;padding:16px 20px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;">
-        <strong>📋 ${currentLang === "tr" ? "Sonraki Adım" : "Next Step"}</strong>
-        <p style="margin-top:8px;font-size:14px;color:#6e6e73;">${currentLang === "tr" ? "Daha derin bir inceleme için profesyonel bir seans ayarlayabilirsiniz." : "For a deeper review, book a professional session."}</p>
-        <div style="text-align:center;margin-top:14px;"><a class="price-btn" href="https://calendly.com/guntekin-suh/30min" style="display:inline-block;padding:12px 28px;">${currentLang === "tr" ? "Profesyonel CV İncelemesi" : "Book Professional CV Review"}</a></div>
-      </div>
-    `;
-    resultDiv.innerHTML = result;
   };
   reader.readAsArrayBuffer(file);
+}
+
+function showError(msg){
+  let resultDiv = document.getElementById("result");
+  resultDiv.style.display = "block";
+  resultDiv.innerHTML = `<div style="text-align:center;padding:30px 20px;">
+    <div style="font-size:40px;margin-bottom:12px;">🚫</div>
+    <p style="font-size:15px;font-weight:600;color:#ef4444;line-height:1.5;">${msg}</p>
+    <button onclick="document.getElementById('result').style.display='none';document.getElementById('cvFile').value='';document.getElementById('selectedFileName').style.display='none';" 
+      style="margin-top:16px;padding:8px 20px;border:1px solid #d1d5db;border-radius:8px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;">
+      ${currentLang==="tr"?"Tekrar Dene":"Try Again"}
+    </button>
+  </div>`;
+}
+
+function updateStep(msg){
+  let el = document.getElementById("analysisStep");
+  if(el) el.textContent = msg;
 }
 
 /* HAMBURGER MENU */
