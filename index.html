@@ -807,6 +807,58 @@ footer a:hover{color:#fff;}
 .fade-up:nth-child(3){transition-delay:0.16s;}
 .fade-up:nth-child(4){transition-delay:0.24s;}
 
+/* TESTIMONIAL FEATURED */
+.testimonial-featured{
+  background:#1d1d1f;
+  color:#fff;
+  padding:40px;
+  border-radius:20px;
+  grid-column:1/-1;
+  display:flex;
+  gap:40px;
+  align-items:center;
+}
+.testimonial-featured .tf-quote{
+  font-size:20px;
+  font-style:italic;
+  line-height:1.7;
+  flex:1;
+}
+.testimonial-featured .tf-meta{
+  flex-shrink:0;
+  text-align:center;
+  min-width:160px;
+}
+.testimonial-featured .tf-result{
+  font-size:48px;
+  font-weight:800;
+  letter-spacing:-0.03em;
+  line-height:1;
+}
+.testimonial-featured .tf-result-label{
+  font-size:13px;
+  color:rgba(255,255,255,0.6);
+  margin-top:6px;
+}
+.testimonial-featured .tf-author{
+  margin-top:16px;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,0.15);
+}
+.testimonial-featured .tf-author strong{font-size:14px;}
+.testimonial-featured .tf-author span{
+  display:block;
+  font-size:13px;
+  color:rgba(255,255,255,0.6);
+  margin-top:2px;
+}
+
+@media(max-width:768px){
+  .testimonial-featured{flex-direction:column;gap:24px;padding:28px;}
+  .testimonial-featured .tf-quote{font-size:16px;}
+  .testimonial-featured .tf-result{font-size:36px;}
+}
+
 </style>
 
 </head>
@@ -831,6 +883,7 @@ footer a:hover{color:#fff;}
 <a href="#ai" data-i18n="nav_ai" onclick="closeMenu()">CV Diagnostic</a>
 <a href="#plans" data-i18n="nav_plans" onclick="closeMenu()">Plans</a>
 <a href="#about" data-i18n="nav_about" onclick="closeMenu()">Founder</a>
+<a href="/blog.html" data-i18n="nav_blog" onclick="closeMenu()">Blog</a>
 <a href="#contact" data-i18n="nav_contact" onclick="closeMenu()">Contact</a>
 <button class="lang-toggle lang-toggle-mobile" style="display:none;" onclick="toggleLang()">🇹🇷 TR</button>
 </nav>
@@ -1018,36 +1071,80 @@ Create a high authority LinkedIn profile that attracts recruiters and opportunit
 
 <div class="testimonial-grid">
 
+<!-- FEATURED: Before/After Story -->
+<div class="testimonial-featured fade-up">
+<div class="tf-quote" data-i18n="t_feat_text">
+"I was stuck in the same role for 3 years with no growth path. Guntekin helped me completely reposition my CV, rebuild my LinkedIn presence and prepare for behavioural interviews. Within 8 weeks, I landed a Senior Product Manager role in Berlin with a 40% salary increase. The structured approach made all the difference."
+</div>
+<div class="tf-meta">
+<div class="tf-result">+40%</div>
+<div class="tf-result-label" data-i18n="t_feat_metric">Salary Increase</div>
+<div class="tf-author">
+<strong data-i18n="t_feat_name">Marcus R.</strong>
+<span data-i18n="t_feat_role">Senior Product Manager · Berlin</span>
+</div>
+</div>
+</div>
+
+<!-- Short testimonials -->
 <div class="testimonial-card fade-up">
 <p data-i18n="t1_text">
-"Guntekin helped me completely restructure my CV and positioning. 
-Within two months I started receiving interview invitations from companies in Germany."
+"Guntekin helped me completely restructure my CV and positioning. Within two months I started receiving interview invitations from companies in Germany."
 </p>
 <div class="testimonial-author">
-<strong data-i18n="t1_role">Product Manager</strong>
-<span>Berlin</span>
+<strong data-i18n="t1_name">Ayşe D.</strong>
+<span data-i18n="t1_role">Product Manager · Berlin</span>
 </div>
 </div>
 
 <div class="testimonial-card fade-up">
 <p data-i18n="t2_text">
-"The interview coaching sessions were incredibly helpful. 
-I felt much more confident and structured in my answers."
+"The interview coaching sessions were incredibly helpful. I felt much more confident and structured in my answers. Got offers from two companies in the Netherlands."
 </p>
 <div class="testimonial-author">
-<strong data-i18n="t2_role">Software Engineer</strong>
-<span>Amsterdam</span>
+<strong data-i18n="t2_name">Daniel V.</strong>
+<span data-i18n="t2_role">Software Engineer · Amsterdam</span>
 </div>
 </div>
 
 <div class="testimonial-card fade-up">
 <p data-i18n="t3_text">
-"My LinkedIn profile visibility improved significantly after the session. 
-Recruiters started reaching out within a few weeks."
+"My LinkedIn profile visibility improved significantly after the session. Recruiters started reaching out within a few weeks. I received 3x more profile views."
 </p>
 <div class="testimonial-author">
-<strong data-i18n="t3_role">Data Analyst</strong>
-<span>Dublin</span>
+<strong data-i18n="t3_name">Sarah M.</strong>
+<span data-i18n="t3_role">Data Analyst · Dublin</span>
+</div>
+</div>
+
+<!-- Detailed story -->
+<div class="testimonial-card fade-up" style="background:#f9fafb;">
+<p data-i18n="t4_text">
+"I was transitioning from finance to tech and had no idea how to position myself. After two sessions with Guntekin, my CV highlighted transferable skills I didn't even realize I had. I got my first tech role within 6 weeks."
+</p>
+<div class="testimonial-author">
+<strong data-i18n="t4_name">Deniz B.</strong>
+<span data-i18n="t4_role">Business Analyst · London</span>
+</div>
+</div>
+
+<div class="testimonial-card fade-up">
+<p data-i18n="t5_text">
+"The career strategy session gave me a clear roadmap. Instead of applying to hundreds of jobs randomly, I focused on 15 targeted applications and got 4 interviews."
+</p>
+<div class="testimonial-author">
+<strong data-i18n="t5_name">Johan L.</strong>
+<span data-i18n="t5_role">Marketing Manager · Munich</span>
+</div>
+</div>
+
+<div class="testimonial-card fade-up">
+<p data-i18n="t6_text">
+"Best investment I made in my career. Professional, structured and genuinely helpful. The mock interview practice was spot on — I nailed my actual interview."
+</p>
+<div class="testimonial-author">
+<strong data-i18n="t6_name">Elena K.</strong>
+<span data-i18n="t6_role">UX Designer · Stockholm</span>
 </div>
 </div>
 
@@ -1310,12 +1407,29 @@ const translations = {
     s4_best: "En uygun: İşe alım uzmanlarını çekmek isteyen profesyoneller",
     s4_detail: "İşe alım uzmanlarını ve fırsatları çeken yüksek otoriteli bir LinkedIn profili oluşturun.",
     testimonials_title: "Profesyoneller Ne Diyor",
+    t_feat_text: "\"3 yıldır aynı pozisyonda sıkışmıştım. Guntekin CV'mi yeniden konumlandırmama, LinkedIn profilimi güçlendirmeme ve davranışsal mülakatlara hazırlanmama yardımcı oldu. 8 hafta içinde Berlin'de %40 maaş artışıyla Senior Product Manager pozisyonuna girdim.\"",
+    t_feat_metric: "Maaş Artışı",
+    t_feat_name: "Marcus R.",
+    t_feat_role: "Senior Product Manager · Berlin",
     t1_text: "\"Guntekin CV'mi ve konumlandırmamı tamamen yeniden yapılandırmama yardımcı oldu. İki ay içinde Almanya'daki şirketlerden mülakat davetleri almaya başladım.\"",
-    t1_role: "Ürün Yöneticisi",
-    t2_text: "\"Mülakat koçluğu seansları inanılmaz faydalıydı. Cevaplarımda çok daha özgüvenli ve yapılandırılmış hissettim.\"",
-    t2_role: "Yazılım Mühendisi",
-    t3_text: "\"LinkedIn profil görünürlüğüm seanstan sonra önemli ölçüde arttı. İşe alım uzmanları birkaç hafta içinde ulaşmaya başladı.\"",
-    t3_role: "Veri Analisti",
+    t1_name: "Ayşe D.",
+    t1_role: "Ürün Yöneticisi · Berlin",
+    t2_text: "\"Mülakat koçluğu seansları inanılmaz faydalıydı. Cevaplarımda çok daha özgüvenli ve yapılandırılmış hissettim. Hollanda'daki iki şirketten teklif aldım.\"",
+    t2_name: "Daniel V.",
+    t2_role: "Yazılım Mühendisi · Amsterdam",
+    t3_text: "\"LinkedIn profil görünürlüğüm seanstan sonra önemli ölçüde arttı. İşe alım uzmanları birkaç hafta içinde ulaşmaya başladı. 3 kat daha fazla profil görüntülemesi aldım.\"",
+    t3_name: "Sarah M.",
+    t3_role: "Veri Analisti · Dublin",
+    t4_text: "\"Finanstan teknolojiye geçiş yapıyordum ve kendimi nasıl konumlandıracağımı bilmiyordum. İki seanstan sonra fark etmediğim transfer edilebilir becerileri ön plana çıkaran bir CV'ye sahip oldum. 6 hafta içinde ilk teknoloji rolümü aldım.\"",
+    t4_name: "Deniz B.",
+    t4_role: "İş Analisti · Londra",
+    t5_text: "\"Kariyer strateji seansı bana net bir yol haritası verdi. Rastgele yüzlerce işe başvurmak yerine 15 hedefli başvuruya odaklandım ve 4 mülakat aldım.\"",
+    t5_name: "Johan L.",
+    t5_role: "Pazarlama Müdürü · Münih",
+    t6_text: "\"Kariyerime yaptığım en iyi yatırım. Profesyonel, yapılandırılmış ve gerçekten faydalı. Mock mülakat pratiği tam isabetliydi — gerçek mülakatımı başarıyla geçtim.\"",
+    t6_name: "Elena K.",
+    t6_role: "UX Tasarımcı · Stockholm",
+    nav_blog: "Blog",
     ai_title: "Ücretsiz CV İnceleme",
     ai_desc: "CV yapısı, anahtar kelime gücü ve ölçülebilir başarılar dahil hızlı bir teşhis incelemesi almak için CV'nizi yükleyin. Bu araç, profesyonel bir danışmanlık öncesi ilk değerlendirme sağlar.",
     ai_upload_title: "Hızlı Teşhis İçin CV'nizi Yükleyin",
