@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Career insights and expert articles on CV writing, interview preparation, LinkedIn strategy and international career transitions by CareerLab.">
+<meta name="author" content="Guntekin Suh">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CareerLab Blog | Career Insights & Expert Tips">
+<meta property="og:description" content="Expert articles on CV optimization, interview coaching, LinkedIn strategy and international career transitions.">
+<meta property="og:url" content="https://getcareerlab.com/blog.html">
+<link rel="canonical" href="https://getcareerlab.com/blog.html">
+<link rel="icon" href="/favicon.png" type="image/png">
+<title>CareerLab Blog | Career Insights & Expert Tips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:#ffffff;
+  color:#1d1d1f;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* HEADER */
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 6%;height:80px;background:#fff;
+  position:sticky;top:0;border-bottom:1px solid #f0f0f0;z-index:100;
+}
+.logo{flex:1;display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;text-decoration:none;color:#1d1d1f;letter-spacing:-0.02em;}
+nav{flex:0 0 auto;display:flex;align-items:center;gap:0;}
+nav a{margin-left:36px;text-decoration:none;color:#1d1d1f;font-weight:400;font-size:15px;transition:color 0.2s;}
+nav a:hover{color:#6e6e73;}
+.header-right{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:12px;}
+.lang-toggle{
+  background:#fff;border:1px solid #e0e0e0;border-radius:980px;
+  padding:8px 16px;font-size:14px;font-weight:500;cursor:pointer;
+  transition:all 0.2s;font-family:inherit;
+}
+.lang-toggle:hover{background:#f5f5f5;}
+
+/* HAMBURGER */
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:102;}
+.hamburger span{display:block;width:22px;height:2px;background:#1d1d1f;margin:5px 0;transition:all 0.3s;}
+.nav-overlay{display:none;}
+.lang-toggle-mobile{display:none !important;}
+
+@media(max-width:768px){
+  .hamburger{display:block;}
+  nav{
+    position:fixed;top:0;right:-280px;width:280px;height:100vh;
+    background:#fff;flex-direction:column;align-items:flex-start;
+    padding:80px 32px 32px;gap:0;transition:right 0.3s ease;z-index:101;
+    box-shadow:-4px 0 20px rgba(0,0,0,0.1);
+  }
+  nav.open{right:0;}
+  nav a{margin-left:0;padding:14px 0;font-size:17px;width:100%;border-bottom:1px solid #f0f0f0;}
+  .nav-overlay{display:block;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:100;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+  .nav-overlay.show{opacity:1;pointer-events:auto;}
+  .header-right .lang-toggle{display:none;}
+  .lang-toggle-mobile{display:block !important;margin-top:16px;width:100%;}
+}
+
+/* BLOG */
+.blog-hero{
+  padding:80px 6% 40px;
+  text-align:center;
+}
+.blog-hero h1{
+  font-size:clamp(32px,5vw,52px);
+  font-weight:800;
+  letter-spacing:-0.03em;
+  line-height:1.1;
+  margin-bottom:16px;
+}
+.blog-hero p{
+  font-size:18px;
+  color:#6e6e73;
+  max-width:600px;
+  margin:0 auto;
+  line-height:1.6;
+}
+.back-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#6e6e73;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  margin-bottom:24px;
+  transition:color 0.2s;
+}
+.back-link:hover{color:#1d1d1f;}
+
+.blog-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 6% 100px;
+}
+.blog-card{
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid #f0f0f0;
+  transition:all 0.3s ease;
+  cursor:pointer;
+  box-shadow:0 1px 3px rgba(0,0,0,0.04);
+}
+.blog-card:hover{
+  box-shadow:0 12px 40px rgba(0,0,0,0.08);
+  transform:translateY(-4px);
+}
+.blog-card-img{width:100%;height:220px;object-fit:cover;}
+.blog-card-body{padding:28px;}
+.blog-card-tag{
+  display:inline-block;padding:4px 12px;
+  background:#f5f5f7;border-radius:980px;
+  font-size:11px;font-weight:600;
+  letter-spacing:0.05em;color:#6e6e73;
+  margin-bottom:12px;
+}
+.blog-card-body h3{
+  font-size:20px;font-weight:700;
+  letter-spacing:-0.02em;line-height:1.3;
+  margin-bottom:12px;
+}
+.blog-card-body .blog-excerpt{
+  font-size:14px;color:#6e6e73;
+  line-height:1.6;margin-bottom:16px;
+}
+.blog-card-body .blog-read-more{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:14px;font-weight:600;color:#1d1d1f;
+  cursor:pointer;transition:gap 0.2s;
+}
+.blog-card:hover .blog-read-more{gap:10px;}
+.blog-full-content{
+  display:none;margin-top:20px;padding-top:20px;
+  border-top:1px solid #f0f0f0;font-size:15px;
+  color:#1d1d1f;line-height:1.8;
+}
+.blog-full-content h4{font-size:17px;font-weight:700;letter-spacing:-0.01em;margin:20px 0 8px;}
+.blog-full-content ul{padding-left:20px;margin:10px 0;}
+.blog-full-content li{margin-bottom:6px;}
+.blog-card.open .blog-full-content{display:block;}
+.blog-card.open .blog-excerpt{display:none;}
+
+/* FADE */
+.fade-up{opacity:0;transform:translateY(30px);transition:all 0.6s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* FOOTER */
+footer{
+  text-align:center;padding:40px 6%;
+  border-top:1px solid #f0f0f0;
+  font-size:13px;color:#86868b;
+}
+footer a{color:#6e6e73;text-decoration:none;}
+footer a:hover{color:#1d1d1f;}
+.footer-links{margin-top:8px;}
+.dot{margin:0 8px;}
+
+@media(max-width:768px){
+  .blog-grid{grid-template-columns:1fr;gap:16px;}
+  .blog-card-img{height:180px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+<a href="/index_7.html" class="logo">
+  <img src="careerlab-logo-final.png" alt="CareerLab Logo" style="height:38px;">
+</a>
+<button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-overlay" onclick="toggleMenu()"></div>
+<nav>
+<a href="/index_7.html#services" data-i18n="nav_services" onclick="closeMenu()">Services</a>
+<a href="/index_7.html#ai" data-i18n="nav_ai" onclick="closeMenu()">CV Diagnostic</a>
+<a href="/index_7.html#plans" data-i18n="nav_plans" onclick="closeMenu()">Plans</a>
+<a href="/index_7.html#about" data-i18n="nav_about" onclick="closeMenu()">Founder</a>
+<a href="/blog.html" data-i18n="nav_blog" style="font-weight:600;" onclick="closeMenu()">Blog</a>
+<a href="/index_7.html#contact" data-i18n="nav_contact" onclick="closeMenu()">Contact</a>
+<button class="lang-toggle lang-toggle-mobile" style="display:none;" onclick="toggleLang()">🇹🇷 TR</button>
+</nav>
+<div class="header-right">
+<button class="lang-toggle" onclick="toggleLang()">🇹🇷 TR</button>
+</div>
+</header>
+
+<div class="blog-hero">
+<a href="/index_7.html" class="back-link">← <span data-i18n="blog_back">Back to Home</span></a>
+<h1 data-i18n="blog_title">Career Insights</h1>
+<p data-i18n="blog_desc">Expert articles on CV writing, interview preparation, LinkedIn strategy and international career transitions.</p>
+</div>
+
+<div class="blog-grid">
+
+<!-- Blog 1: CV -->
+<div class="blog-card fade-up" onclick="toggleBlogCard(this)">
+<img class="blog-card-img" src="blog-cv.jpg" alt="ATS-optimized CV writing tips">
+<div class="blog-card-body">
+<span class="blog-card-tag" data-i18n="blog_tag_cv">CV & RESUME</span>
+<h3 data-i18n="blog1_title">7 CV Mistakes That Get You Instantly Rejected by ATS Systems</h3>
+<p class="blog-excerpt" data-i18n="blog1_excerpt">Most job seekers don't realize their CV never reaches a human. Learn the critical formatting and content mistakes that ATS systems flag — and how to fix them today.</p>
+<span class="blog-read-more" data-i18n="blog_readmore">Read more →</span>
+<div class="blog-full-content" data-i18n-html="blog1_content">
+<p>Applicant Tracking Systems (ATS) reject up to <strong>75% of CVs</strong> before a recruiter ever sees them. If you're applying to international roles and not hearing back, your CV format might be the problem — not your qualifications.</p>
+<h4>1. Using Graphics, Tables or Columns</h4>
+<p>ATS software reads documents linearly. Two-column layouts, infographics and text boxes confuse parsers and result in garbled or missing information. Stick to a single-column, clean layout.</p>
+<h4>2. Creative File Formats</h4>
+<p>Always submit in PDF or .docx format unless specifically asked otherwise. Image-based PDFs (exported from Canva/design tools) often contain zero extractable text.</p>
+<h4>3. Missing Keywords</h4>
+<p>ATS systems match your CV against the job description. If the role asks for "stakeholder management" and your CV says "client relations," you may not pass the keyword filter.</p>
+<ul>
+<li><strong>Fix:</strong> Mirror the exact terminology from the job posting</li>
+<li><strong>Fix:</strong> Include both acronyms and full terms (e.g., "Search Engine Optimization (SEO)")</li>
+</ul>
+<h4>4. Generic Objective Statements</h4>
+<p>Replace "I am a motivated professional seeking opportunities" with a targeted professional summary that includes your role title, years of experience and key skills.</p>
+<h4>5. No Quantified Achievements</h4>
+<p>"Managed a team" says nothing. "Led a team of 12, delivering €2M in quarterly revenue" tells a story. Always quantify impact with numbers, percentages or financial results.</p>
+<h4>6. Inconsistent Date Formats</h4>
+<p>Use one format throughout: "Jan 2022 – Mar 2024" or "01/2022 – 03/2024." Mixing formats confuses both ATS and human readers.</p>
+<h4>7. Irrelevant Personal Information</h4>
+<p>For international applications, remove photo, date of birth, marital status and nationality unless specifically required. Focus space on skills and achievements instead.</p>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 Pro Tip:</strong> Use our free CV Diagnostic tool to check your CV's ATS compatibility score before applying.</p>
+</div>
+</div>
+</div>
+
+<!-- Blog 2: LinkedIn -->
+<div class="blog-card fade-up" onclick="toggleBlogCard(this)">
+<img class="blog-card-img" src="blog-linkedin.jpg" alt="LinkedIn profile optimization">
+<div class="blog-card-body">
+<span class="blog-card-tag" data-i18n="blog_tag_linkedin">LINKEDIN</span>
+<h3 data-i18n="blog2_title">How to Build a LinkedIn Profile That Attracts International Recruiters</h3>
+<p class="blog-excerpt" data-i18n="blog2_excerpt">Your LinkedIn profile is your digital first impression. Discover the proven framework for headlines, about sections and featured content that makes recruiters reach out to you.</p>
+<span class="blog-read-more" data-i18n="blog_readmore">Read more →</span>
+<div class="blog-full-content" data-i18n-html="blog2_content">
+<p>LinkedIn is the #1 platform recruiters use to source candidates for international roles. Yet most professionals treat it as an online CV — which is a missed opportunity.</p>
+<h4>The Headline Formula</h4>
+<p>Your headline is the most important piece of real estate on LinkedIn. Instead of "Product Manager at Company X," use:</p>
+<p><strong>"Senior Product Manager | SaaS & B2B | Driving 3x Revenue Growth | Ex-Google"</strong></p>
+<p>This format includes: Role + Industry + Impact + Social Proof.</p>
+<h4>Writing an About Section That Converts</h4>
+<ul>
+<li><strong>Hook (line 1-2):</strong> Start with your strongest achievement or a bold statement</li>
+<li><strong>Story (lines 3-8):</strong> Your career narrative — where you've been, what you've done</li>
+<li><strong>Proof (lines 9-12):</strong> Key metrics, companies, and results</li>
+<li><strong>CTA (last line):</strong> What you're looking for or how to reach you</li>
+</ul>
+<h4>Featured Section Strategy</h4>
+<p>Add 3-4 items: a case study, a published article, a presentation, or a project portfolio. This visual section dramatically increases profile engagement.</p>
+<h4>Skills & Endorsements</h4>
+<p>LinkedIn's algorithm weighs your top 3 skills heavily. Choose skills that match the roles you're targeting — not just your current role.</p>
+<h4>Activity & Content</h4>
+<p>Posting once a week increases your visibility by 5-10x. Share industry insights, career lessons, or professional achievements. Engagement signals to recruiters that you're active and thought-leading.</p>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 Pro Tip:</strong> Set your profile to "Open to Work" (visible to recruiters only) and specify target locations and roles for better matches.</p>
+</div>
+</div>
+</div>
+
+<!-- Blog 3: Interview -->
+<div class="blog-card fade-up" onclick="toggleBlogCard(this)">
+<img class="blog-card-img" src="blog-interview.jpg" alt="Interview coaching and preparation">
+<div class="blog-card-body">
+<span class="blog-card-tag" data-i18n="blog_tag_interview">INTERVIEW</span>
+<h3 data-i18n="blog3_title">The STAR Method: How to Answer Behavioural Interview Questions Like a Pro</h3>
+<p class="blog-excerpt" data-i18n="blog3_excerpt">Behavioural questions are the #1 reason candidates fail interviews at top companies. Master the STAR framework and learn the exact structure Google and Amazon interviewers look for.</p>
+<span class="blog-read-more" data-i18n="blog_readmore">Read more →</span>
+<div class="blog-full-content" data-i18n-html="blog3_content">
+<p>At companies like Google, Amazon and LinkedIn, <strong>behavioural interviews account for 40-60% of the hiring decision</strong>. These questions assess how you've handled real situations — and most candidates fail because they ramble without structure.</p>
+<h4>What is the STAR Method?</h4>
+<ul>
+<li><strong>Situation:</strong> Set the scene (1-2 sentences)</li>
+<li><strong>Task:</strong> What was your specific responsibility?</li>
+<li><strong>Action:</strong> What did YOU do? (This should be 60% of your answer)</li>
+<li><strong>Result:</strong> Quantified outcome — always end with numbers</li>
+</ul>
+<h4>Example: "Tell me about a time you dealt with a difficult stakeholder"</h4>
+<p><strong>Situation:</strong> "At TikTok, I was managing a product launch where the engineering lead disagreed with the timeline."</p>
+<p><strong>Task:</strong> "I needed to align both teams and deliver by Q3 without compromising quality."</p>
+<p><strong>Action:</strong> "I set up a 3-day sprint workshop, created a shared priority matrix, and proposed a phased rollout that addressed both concerns."</p>
+<p><strong>Result:</strong> "We launched 2 weeks early, with a 95% satisfaction score from both teams, and the product drove €400K in Q4 revenue."</p>
+<h4>Common Mistakes to Avoid</h4>
+<ul>
+<li>Talking about "we" instead of "I" — interviewers want YOUR contribution</li>
+<li>Skipping the Result — always quantify impact</li>
+<li>Giving 5-minute answers — aim for 90 seconds per STAR response</li>
+<li>Not preparing enough stories — have 8-10 ready covering leadership, conflict, failure, and innovation</li>
+</ul>
+<h4>Top 5 Questions to Prepare</h4>
+<ul>
+<li>Tell me about a time you led a project under pressure</li>
+<li>Describe a situation where you failed and what you learned</li>
+<li>How have you handled conflicting priorities?</li>
+<li>Give an example of when you influenced without authority</li>
+<li>Tell me about your biggest professional achievement</li>
+</ul>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 Pro Tip:</strong> Record yourself practicing STAR answers. Most candidates don't realize they take 3x longer than they think.</p>
+</div>
+</div>
+</div>
+
+<!-- Blog 4: Career Change -->
+<div class="blog-card fade-up" onclick="toggleBlogCard(this)">
+<img class="blog-card-img" src="blog-career.jpg" alt="Career transition to Europe">
+<div class="blog-card-body">
+<span class="blog-card-tag" data-i18n="blog_tag_career">CAREER CHANGE</span>
+<h3 data-i18n="blog4_title">Moving to Europe: A Complete Guide to Landing Your First International Tech Role</h3>
+<p class="blog-excerpt" data-i18n="blog4_excerpt">From visa sponsorship to salary expectations, here's everything you need to know about transitioning your career to the European tech market in 2025.</p>
+<span class="blog-read-more" data-i18n="blog_readmore">Read more →</span>
+<div class="blog-full-content" data-i18n-html="blog4_content">
+<p>The European tech market is booming, with cities like Berlin, Amsterdam, Dublin and Stockholm actively recruiting international talent. But making the move requires more than just applying — it requires strategy.</p>
+<h4>Step 1: Choose Your Target Market</h4>
+<p>Each European city has a different tech ecosystem:</p>
+<ul>
+<li><strong>Berlin:</strong> Startup culture, English-friendly, visa sponsorship common</li>
+<li><strong>Amsterdam:</strong> Strong fintech/SaaS scene, 30% tax ruling for expats</li>
+<li><strong>Dublin:</strong> EMEA HQs of Google, Meta, LinkedIn — strong for enterprise roles</li>
+<li><strong>Stockholm:</strong> Product-led companies (Spotify, Klarna), high quality of life</li>
+<li><strong>Munich:</strong> Enterprise tech, automotive innovation, higher salaries</li>
+</ul>
+<h4>Step 2: Understand Visa Sponsorship</h4>
+<p>Germany's EU Blue Card requires a job offer with minimum €45,300/year salary (€41,000 for shortage occupations including IT). The Netherlands has a Highly Skilled Migrant visa with employer sponsorship. Both processes take 4-8 weeks once you have an offer.</p>
+<h4>Step 3: Adapt Your CV for the European Market</h4>
+<ul>
+<li>Use a clean, single-column PDF format</li>
+<li>Include your LinkedIn URL prominently</li>
+<li>Highlight international experience and language skills</li>
+<li>Quantify achievements in euros or percentages</li>
+<li>Remove photo, age and marital status for UK/Ireland; include photo for Germany</li>
+</ul>
+<h4>Step 4: Network Before You Apply</h4>
+<p>80% of international roles are filled through referrals and direct outreach. Join LinkedIn groups, attend virtual events, and reach out to people in your target companies.</p>
+<h4>Step 5: Prepare for Salary Negotiation</h4>
+<p>European salaries are lower than US but benefits are stronger (healthcare, vacation, pension). Research country-specific ranges on Glassdoor, levels.fyi and Blind.</p>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 Pro Tip:</strong> Start your job search 3-6 months before your desired move date. Visa processing, notice periods and relocation logistics all take time.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 CareerLab. All rights reserved.</p>
+<div class="footer-links">
+<a href="https://www.linkedin.com/in/guntekinsuh/">LinkedIn</a>
+<span class="dot">·</span>
+<a href="https://www.instagram.com/guntekinsuh/">Instagram</a>
+</div>
+</footer>
+
+<script>
+const translations = {
+  tr: {
+    nav_services: "Hizmetler",
+    nav_ai: "Hızlı CV Analizi",
+    nav_plans: "Planlar",
+    nav_about: "Kurucu",
+    nav_contact: "İletişim",
+    nav_blog: "Blog",
+    blog_back: "Ana Sayfaya Dön",
+    blog_title: "Kariyer İçgörüleri",
+    blog_desc: "CV yazımı, mülakat hazırlığı, LinkedIn stratejisi ve uluslararası kariyer geçişleri hakkında uzman makaleler.",
+    blog_tag_cv: "CV & ÖZGEÇMİŞ",
+    blog_tag_linkedin: "LINKEDIN",
+    blog_tag_interview: "MÜLAKAT",
+    blog_tag_career: "KARİYER DEĞİŞİMİ",
+    blog1_title: "ATS Sistemleri Tarafından Anında Reddedilmenize Neden Olan 7 CV Hatası",
+    blog1_excerpt: "Çoğu iş arayan, CV'lerinin hiçbir zaman bir insana ulaşmadığını fark etmez. ATS sistemlerinin işaretlediği kritik format ve içerik hatalarını öğrenin.",
+    blog2_title: "Uluslararası İşe Alım Uzmanlarını Çeken Bir LinkedIn Profili Nasıl Oluşturulur",
+    blog2_excerpt: "LinkedIn profiliniz dijital ilk izleniminizdir. İşe alım uzmanlarının size ulaşmasını sağlayan başlık, hakkında bölümü ve öne çıkan içerik çerçevesini keşfedin.",
+    blog3_title: "STAR Metodu: Davranışsal Mülakat Sorularına Profesyonel Gibi Cevap Vermek",
+    blog3_excerpt: "Davranışsal sorular, adayların üst düzey şirketlerde mülakatları kaybetmesinin 1 numaralı nedenidir. STAR çerçevesini öğrenin.",
+    blog4_title: "Avrupa'ya Taşınmak: İlk Uluslararası Teknoloji Rolünüzü Elde Etme Rehberi",
+    blog4_excerpt: "Vize sponsorluğundan maaş beklentilerine, kariyerinizi Avrupa teknoloji pazarına taşımak için bilmeniz gereken her şey.",
+    blog_readmore: "Devamını oku →",
+    blog1_content: `<p>Aday Takip Sistemleri (ATS), işe alım uzmanı görmeden önce CV'lerin <strong>%75'ini</strong> reddeder. Uluslararası pozisyonlara başvuruyor ve geri dönüş alamıyorsanız, sorun nitelikleriniz değil — CV formatınız olabilir.</p>
+<h4>1. Grafik, Tablo veya Sütun Kullanmak</h4>
+<p>ATS yazılımı belgeleri doğrusal olarak okur. İki sütunlu düzenler, infografikler ve metin kutuları ayrıştırıcıları karıştırır ve bilgilerin bozulmasına veya kaybolmasına neden olur. Tek sütunlu, temiz bir düzen kullanın.</p>
+<h4>2. Yaratıcı Dosya Formatları</h4>
+<p>Aksini özellikle belirtilmedikçe her zaman PDF veya .docx formatında gönderin. Görsel tabanlı PDF'ler (Canva/tasarım araçlarından dışa aktarılan) genellikle sıfır çıkarılabilir metin içerir.</p>
+<h4>3. Eksik Anahtar Kelimeler</h4>
+<p>ATS sistemleri CV'nizi iş ilanıyla eşleştirir. Pozisyon "paydaş yönetimi" istiyorsa ve CV'niz "müşteri ilişkileri" diyorsa, anahtar kelime filtresini geçemeyebilirsiniz.</p>
+<ul><li><strong>Çözüm:</strong> İş ilanındaki tam terminolojiyi yansıtın</li><li><strong>Çözüm:</strong> Hem kısaltmaları hem de tam terimleri ekleyin (ör. "Arama Motoru Optimizasyonu (SEO)")</li></ul>
+<h4>4. Genel Hedef İfadeleri</h4>
+<p>"Fırsatlar arayan motivasyonlu bir profesyonelim" ifadesini, rol unvanınızı, deneyim yıllarınızı ve temel becerilerinizi içeren hedefli bir profesyonel özet ile değiştirin.</p>
+<h4>5. Ölçülmüş Başarı Yok</h4>
+<p>"Bir ekip yönettim" hiçbir şey söylemez. "12 kişilik bir ekibe liderlik ettim, çeyreklik 2 milyon € gelir sağladım" bir hikaye anlatır. Etkiyi her zaman rakamlarla, yüzdelerle veya finansal sonuçlarla ölçün.</p>
+<h4>6. Tutarsız Tarih Formatları</h4>
+<p>Baştan sona tek bir format kullanın: "Oca 2022 – Mar 2024" veya "01/2022 – 03/2024." Formatları karıştırmak hem ATS'yi hem de insan okuyucuları karıştırır.</p>
+<h4>7. İlgisiz Kişisel Bilgiler</h4>
+<p>Uluslararası başvurular için, özellikle istenmedikçe fotoğraf, doğum tarihi, medeni durum ve milliyeti kaldırın. Alanı beceriler ve başarılara odaklayın.</p>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 İpucu:</strong> Başvurmadan önce CV'nizin ATS uyumluluk puanını kontrol etmek için ücretsiz CV Teşhis aracımızı kullanın.</p>`,
+    blog2_content: `<p>LinkedIn, işe alım uzmanlarının uluslararası pozisyonlar için aday bulmak amacıyla kullandığı 1 numaralı platformdur. Yine de çoğu profesyonel onu çevrimiçi bir CV gibi kullanır — bu kaçırılmış bir fırsattır.</p>
+<h4>Başlık Formülü</h4>
+<p>Başlığınız LinkedIn'deki en önemli alandır. "X Şirketinde Ürün Yöneticisi" yerine şunu kullanın:</p>
+<p><strong>"Kıdemli Ürün Yöneticisi | SaaS & B2B | 3x Gelir Artışı | Ex-Google"</strong></p>
+<p>Bu format şunları içerir: Rol + Sektör + Etki + Sosyal Kanıt.</p>
+<h4>Dönüştüren Bir Hakkında Bölümü Yazmak</h4>
+<ul><li><strong>Kanca (satır 1-2):</strong> En güçlü başarınız veya cesur bir ifade ile başlayın</li><li><strong>Hikaye (satır 3-8):</strong> Kariyer hikayeniz — nerede bulundunuz, ne yaptınız</li><li><strong>Kanıt (satır 9-12):</strong> Temel metrikler, şirketler ve sonuçlar</li><li><strong>CTA (son satır):</strong> Ne aradığınız veya nasıl ulaşılacağı</li></ul>
+<h4>Öne Çıkanlar Bölümü Stratejisi</h4>
+<p>3-4 öğe ekleyin: bir vaka çalışması, yayımlanmış bir makale, bir sunum veya proje portföyü. Bu görsel bölüm profil etkileşimini önemli ölçüde artırır.</p>
+<h4>Beceriler ve Onaylar</h4>
+<p>LinkedIn algoritması ilk 3 becerinize ağırlık verir. Mevcut rolünüze değil, hedeflediğiniz rollere uyan becerileri seçin.</p>
+<h4>Aktivite ve İçerik</h4>
+<p>Haftada bir paylaşım yapmak görünürlüğünüzü 5-10 kat artırır. Sektör içgörüleri, kariyer dersleri veya profesyonel başarılar paylaşın.</p>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 İpucu:</strong> Profilinizi "İşe Açık" olarak ayarlayın (yalnızca işe alım uzmanlarına görünür) ve daha iyi eşleşmeler için hedef konumları ve rolleri belirtin.</p>`,
+    blog3_content: `<p>Google, Amazon ve LinkedIn gibi şirketlerde, <strong>davranışsal mülakatlar işe alım kararının %40-60'ını</strong> oluşturur. Bu sorular gerçek durumları nasıl ele aldığınızı değerlendirir — ve çoğu aday yapı olmadan konuştuğu için başarısız olur.</p>
+<h4>STAR Metodu Nedir?</h4>
+<ul><li><strong>Durum (Situation):</strong> Sahneyi kurun (1-2 cümle)</li><li><strong>Görev (Task):</strong> Sizin özel sorumluluğunuz neydi?</li><li><strong>Eylem (Action):</strong> SİZ ne yaptınız? (Cevabınızın %60'ı bu olmalı)</li><li><strong>Sonuç (Result):</strong> Ölçülebilir sonuç — her zaman rakamlarla bitirin</li></ul>
+<h4>Örnek: "Zor bir paydaşla nasıl başa çıktığınızı anlatın"</h4>
+<p><strong>Durum:</strong> "TikTok'ta, mühendislik liderinin zaman çizelgesine katılmadığı bir ürün lansmanını yönetiyordum."</p>
+<p><strong>Görev:</strong> "Her iki ekibi de uyumlu hale getirmem ve kaliteden ödün vermeden Q3'e kadar teslim etmem gerekiyordu."</p>
+<p><strong>Eylem:</strong> "3 günlük bir sprint atölyesi kurdum, paylaşımlı bir öncelik matrisi oluşturdum ve her iki endişeyi de ele alan aşamalı bir lansman önerdim."</p>
+<p><strong>Sonuç:</strong> "2 hafta erken lansman yaptık, her iki ekipten %95 memnuniyet puanı aldık ve ürün Q4'te €400K gelir sağladı."</p>
+<h4>Kaçınılması Gereken Yaygın Hatalar</h4>
+<ul><li>"Biz" yerine "ben" kullanın — mülakatçılar SİZİN katkınızı ister</li><li>Sonucu atlamayın — etkiyi her zaman ölçün</li><li>5 dakikalık cevaplar vermeyin — STAR cevabı başına 90 saniyeyi hedefleyin</li><li>Yeterli hikaye hazırlamayın — liderlik, çatışma, başarısızlık ve yenilik konularında 8-10 tane hazırlayın</li></ul>
+<h4>Hazırlanmanız Gereken İlk 5 Soru</h4>
+<ul><li>Baskı altında bir projeye liderlik ettiğiniz bir zamanı anlatın</li><li>Başarısız olduğunuz ve ne öğrendiğiniz bir durumu tanımlayın</li><li>Çelişen öncelikleri nasıl ele aldınız?</li><li>Yetki olmadan etki ettiğiniz bir örnek verin</li><li>En büyük profesyonel başarınızı anlatın</li></ul>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 İpucu:</strong> STAR cevaplarınızı pratik yaparken kendinizi kaydedin. Çoğu aday düşündüklerinden 3 kat uzun sürdüğünü fark etmez.</p>`,
+    blog4_content: `<p>Avrupa teknoloji pazarı patlıyor; Berlin, Amsterdam, Dublin ve Stockholm gibi şehirler aktif olarak uluslararası yetenek arıyor. Ancak bu geçişi yapmak sadece başvurmaktan fazlasını gerektirir — strateji gerektirir.</p>
+<h4>Adım 1: Hedef Pazarınızı Seçin</h4>
+<p>Her Avrupa şehrinin farklı bir teknoloji ekosistemi vardır:</p>
+<ul><li><strong>Berlin:</strong> Startup kültürü, İngilizce dostu, vize sponsorluğu yaygın</li><li><strong>Amsterdam:</strong> Güçlü fintech/SaaS sahası, gurbetçiler için %30 vergi indirimi</li><li><strong>Dublin:</strong> Google, Meta, LinkedIn'in EMEA merkezi — kurumsal roller için güçlü</li><li><strong>Stockholm:</strong> Ürün odaklı şirketler (Spotify, Klarna), yüksek yaşam kalitesi</li><li><strong>Münih:</strong> Kurumsal teknoloji, otomotiv inovasyonu, daha yüksek maaşlar</li></ul>
+<h4>Adım 2: Vize Sponsorluğunu Anlayın</h4>
+<p>Almanya'nın AB Mavi Kartı, minimum 45.300€/yıl maaşla bir iş teklifi gerektirir (BT dahil kıtlık meslekleri için 41.000€). Hollanda'nın Yüksek Vasıflı Göçmen vizesi işveren sponsorluğu ile. Her iki süreç de teklifiniz olduktan sonra 4-8 hafta sürer.</p>
+<h4>Adım 3: CV'nizi Avrupa Pazarına Uyarlayın</h4>
+<ul><li>Temiz, tek sütunlu bir PDF formatı kullanın</li><li>LinkedIn URL'nizi belirgin şekilde ekleyin</li><li>Uluslararası deneyim ve dil becerilerini vurgulayın</li><li>Başarıları euro veya yüzdelerle ölçün</li><li>İngiltere/İrlanda için fotoğraf, yaş ve medeni durumu kaldırın; Almanya için fotoğraf ekleyin</li></ul>
+<h4>Adım 4: Başvurmadan Önce Ağ Kurun</h4>
+<p>Uluslararası rollerin %80'i referanslar ve doğrudan iletişim yoluyla doldurulur. LinkedIn gruplarına katılın, sanal etkinliklere katılın ve hedef şirketlerinizdeki kişilere ulaşın.</p>
+<h4>Adım 5: Maaş Müzakeresine Hazırlanın</h4>
+<p>Avrupa maaşları ABD'den düşüktür ancak yan haklar daha güçlüdür (sağlık, tatil, emeklilik). Glassdoor, levels.fyi ve Blind'da ülkeye özgü aralıkları araştırın.</p>
+<p style="margin-top:20px;padding:16px;background:#f0f4ff;border-radius:12px;font-size:14px;"><strong>💡 İpucu:</strong> İş aramanıza istediğiniz taşınma tarihinden 3-6 ay önce başlayın. Vize işlemleri, ihbar süreleri ve taşınma lojistiği zaman alır.</p>`
+  }
+};
+
+const originals = {};
+const originalsHtml = {};
+let currentLang = "en";
+document.querySelectorAll("[data-i18n]").forEach(el => {
+  originals[el.dataset.i18n] = el.innerHTML;
+});
+document.querySelectorAll("[data-i18n-html]").forEach(el => {
+  originalsHtml[el.dataset.i18nHtml] = el.innerHTML;
+});
+
+function toggleLang() {
+  const btns = document.querySelectorAll(".lang-toggle");
+  if (currentLang === "en") {
+    currentLang = "tr";
+    document.documentElement.lang = "tr";
+    btns.forEach(b => b.innerHTML = "🇬🇧 EN");
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
+      if (translations.tr[key]) el.innerHTML = translations.tr[key];
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(el => {
+      const key = el.dataset.i18nHtml;
+      if (translations.tr[key]) el.innerHTML = translations.tr[key];
+    });
+  } else {
+    currentLang = "en";
+    document.documentElement.lang = "en";
+    btns.forEach(b => b.innerHTML = "🇹🇷 TR");
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      el.innerHTML = originals[el.dataset.i18n];
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(el => {
+      el.innerHTML = originalsHtml[el.dataset.i18nHtml];
+    });
+  }
+}
+
+function toggleBlogCard(card){
+  card.classList.toggle("open");
+}
+
+function toggleMenu(){
+  document.querySelector("nav").classList.toggle("open");
+  document.querySelector(".nav-overlay").classList.toggle("show");
+}
+function closeMenu(){
+  document.querySelector("nav").classList.remove("open");
+  document.querySelector(".nav-overlay").classList.remove("show");
+}
+
+/* SCROLL FADE-IN */
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add("visible"); }
+  });
+}, {threshold:0.1});
+document.querySelectorAll(".fade-up").forEach(el => fadeObserver.observe(el));
+</script>
+
+</body>
+</html>
