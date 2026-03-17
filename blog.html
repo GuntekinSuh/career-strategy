@@ -23,47 +23,141 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* HEADER */
+/* ===== HEADER — IDENTICAL TO INDEX.HTML ===== */
 header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:0 6%;height:80px;background:#fff;
-  position:sticky;top:0;border-bottom:1px solid #f0f0f0;z-index:100;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 6%;
+  height:72px;
+  background:#fff;
+  position:sticky;
+  top:0;
+  border-bottom:1px solid #f0f0f0;
+  z-index:100;
 }
-.logo{flex:1;display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;text-decoration:none;color:#1d1d1f;letter-spacing:-0.02em;}
-nav{flex:0 0 auto;display:flex;align-items:center;gap:0;}
-nav a{margin-left:36px;text-decoration:none;color:#1d1d1f;font-weight:400;font-size:15px;transition:color 0.2s;}
+
+.logo{ flex:1; }
+nav{ flex:0 0 auto; }
+.header-right{ flex:1; display:flex; justify-content:flex-end; }
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:22px;
+  text-decoration:none;
+  color:#1d1d1f;
+  letter-spacing:-0.02em;
+}
+
+.logo-icon{
+  width:36px;height:36px;
+  background:#1d1d1f;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:0.02em;
+}
+
+nav{display:flex;align-items:center;gap:0;}
+nav a{
+  margin-left:36px;
+  text-decoration:none;
+  color:#1d1d1f;
+  font-weight:400;
+  font-size:15px;
+  transition:color 0.2s;
+}
 nav a:hover{color:#6e6e73;}
-.header-right{flex:1;display:flex;justify-content:flex-end;align-items:center;gap:12px;}
+
+.header-right{align-items:center;gap:12px;}
+
 .lang-toggle{
-  background:#fff;border:1px solid #e0e0e0;border-radius:980px;
-  padding:8px 16px;font-size:14px;font-weight:500;cursor:pointer;
-  transition:all 0.2s;font-family:inherit;
+  background:#fff;
+  border:1px solid #e0e0e0;
+  border-radius:980px;
+  padding:8px 16px;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:0.2s;
+  color:#1d1d1f;
+  font-family:inherit;
 }
 .lang-toggle:hover{background:#f5f5f5;}
 
-/* HAMBURGER */
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;z-index:102;}
-.hamburger span{display:block;width:22px;height:2px;background:#1d1d1f;margin:5px 0;transition:all 0.3s;}
-.nav-overlay{display:none;}
-.lang-toggle-mobile{display:none !important;}
+.header-cta{
+  background:#1d1d1f;
+  color:#fff;
+  padding:10px 24px;
+  border-radius:980px;
+  text-decoration:none;
+  font-weight:500;
+  font-size:14px;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+.header-cta:hover{background:#333;}
 
-@media(max-width:768px){
-  .hamburger{display:block;}
-  nav{
-    position:fixed;top:0;right:-280px;width:280px;height:100vh;
-    background:#fff;flex-direction:column;align-items:flex-start;
-    padding:80px 32px 32px;gap:0;transition:right 0.3s ease;z-index:101;
-    box-shadow:-4px 0 20px rgba(0,0,0,0.1);
-  }
-  nav.open{right:0;}
-  nav a{margin-left:0;padding:14px 0;font-size:17px;width:100%;border-bottom:1px solid #f0f0f0;}
-  .nav-overlay{display:block;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:100;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-  .nav-overlay.show{opacity:1;pointer-events:auto;}
-  .header-right .lang-toggle{display:none;}
-  .lang-toggle-mobile{display:block !important;margin-top:16px;width:100%;}
+/* HAMBURGER — IDENTICAL TO INDEX.HTML */
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  background:none;
+  border:none;
+  padding:6px;
+  z-index:200;
+}
+.hamburger span{
+  display:block;
+  width:22px;
+  height:1.5px;
+  background:#1d1d1f;
+  border-radius:2px;
+  transition:0.3s;
 }
 
-/* BLOG */
+.nav-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.3);z-index:140;}
+.nav-overlay.show{display:block;}
+.lang-toggle-mobile{display:none !important;}
+
+/* MOBILE — IDENTICAL TO INDEX.HTML */
+@media(max-width:768px){
+  header{padding:0 5%;height:56px;}
+
+  .hamburger{display:flex;margin-left:auto;}
+
+  .header-right{display:none;}
+
+  nav{
+    position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    flex-direction:column;align-items:flex-start;
+    padding:80px 30px 30px;
+    box-shadow:-5px 0 30px rgba(0,0,0,0.1);
+    transition:right 0.35s ease;z-index:150;
+  }
+  nav.open{right:0;}
+  nav a{margin-left:0;font-size:17px;padding:14px 0;width:100%;border-bottom:1px solid #f0f0f0;}
+  .lang-toggle-mobile{display:block !important;margin-top:16px;}
+}
+
+@media(min-width:769px) and (max-width:1024px){
+  nav a{margin-left:20px;font-size:13px;}
+}
+
+/* ===== BLOG SPECIFIC ===== */
 .blog-hero{
   padding:80px 6% 40px;
   text-align:center;
@@ -175,13 +269,17 @@ footer a:hover{color:#1d1d1f;}
 <body>
 
 <header>
+
 <a href="/index.html" class="logo">
   <img src="logo1.png" alt="CareerLab Logo" style="height:48px;">
 </a>
+
 <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
 <span></span><span></span><span></span>
 </button>
+
 <div class="nav-overlay" onclick="toggleMenu()"></div>
+
 <nav>
 <a href="/index.html#services" data-i18n="nav_services" onclick="closeMenu()">Services</a>
 <a href="/index.html#ai" data-i18n="nav_ai" onclick="closeMenu()">CV Diagnostic</a>
@@ -191,9 +289,12 @@ footer a:hover{color:#1d1d1f;}
 <a href="/index.html#contact" data-i18n="nav_contact" onclick="closeMenu()">Contact</a>
 <button class="lang-toggle lang-toggle-mobile" style="display:none;" onclick="toggleLang()">🇹🇷 TR</button>
 </nav>
+
 <div class="header-right">
 <button class="lang-toggle" onclick="toggleLang()">🇹🇷 TR</button>
+<a class="header-cta" href="https://calendly.com/guntekin-suh/30min" data-i18n="hero_cta">Book Strategy Call</a>
 </div>
+
 </header>
 
 <div class="blog-hero">
@@ -369,6 +470,7 @@ const translations = {
     nav_about: "Kurucu",
     nav_contact: "İletişim",
     nav_blog: "Blog",
+    hero_cta: "Strateji Görüşmesi",
     blog_back: "Ana Sayfaya Dön",
     blog_title: "Kariyer İçgörüleri",
     blog_desc: "CV yazımı, mülakat hazırlığı, LinkedIn stratejisi ve uluslararası kariyer geçişleri hakkında uzman makaleler.",
