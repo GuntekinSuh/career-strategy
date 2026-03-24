@@ -1953,7 +1953,6 @@ function closeMenu(){
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 
 <script>
-// Comment section translation
 const commentTranslations = {
   en: {
     subtitle: "Join the conversation",
@@ -1972,16 +1971,6 @@ function updateCommentLang(lang) {
   document.getElementById("commentSubtitle").textContent = t.subtitle;
   document.getElementById("commentTitle").textContent = t.title;
   document.getElementById("commentDesc").textContent = t.desc;
-}
-
-// Hook into your existing language switcher
-const origSetLang = typeof setLang === "function" ? setLang : null;
-if (origSetLang) {
-  const _origSetLang = setLang;
-  setLang = function(lang) {
-    _origSetLang(lang);
-    updateCommentLang(lang);
-  };
 }
 </script>
 
